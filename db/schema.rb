@@ -10,12 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180126213157) do
+ActiveRecord::Schema.define(version: 20180126224625) do
 
   create_table "galleries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "gallery_id"
+    t.string "title_da"
+    t.string "title_en"
+    t.text "description_da"
+    t.text "description_en"
+    t.string "source_da"
+    t.string "source_en"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gallery_id"], name: "index_images_on_gallery_id"
   end
 
   create_table "playlists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -38,5 +51,6 @@ ActiveRecord::Schema.define(version: 20180126213157) do
     t.index ["playlist_id"], name: "index_tracks_on_playlist_id"
   end
 
+  add_foreign_key "images", "galleries"
   add_foreign_key "tracks", "playlists"
 end
