@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Video Galleries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @video_galleries.each do |video_gallery| %>
+      <tr>
+        <td><%= video_gallery.name %></td>
+        <td><%= link_to 'Show', video_gallery %></td>
+        <td><%= link_to 'Edit', edit_video_gallery_path(video_gallery) %></td>
+        <td><%= link_to 'Destroy', video_gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Video Gallery', new_video_gallery_path %>
