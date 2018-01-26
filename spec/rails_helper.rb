@@ -64,4 +64,9 @@ RSpec.configure do |config|
 
   # Include FactoryBot methods
   config.include FactoryBot::Syntax::Methods
+  
+  # Delete test uploads when done (see config/environment/test.rb)
+  config.after(:suite) do
+    FileUtils.rm_rf( Dir["#{Rails.root}/tmp/test_uploads/"] )
+  end
 end

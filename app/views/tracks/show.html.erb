@@ -10,5 +10,10 @@
   <%= @track.description %>
 </p>
 
+<p>
+  <strong>Track:</strong>
+  <audio src="<%= @track.mp3.url %>" controls />
+</p>
+
 <%= link_to 'Edit', edit_track_path(@track) %> |
 <%= link_to 'Back', playlist_tracks_path(@track.playlist) %>

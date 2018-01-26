@@ -31,11 +31,13 @@ RSpec.describe TracksController, type: :controller do
   let(:playlist) { create :playlist }
 
   let(:valid_attributes) {
-    attributes_for(:track, playlist: nil).compact
+    attributes_for(:track).slice(:title, :description).merge({
+      mp3: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'fixtures', "silence.mp3"), "audio/mp3")
+    })
   }
 
   let(:invalid_attributes) {
-    attributes_for(:track, title: "", playlist: nil).compact
+    attributes_for(:track, title: "").slice(:title, :description)
   }
 
   # This should return the minimal set of values that should be in the session

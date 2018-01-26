@@ -39,4 +39,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  
+  # Put test uploads into tmp
+  Paperclip::Attachment.default_options[:path] = "#{Rails.root}/tmp/test_uploads/:class/:id_partition/:style.:extension"
 end

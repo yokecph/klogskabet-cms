@@ -21,6 +21,11 @@
     <%= form.text_area :description, id: :track_description %>
   </div>
 
+  <div class="field">
+    <%= form.label :mp3 %>
+    <%= form.file_field :mp3, id: :track_mp3, accept: "audio/mp3,audio/mpeg" %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
