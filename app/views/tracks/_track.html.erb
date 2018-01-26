@@ -1,0 +1,10 @@
+<article class="track">
+  <h3><%= track.title %></h3>
+  <p><%= track.description.present? ? track.description : "<em>No description</em>".html_safe %></p>
+  <p>
+    <audio src="<%= track.mp3.url %>" controls></audio>
+  </p>
+  <p>
+    <%= link_to 'Edit track', edit_track_path(track) %> | <%= link_to 'Delete track', track, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </p>
+</article>

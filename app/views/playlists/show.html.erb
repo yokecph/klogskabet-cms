@@ -12,3 +12,13 @@
 
 <%= link_to 'Edit', edit_playlist_path(@playlist) %> |
 <%= link_to 'Back', playlists_path %>
+
+<h2>Tracks</h2>
+
+<% if @playlist.tracks.any? %>
+  <%= render @playlist.tracks %>
+<% else %>
+  <em class="muted">No tracks</em>
+<% end %>
+
+<%= link_to 'New Track', new_playlist_track_path(@playlist) %>

@@ -14,11 +14,10 @@
   <tbody>
     <% @playlists.each do |playlist| %>
       <tr>
-        <td><%= playlist.name %></td>
+        <td><%= link_to playlist.name, playlist %></td>
         <td><%= playlist.description %></td>
-        <td><%= link_to 'Show', playlist %></td>
         <td><%= link_to 'Edit', edit_playlist_path(playlist) %></td>
-        <td><%= link_to 'Destroy', playlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', playlist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
