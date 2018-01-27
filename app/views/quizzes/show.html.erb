@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @quiz.name %>
+</p>
+
+<p>
+  <strong>Title da:</strong>
+  <%= @quiz.title_da %>
+</p>
+
+<p>
+  <strong>Title en:</strong>
+  <%= @quiz.title_en %>
+</p>
+
+<p>
+  <strong>Subtitle da:</strong>
+  <%= @quiz.subtitle_da %>
+</p>
+
+<p>
+  <strong>Subtitle en:</strong>
+  <%= @quiz.subtitle_en %>
+</p>
+
+<p>
+  <strong>Result title da:</strong>
+  <%= @quiz.result_title_da %>
+</p>
+
+<p>
+  <strong>Result title en:</strong>
+  <%= @quiz.result_title_en %>
+</p>
+
+<%= link_to 'Edit', edit_quiz_path(@quiz) %> |
+<%= link_to 'Back', quizzes_path %>

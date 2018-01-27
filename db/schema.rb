@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180127053716) do
+ActiveRecord::Schema.define(version: 20180127060810) do
 
   create_table "devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -77,6 +77,18 @@ ActiveRecord::Schema.define(version: 20180127053716) do
   create_table "playlists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "quizzes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.string "title_da"
+    t.string "title_en"
+    t.string "subtitle_da"
+    t.string "subtitle_en"
+    t.string "result_title_da"
+    t.string "result_title_en"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
