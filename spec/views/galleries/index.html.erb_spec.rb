@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "galleries/index", type: :view do
   before(:each) do
-    assign(:galleries, create_pair(:gallery))
+    @theme = assign(:theme, create(:theme))
+    assign(:galleries, create_pair(:gallery, theme: @theme))
   end
 
   it "renders a list of galleries" do

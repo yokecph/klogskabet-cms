@@ -3,4 +3,4 @@
 <%= render 'form', playlist: @playlist %>
 
 <%= link_to 'Show', @playlist %> |
-<%= link_to 'Back', playlists_path %>
+<%= link_to 'Back', theme_playlists_path(@playlist.theme) %>

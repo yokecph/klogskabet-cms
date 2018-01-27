@@ -1,10 +1,12 @@
 class QuizzesController < ApplicationController
+  include ThematicController
+
   before_action :set_quiz, only: [:show, :edit, :update, :destroy]
 
   # GET /quizzes
   # GET /quizzes.json
   def index
-    @quizzes = Quiz.all
+    @quizzes = @theme.quizzes.all
   end
 
   # GET /quizzes/1
@@ -14,7 +16,7 @@ class QuizzesController < ApplicationController
 
   # GET /quizzes/new
   def new
-    @quiz = Quiz.new
+    @quiz = @theme.quizzes.new
     @quiz.quiz_options = Quiz::OPTION_COUNT.times.map { @quiz.quiz_options.new }
   end
 
@@ -25,7 +27,7 @@ class QuizzesController < ApplicationController
   # POST /quizzes
   # POST /quizzes.json
   def create
-    @quiz = Quiz.new(quiz_params)
+    @quiz = @theme.quizzes.new(quiz_params)
 
     respond_to do |format|
       if @quiz.save
@@ -57,7 +59,7 @@ class QuizzesController < ApplicationController
   def destroy
     @quiz.destroy
     respond_to do |format|
-      format.html { redirect_to quizzes_url, notice: 'Quiz was successfully destroyed.' }
+      format.html { redirect_to @quiz.theme, notice: 'Quiz was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

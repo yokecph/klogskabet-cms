@@ -1,10 +1,12 @@
 class PlaylistsController < ApplicationController
+  include ThematicController
+
   before_action :set_playlist, only: [:show, :edit, :update, :destroy]
 
   # GET /playlists
   # GET /playlists.json
   def index
-    @playlists = Playlist.all
+    @playlists = @theme.playlists.all
   end
 
   # GET /playlists/1
@@ -14,7 +16,7 @@ class PlaylistsController < ApplicationController
 
   # GET /playlists/new
   def new
-    @playlist = Playlist.new
+    @playlist = @theme.playlists.new
   end
 
   # GET /playlists/1/edit
@@ -24,7 +26,7 @@ class PlaylistsController < ApplicationController
   # POST /playlists
   # POST /playlists.json
   def create
-    @playlist = Playlist.new(playlist_params)
+    @playlist = @theme.playlists.new(playlist_params)
 
     respond_to do |format|
       if @playlist.save
@@ -56,7 +58,7 @@ class PlaylistsController < ApplicationController
   def destroy
     @playlist.destroy
     respond_to do |format|
-      format.html { redirect_to playlists_url, notice: 'Playlist was successfully destroyed.' }
+      format.html { redirect_to @playlist.theme, notice: 'Playlist was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

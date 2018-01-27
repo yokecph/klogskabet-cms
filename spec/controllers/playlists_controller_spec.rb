@@ -28,6 +28,8 @@ RSpec.describe PlaylistsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Playlist. As you add validations to Playlist, be sure to
   # adjust the attributes here as well.
+  let(:theme) { create :theme }
+
   let(:valid_attributes) {
     attributes_for(:playlist)
   }
@@ -43,13 +45,13 @@ RSpec.describe PlaylistsController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
-      get :index, params: {}, session: valid_session
+      get :index, params: { theme_id: theme.to_param }, session: valid_session
       expect(response).to be_success
     end
   end
 
   describe "GET #show" do
-    let!(:playlist) { create :playlist }
+    let!(:playlist) { create :playlist, theme: theme }
 
     it "returns a success response" do
       get :show, params: {id: playlist.to_param}, session: valid_session
@@ -59,13 +61,13 @@ RSpec.describe PlaylistsController, type: :controller do
 
   describe "GET #new" do
     it "returns a success response" do
-      get :new, params: {}, session: valid_session
+      get :new, params: { theme_id: theme.to_param }, session: valid_session
       expect(response).to be_success
     end
   end
 
   describe "GET #edit" do
-    let!(:playlist) { create :playlist }
+    let!(:playlist) { create :playlist, theme: theme }
 
     it "returns a success response" do
       get :edit, params: {id: playlist.to_param}, session: valid_session
@@ -77,12 +79,12 @@ RSpec.describe PlaylistsController, type: :controller do
     context "with valid params" do
       it "creates a new Playlist" do
         expect {
-          post :create, params: {playlist: valid_attributes}, session: valid_session
+          post :create, params: { theme_id: theme.to_param, playlist: valid_attributes}, session: valid_session
         }.to change(Playlist, :count).by(1)
       end
 
       it "redirects to the created playlist" do
-        post :create, params: {playlist: valid_attributes}, session: valid_session
+        post :create, params: { theme_id: theme.to_param, playlist: valid_attributes}, session: valid_session
         expect(response).to redirect_to(Playlist.last)
       end
     end
@@ -91,16 +93,14 @@ RSpec.describe PlaylistsController, type: :controller do
       let(:attributes) { attributes_for(:playlist, name: "") }
 
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {playlist: invalid_attributes}, session: valid_session
+        post :create, params: { theme_id: theme.to_param, playlist: invalid_attributes}, session: valid_session
         expect(response).to be_success
       end
     end
   end
 
   describe "PUT #update" do
-    let!(:playlist) {
-      create :playlist
-    }
+    let(:playlist) { create :playlist, theme: theme }
 
     context "with valid params" do
       let(:new_attributes) {
@@ -128,9 +128,7 @@ RSpec.describe PlaylistsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    let!(:playlist) {
-      create :playlist
-    }
+    let!(:playlist) { create :playlist, theme: theme }
 
     it "destroys the requested playlist" do
       expect {
@@ -140,7 +138,7 @@ RSpec.describe PlaylistsController, type: :controller do
 
     it "redirects to the playlists list" do
       delete :destroy, params: {id: playlist.to_param}, session: valid_session
-      expect(response).to redirect_to(playlists_url)
+      expect(response).to redirect_to(theme)
     end
   end
 

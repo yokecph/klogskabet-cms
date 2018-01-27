@@ -3,4 +3,4 @@
 <%= render 'form', timeline: @timeline %>
 
 <%= link_to 'Show', @timeline %> |
-<%= link_to 'Back', timelines_path %>
+<%= link_to 'Back', theme_timelines_path(@timeline.theme) %>

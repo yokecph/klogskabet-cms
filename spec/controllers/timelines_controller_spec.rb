@@ -28,6 +28,8 @@ RSpec.describe TimelinesController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Timeline. As you add validations to Timeline, be sure to
   # adjust the attributes here as well.
+  let(:theme) { create :theme }
+
   let(:valid_attributes) {
     attributes_for(:timeline)
   }
@@ -43,13 +45,13 @@ RSpec.describe TimelinesController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
-      get :index, params: {}, session: valid_session
+      get :index, params: { theme_id: theme.to_param }, session: valid_session
       expect(response).to be_success
     end
   end
 
   describe "GET #show" do
-    let(:timeline) { create :timeline}
+    let(:timeline) { create :timeline, theme: theme }
 
     it "returns a success response" do
       get :show, params: {id: timeline.to_param}, session: valid_session
@@ -59,13 +61,13 @@ RSpec.describe TimelinesController, type: :controller do
 
   describe "GET #new" do
     it "returns a success response" do
-      get :new, params: {}, session: valid_session
+      get :new, params: { theme_id: theme.to_param }, session: valid_session
       expect(response).to be_success
     end
   end
 
   describe "GET #edit" do
-    let(:timeline) { create :timeline}
+    let(:timeline) { create :timeline, theme: theme }
 
     it "returns a success response" do
       get :edit, params: {id: timeline.to_param}, session: valid_session
@@ -77,26 +79,26 @@ RSpec.describe TimelinesController, type: :controller do
     context "with valid params" do
       it "creates a new Timeline" do
         expect {
-          post :create, params: {timeline: valid_attributes}, session: valid_session
+          post :create, params: { theme_id: theme.to_param, timeline: valid_attributes }, session: valid_session
         }.to change(Timeline, :count).by(1)
       end
 
       it "redirects to the created timeline" do
-        post :create, params: {timeline: valid_attributes}, session: valid_session
+        post :create, params: { theme_id: theme.to_param, timeline: valid_attributes }, session: valid_session
         expect(response).to redirect_to(Timeline.last)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {timeline: invalid_attributes}, session: valid_session
+        post :create, params: { theme_id: theme.to_param, timeline: invalid_attributes }, session: valid_session
         expect(response).to be_success
       end
     end
   end
 
   describe "PUT #update" do
-    let(:timeline) { create :timeline}
+    let(:timeline) { create :timeline, theme: theme }
 
     context "with valid params" do
       let(:new_attributes) {
@@ -124,7 +126,7 @@ RSpec.describe TimelinesController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    let!(:timeline) { create :timeline}
+    let!(:timeline) { create :timeline, theme: theme }
 
     it "destroys the requested timeline" do
       expect {
@@ -134,7 +136,7 @@ RSpec.describe TimelinesController, type: :controller do
 
     it "redirects to the timelines list" do
       delete :destroy, params: {id: timeline.to_param}, session: valid_session
-      expect(response).to redirect_to(timelines_url)
+      expect(response).to redirect_to(theme)
     end
   end
 

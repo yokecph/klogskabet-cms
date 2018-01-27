@@ -2,4 +2,4 @@
 
 <%= render 'form', video_gallery: @video_gallery %>
 
-<%= link_to 'Back', video_galleries_path %>
+<%= link_to 'Back', theme_video_galleries_path(@video_gallery.theme) %>

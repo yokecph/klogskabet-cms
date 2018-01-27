@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "Galleries", type: :request do
-  describe "GET /galleries" do
+  let(:theme) { create :theme }
+
+  describe "GET /theme/:theme_id/galleries" do
     it "works! (now write some real specs)" do
-      get galleries_path
+      get theme_galleries_path(theme)
       expect(response).to have_http_status(200)
     end
   end

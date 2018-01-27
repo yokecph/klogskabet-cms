@@ -28,6 +28,8 @@ RSpec.describe QuizzesController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Quiz. As you add validations to Quiz, be sure to
   # adjust the attributes here as well.
+  let(:theme) { create :theme }
+
   let(:valid_attributes) {
     attributes_for(:quiz)
   }
@@ -43,13 +45,13 @@ RSpec.describe QuizzesController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
-      get :index, params: {}, session: valid_session
+      get :index, params: { theme_id: theme.to_param }, session: valid_session
       expect(response).to be_success
     end
   end
 
   describe "GET #show" do
-    let(:quiz) { create :quiz }
+    let(:quiz) { create :quiz, theme: theme }
 
     it "returns a success response" do
       get :show, params: {id: quiz.to_param}, session: valid_session
@@ -59,13 +61,13 @@ RSpec.describe QuizzesController, type: :controller do
 
   describe "GET #new" do
     it "returns a success response" do
-      get :new, params: {}, session: valid_session
+      get :new, params: { theme_id: theme.to_param }, session: valid_session
       expect(response).to be_success
     end
   end
 
   describe "GET #edit" do
-    let(:quiz) { create :quiz }
+    let(:quiz) { create :quiz, theme: theme }
 
     it "returns a success response" do
       get :edit, params: {id: quiz.to_param}, session: valid_session
@@ -77,26 +79,26 @@ RSpec.describe QuizzesController, type: :controller do
     context "with valid params" do
       it "creates a new Quiz" do
         expect {
-          post :create, params: {quiz: valid_attributes}, session: valid_session
+          post :create, params: { theme_id: theme.to_param, quiz: valid_attributes}, session: valid_session
         }.to change(Quiz, :count).by(1)
       end
 
       it "redirects to the created quiz" do
-        post :create, params: {quiz: valid_attributes}, session: valid_session
+        post :create, params: { theme_id: theme.to_param, quiz: valid_attributes}, session: valid_session
         expect(response).to redirect_to(Quiz.last)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {quiz: invalid_attributes}, session: valid_session
+        post :create, params: { theme_id: theme.to_param, quiz: invalid_attributes}, session: valid_session
         expect(response).to be_success
       end
     end
   end
 
   describe "PUT #update" do
-    let(:quiz) { create :quiz }
+    let(:quiz) { create :quiz, theme: theme }
 
     context "with valid params" do
       let(:new_attributes) {
@@ -124,7 +126,7 @@ RSpec.describe QuizzesController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    let!(:quiz) { create :quiz, :with_options }
+    let!(:quiz) { create :quiz, :with_options, theme: theme }
 
     it "destroys the requested quiz" do
       expect {
@@ -140,7 +142,7 @@ RSpec.describe QuizzesController, type: :controller do
 
     it "redirects to the quizzes list" do
       delete :destroy, params: {id: quiz.to_param}, session: valid_session
-      expect(response).to redirect_to(quizzes_url)
+      expect(response).to redirect_to(theme)
     end
   end
 

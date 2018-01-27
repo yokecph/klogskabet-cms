@@ -28,6 +28,8 @@ RSpec.describe VideoGalleriesController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # VideoGallery. As you add validations to VideoGallery, be sure to
   # adjust the attributes here as well.
+  let(:theme) { create :theme }
+
   let(:valid_attributes) {
     attributes_for(:video_gallery)
   }
@@ -43,13 +45,13 @@ RSpec.describe VideoGalleriesController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
-      get :index, params: {}, session: valid_session
+      get :index, params: { theme_id: theme.to_param }, session: valid_session
       expect(response).to be_success
     end
   end
 
   describe "GET #show" do
-    let(:video_gallery) { create :video_gallery }
+    let(:video_gallery) { create :video_gallery, theme: theme }
 
     it "returns a success response" do
       get :show, params: {id: video_gallery.to_param}, session: valid_session
@@ -59,13 +61,13 @@ RSpec.describe VideoGalleriesController, type: :controller do
 
   describe "GET #new" do
     it "returns a success response" do
-      get :new, params: {}, session: valid_session
+      get :new, params: { theme_id: theme.to_param }, session: valid_session
       expect(response).to be_success
     end
   end
 
   describe "GET #edit" do
-    let(:video_gallery) { create :video_gallery }
+    let(:video_gallery) { create :video_gallery, theme: theme }
 
     it "returns a success response" do
       get :edit, params: {id: video_gallery.to_param}, session: valid_session
@@ -77,26 +79,26 @@ RSpec.describe VideoGalleriesController, type: :controller do
     context "with valid params" do
       it "creates a new VideoGallery" do
         expect {
-          post :create, params: {video_gallery: valid_attributes}, session: valid_session
+          post :create, params: {theme_id: theme.to_param, video_gallery: valid_attributes}, session: valid_session
         }.to change(VideoGallery, :count).by(1)
       end
 
       it "redirects to the created video_gallery" do
-        post :create, params: {video_gallery: valid_attributes}, session: valid_session
+        post :create, params: {theme_id: theme.to_param, video_gallery: valid_attributes}, session: valid_session
         expect(response).to redirect_to(VideoGallery.last)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {video_gallery: invalid_attributes}, session: valid_session
+        post :create, params: {theme_id: theme.to_param, video_gallery: invalid_attributes}, session: valid_session
         expect(response).to be_success
       end
     end
   end
 
   describe "PUT #update" do
-    let(:video_gallery) { create :video_gallery }
+    let(:video_gallery) { create :video_gallery, theme: theme }
 
     context "with valid params" do
       let(:new_attributes) {
@@ -124,7 +126,7 @@ RSpec.describe VideoGalleriesController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    let!(:video_gallery) { create :video_gallery }
+    let!(:video_gallery) { create :video_gallery, theme: theme }
 
     it "destroys the requested video_gallery" do
       expect {
@@ -134,7 +136,7 @@ RSpec.describe VideoGalleriesController, type: :controller do
 
     it "redirects to the video_galleries list" do
       delete :destroy, params: {id: video_gallery.to_param}, session: valid_session
-      expect(response).to redirect_to(video_galleries_url)
+      expect(response).to redirect_to(theme)
     end
   end
 

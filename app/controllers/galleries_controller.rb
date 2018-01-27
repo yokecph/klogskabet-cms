@@ -1,10 +1,12 @@
 class GalleriesController < ApplicationController
+  include ThematicController
+
   before_action :set_gallery, only: [:show, :edit, :update, :destroy]
 
   # GET /galleries
   # GET /galleries.json
   def index
-    @galleries = Gallery.all
+    @galleries = @theme.galleries.all
   end
 
   # GET /galleries/1
@@ -14,7 +16,7 @@ class GalleriesController < ApplicationController
 
   # GET /galleries/new
   def new
-    @gallery = Gallery.new
+    @gallery = @theme.galleries.new
   end
 
   # GET /galleries/1/edit
@@ -24,7 +26,7 @@ class GalleriesController < ApplicationController
   # POST /galleries
   # POST /galleries.json
   def create
-    @gallery = Gallery.new(gallery_params)
+    @gallery = @theme.galleries.new(gallery_params)
 
     respond_to do |format|
       if @gallery.save
@@ -56,7 +58,7 @@ class GalleriesController < ApplicationController
   def destroy
     @gallery.destroy
     respond_to do |format|
-      format.html { redirect_to galleries_url, notice: 'Gallery was successfully destroyed.' }
+      format.html { redirect_to @gallery.theme, notice: 'Gallery was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

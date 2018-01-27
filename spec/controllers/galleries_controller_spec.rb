@@ -28,6 +28,8 @@ RSpec.describe GalleriesController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Gallery. As you add validations to Gallery, be sure to
   # adjust the attributes here as well.
+  let(:theme) { create :theme }
+
   let(:valid_attributes) {
     attributes_for(:gallery)
   }
@@ -43,13 +45,13 @@ RSpec.describe GalleriesController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
-      get :index, params: {}, session: valid_session
+      get :index, params: { theme_id: theme.to_param }, session: valid_session
       expect(response).to be_success
     end
   end
 
   describe "GET #show" do
-    let(:gallery) { create :gallery }
+    let(:gallery) { create :gallery, theme: theme }
 
     it "returns a success response" do
       get :show, params: {id: gallery.to_param}, session: valid_session
@@ -59,13 +61,13 @@ RSpec.describe GalleriesController, type: :controller do
 
   describe "GET #new" do
     it "returns a success response" do
-      get :new, params: {}, session: valid_session
+      get :new, params: { theme_id: theme.to_param }, session: valid_session
       expect(response).to be_success
     end
   end
 
   describe "GET #edit" do
-    let(:gallery) { create :gallery }
+    let(:gallery) { create :gallery, theme: theme }
 
     it "returns a success response" do
       get :edit, params: {id: gallery.to_param}, session: valid_session
@@ -77,26 +79,26 @@ RSpec.describe GalleriesController, type: :controller do
     context "with valid params" do
       it "creates a new Gallery" do
         expect {
-          post :create, params: {gallery: valid_attributes}, session: valid_session
+          post :create, params: { theme_id: theme.to_param, gallery: valid_attributes }, session: valid_session
         }.to change(Gallery, :count).by(1)
       end
 
       it "redirects to the created gallery" do
-        post :create, params: {gallery: valid_attributes}, session: valid_session
+        post :create, params: { theme_id: theme.to_param, gallery: valid_attributes }, session: valid_session
         expect(response).to redirect_to(Gallery.last)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {gallery: invalid_attributes}, session: valid_session
+        post :create, params: { theme_id: theme.to_param, gallery: invalid_attributes }, session: valid_session
         expect(response).to be_success
       end
     end
   end
 
   describe "PUT #update" do
-    let(:gallery) { create :gallery }
+    let(:gallery) { create :gallery, theme: theme }
 
     context "with valid params" do
       let(:new_attributes) {
@@ -125,7 +127,7 @@ RSpec.describe GalleriesController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    let!(:gallery) { create :gallery }
+    let!(:gallery) { create :gallery, theme: theme }
 
     it "destroys the requested gallery" do
       expect {
@@ -135,7 +137,7 @@ RSpec.describe GalleriesController, type: :controller do
 
     it "redirects to the galleries list" do
       delete :destroy, params: {id: gallery.to_param}, session: valid_session
-      expect(response).to redirect_to(galleries_url)
+      expect(response).to redirect_to(theme)
     end
   end
 

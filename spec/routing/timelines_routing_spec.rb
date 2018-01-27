@@ -4,11 +4,11 @@ RSpec.describe TimelinesController, type: :routing do
   describe "routing" do
 
     it "routes to #index" do
-      expect(get: "/timelines").to route_to("timelines#index")
+      expect(get: "/themes/2/timelines").to route_to("timelines#index", theme_id: "2")
     end
 
     it "routes to #new" do
-      expect(get: "/timelines/new").to route_to("timelines#new")
+      expect(get: "/themes/2/timelines/new").to route_to("timelines#new", theme_id: "2")
     end
 
     it "routes to #show" do
@@ -20,7 +20,7 @@ RSpec.describe TimelinesController, type: :routing do
     end
 
     it "routes to #create" do
-      expect(post: "/timelines").to route_to("timelines#create")
+      expect(post: "/themes/2/timelines").to route_to("timelines#create", theme_id: "2")
     end
 
     it "routes to #update via PUT" do

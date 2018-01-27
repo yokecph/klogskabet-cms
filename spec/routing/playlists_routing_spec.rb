@@ -4,11 +4,11 @@ RSpec.describe PlaylistsController, type: :routing do
   describe "routing" do
 
     it "routes to #index" do
-      expect(get: "/playlists").to route_to("playlists#index")
+      expect(get: "/themes/2/playlists").to route_to("playlists#index", theme_id: "2")
     end
 
     it "routes to #new" do
-      expect(get: "/playlists/new").to route_to("playlists#new")
+      expect(get: "/themes/2/playlists/new").to route_to("playlists#new", theme_id: "2")
     end
 
     it "routes to #show" do
@@ -20,7 +20,7 @@ RSpec.describe PlaylistsController, type: :routing do
     end
 
     it "routes to #create" do
-      expect(post: "/playlists").to route_to("playlists#create")
+      expect(post: "/themes/2/playlists").to route_to("playlists#create", theme_id: "2")
     end
 
     it "routes to #update via PUT" do

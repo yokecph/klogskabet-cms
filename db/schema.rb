@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180127130901) do
+ActiveRecord::Schema.define(version: 20180127255756) do
 
   create_table "devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20180127130901) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "theme_id"
+    t.index ["theme_id"], name: "index_galleries_on_theme_id"
   end
 
   create_table "images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -79,6 +81,8 @@ ActiveRecord::Schema.define(version: 20180127130901) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "theme_id"
+    t.index ["theme_id"], name: "index_playlists_on_theme_id"
   end
 
   create_table "quiz_options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -102,6 +106,8 @@ ActiveRecord::Schema.define(version: 20180127130901) do
     t.string "result_title_en"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "theme_id"
+    t.index ["theme_id"], name: "index_quizzes_on_theme_id"
   end
 
   create_table "themes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -117,6 +123,8 @@ ActiveRecord::Schema.define(version: 20180127130901) do
     t.string "title_en"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "theme_id"
+    t.index ["theme_id"], name: "index_timelines_on_theme_id"
   end
 
   create_table "tracks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -136,6 +144,8 @@ ActiveRecord::Schema.define(version: 20180127130901) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "theme_id"
+    t.index ["theme_id"], name: "index_video_galleries_on_theme_id"
   end
 
   create_table "videos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -152,10 +162,15 @@ ActiveRecord::Schema.define(version: 20180127130901) do
     t.index ["video_gallery_id"], name: "index_videos_on_video_gallery_id"
   end
 
+  add_foreign_key "galleries", "themes"
   add_foreign_key "images", "galleries"
   add_foreign_key "interval_images", "intervals"
   add_foreign_key "intervals", "timelines"
+  add_foreign_key "playlists", "themes"
   add_foreign_key "quiz_options", "quizzes"
+  add_foreign_key "quizzes", "themes"
+  add_foreign_key "timelines", "themes"
   add_foreign_key "tracks", "playlists"
+  add_foreign_key "video_galleries", "themes"
   add_foreign_key "videos", "video_galleries"
 end

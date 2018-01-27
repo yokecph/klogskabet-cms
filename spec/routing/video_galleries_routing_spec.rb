@@ -4,11 +4,11 @@ RSpec.describe VideoGalleriesController, type: :routing do
   describe "routing" do
 
     it "routes to #index" do
-      expect(get: "/video_galleries").to route_to("video_galleries#index")
+      expect(get: "/themes/2/video_galleries").to route_to("video_galleries#index", theme_id: "2")
     end
 
     it "routes to #new" do
-      expect(get: "/video_galleries/new").to route_to("video_galleries#new")
+      expect(get: "/themes/2/video_galleries/new").to route_to("video_galleries#new", theme_id: "2")
     end
 
     it "routes to #show" do
@@ -20,7 +20,7 @@ RSpec.describe VideoGalleriesController, type: :routing do
     end
 
     it "routes to #create" do
-      expect(post: "/video_galleries").to route_to("video_galleries#create")
+      expect(post: "/themes/2/video_galleries").to route_to("video_galleries#create", theme_id: "2")
     end
 
     it "routes to #update via PUT" do

@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :quiz do
+    theme
     sequence(:name) { |n| "Quiz #{n}" }
     title_da "Dansk titel"
     title_en "English Title"

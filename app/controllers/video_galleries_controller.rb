@@ -1,10 +1,12 @@
 class VideoGalleriesController < ApplicationController
+  include ThematicController
+
   before_action :set_video_gallery, only: [:show, :edit, :update, :destroy]
 
   # GET /video_galleries
   # GET /video_galleries.json
   def index
-    @video_galleries = VideoGallery.all
+    @video_galleries = @theme.video_galleries.all
   end
 
   # GET /video_galleries/1
@@ -14,7 +16,7 @@ class VideoGalleriesController < ApplicationController
 
   # GET /video_galleries/new
   def new
-    @video_gallery = VideoGallery.new
+    @video_gallery = @theme.video_galleries.new
   end
 
   # GET /video_galleries/1/edit
@@ -24,7 +26,7 @@ class VideoGalleriesController < ApplicationController
   # POST /video_galleries
   # POST /video_galleries.json
   def create
-    @video_gallery = VideoGallery.new(video_gallery_params)
+    @video_gallery = @theme.video_galleries.new(video_gallery_params)
 
     respond_to do |format|
       if @video_gallery.save
@@ -56,7 +58,7 @@ class VideoGalleriesController < ApplicationController
   def destroy
     @video_gallery.destroy
     respond_to do |format|
-      format.html { redirect_to video_galleries_url, notice: 'Video gallery was successfully destroyed.' }
+      format.html { redirect_to @video_gallery.theme, notice: 'Video gallery was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -1,10 +1,12 @@
 class TimelinesController < ApplicationController
+  include ThematicController
+
   before_action :set_timeline, only: [:show, :edit, :update, :destroy]
 
   # GET /timelines
   # GET /timelines.json
   def index
-    @timelines = Timeline.all
+    @timelines = @theme.timelines.all
   end
 
   # GET /timelines/1
@@ -14,7 +16,7 @@ class TimelinesController < ApplicationController
 
   # GET /timelines/new
   def new
-    @timeline = Timeline.new
+    @timeline = @theme.timelines.new
   end
 
   # GET /timelines/1/edit
@@ -24,7 +26,7 @@ class TimelinesController < ApplicationController
   # POST /timelines
   # POST /timelines.json
   def create
-    @timeline = Timeline.new(timeline_params)
+    @timeline = @theme.timelines.new(timeline_params)
 
     respond_to do |format|
       if @timeline.save
@@ -56,7 +58,7 @@ class TimelinesController < ApplicationController
   def destroy
     @timeline.destroy
     respond_to do |format|
-      format.html { redirect_to timelines_url, notice: 'Timeline was successfully destroyed.' }
+      format.html { redirect_to @timeline.theme, notice: 'Timeline was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

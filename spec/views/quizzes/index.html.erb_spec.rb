@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "quizzes/index", type: :view do
   before(:each) do
-    assign(:quizzes, create_pair(:quiz))
+    @theme = assign(:theme, create(:theme))
+    assign(:quizzes, create_pair(:quiz, theme: @theme))
   end
 
   it "renders a list of quizzes" do

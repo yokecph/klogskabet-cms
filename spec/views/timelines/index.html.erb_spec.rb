@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "timelines/index", type: :view do
   before(:each) do
-    assign(:timelines, create_pair(:timeline))
+    @theme = assign(:theme, create(:theme))
+    assign(:timelines, create_pair(:timeline, theme: @theme))
   end
 
   it "renders a list of timelines" do
