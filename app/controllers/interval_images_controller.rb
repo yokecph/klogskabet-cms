@@ -75,6 +75,6 @@ class IntervalImagesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def interval_image_params
-    params.require(:interval_image).permit(:file, :interval_id, :description_da, :description_en, :source_da, :source_en)
+    params.require(:interval_image).permit(:file, :description_da, :description_en, :source_da, :source_en)
   end
 end
