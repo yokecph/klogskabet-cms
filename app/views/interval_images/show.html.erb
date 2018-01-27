@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Interval:</strong>
+  <%= @interval_image.interval %>
+</p>
+
+<p>
+  <strong>Description da:</strong>
+  <%= @interval_image.description_da %>
+</p>
+
+<p>
+  <strong>Description en:</strong>
+  <%= @interval_image.description_en %>
+</p>
+
+<p>
+  <strong>Source da:</strong>
+  <%= @interval_image.source_da %>
+</p>
+
+<p>
+  <strong>Source en:</strong>
+  <%= @interval_image.source_en %>
+</p>
+
+<%= link_to 'Edit', edit_interval_image_path(@interval_image) %> |
+<%= link_to 'Back', @interval_image.interval %>

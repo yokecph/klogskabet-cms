@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Interval Images</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Interval</th>
+      <th>Description da</th>
+      <th>Description en</th>
+      <th>Source da</th>
+      <th>Source en</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @interval_images.each do |interval_image| %>
+      <tr>
+        <td><%= interval_image.interval %></td>
+        <td><%= interval_image.description_da %></td>
+        <td><%= interval_image.description_en %></td>
+        <td><%= interval_image.source_da %></td>
+        <td><%= interval_image.source_en %></td>
+        <td><%= link_to 'Show', interval_image %></td>
+        <td><%= link_to 'Edit', edit_interval_image_path(interval_image) %></td>
+        <td><%= link_to 'Destroy', interval_image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Interval Image', new_interval_interval_image_path(@interval) %>

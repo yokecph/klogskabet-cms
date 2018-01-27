@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180127020907) do
+ActiveRecord::Schema.define(version: 20180127033335) do
 
   create_table "galleries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -33,6 +33,21 @@ ActiveRecord::Schema.define(version: 20180127020907) do
     t.integer "file_file_size"
     t.datetime "file_updated_at"
     t.index ["gallery_id"], name: "index_images_on_gallery_id"
+  end
+
+  create_table "interval_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "interval_id"
+    t.text "description_da"
+    t.text "description_en"
+    t.string "source_da"
+    t.string "source_en"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "file_file_name"
+    t.string "file_content_type"
+    t.integer "file_file_size"
+    t.datetime "file_updated_at"
+    t.index ["interval_id"], name: "index_interval_images_on_interval_id"
   end
 
   create_table "intervals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -97,6 +112,7 @@ ActiveRecord::Schema.define(version: 20180127020907) do
   end
 
   add_foreign_key "images", "galleries"
+  add_foreign_key "interval_images", "intervals"
   add_foreign_key "intervals", "timelines"
   add_foreign_key "tracks", "playlists"
   add_foreign_key "videos", "video_galleries"

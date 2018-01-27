@@ -1,7 +1,9 @@
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
   resources :timelines, shallow: true do
-    resources :intervals
+    resources :intervals, shallow: true do
+      resources :interval_images
+    end
   end
 
   resources :video_galleries, shallow: true do
