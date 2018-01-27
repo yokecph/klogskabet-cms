@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Video gallery:</strong>
+  <%= @video.video_gallery %>
+</p>
+
+<p>
+  <strong>Title da:</strong>
+  <%= @video.title_da %>
+</p>
+
+<p>
+  <strong>Title en:</strong>
+  <%= @video.title_en %>
+</p>
+
+<p>
+  <strong>Description da:</strong>
+  <%= @video.description_da %>
+</p>
+
+<p>
+  <strong>Description en:</strong>
+  <%= @video.description_en %>
+</p>
+
+<p>
+  <strong>Source da:</strong>
+  <%= @video.source_da %>
+</p>
+
+<p>
+  <strong>Source en:</strong>
+  <%= @video.source_en %>
+</p>
+
+<%= link_to 'Edit', edit_video_path(@video) %> |
+<%= link_to 'Back', @video.video_gallery %>

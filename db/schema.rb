@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180126233038) do
+ActiveRecord::Schema.define(version: 20180126234325) do
 
   create_table "galleries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -57,6 +57,20 @@ ActiveRecord::Schema.define(version: 20180126233038) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "videos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "video_gallery_id"
+    t.string "title_da"
+    t.string "title_en"
+    t.text "description_da"
+    t.text "description_en"
+    t.string "source_da"
+    t.string "source_en"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["video_gallery_id"], name: "index_videos_on_video_gallery_id"
+  end
+
   add_foreign_key "images", "galleries"
   add_foreign_key "tracks", "playlists"
+  add_foreign_key "videos", "video_galleries"
 end
