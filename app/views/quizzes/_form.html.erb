@@ -46,6 +46,32 @@
     <%= form.text_field :result_title_en, id: :quiz_result_title_en %>
   </div>
 
+  <%= form.fields_for :quiz_options do |builder| %>
+    <fieldset label="Options">
+      <%= builder.hidden_field :id %>
+
+      <div class="field">
+        <%= builder.label :option_da %>
+        <%= builder.text_field :option_da %>
+      </div>
+
+      <div class="field">
+        <%= builder.label :option_en %>
+        <%= builder.text_field :option_en %>
+      </div>
+
+      <div class="field">
+        <%= builder.label :answer_da %>
+        <%= builder.text_field :answer_da %>
+      </div>
+
+      <div class="field">
+        <%= builder.label :answer_en %>
+        <%= builder.text_field :answer_en %>
+      </div>
+    </fieldset>
+  <% end %>
+
   <div class="actions">
     <%= form.submit %>
   </div>

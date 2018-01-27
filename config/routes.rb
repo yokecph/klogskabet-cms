@@ -3,9 +3,7 @@ Rails.application.routes.draw do
   resources :themes
   resources :devices
 
-  resources :quizzes, shallow: true do
-    resources :quiz_options
-  end
+  resources :quizzes
 
   resources :timelines, shallow: true do
     resources :intervals, shallow: true do

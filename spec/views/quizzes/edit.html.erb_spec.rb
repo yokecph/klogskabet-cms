@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "quizzes/edit", type: :view do
   before(:each) do
-    @quiz = assign(:quiz, create(:quiz))
+    @quiz = assign(:quiz, create(:quiz, :with_options))
   end
 
   it "renders the edit quiz form" do
@@ -16,6 +16,14 @@ RSpec.describe "quizzes/edit", type: :view do
       assert_select "input[name=?]", "quiz[subtitle_en]"
       assert_select "input[name=?]", "quiz[result_title_da]"
       assert_select "input[name=?]", "quiz[result_title_en]"
+
+      (0...5).each do |i|
+        assert_select "input[type=hidden][name=?]", "quiz[quiz_options_attributes][#{i}][id]"
+        assert_select "input[type=text][name=?]", "quiz[quiz_options_attributes][#{i}][option_da]"
+        assert_select "input[type=text][name=?]", "quiz[quiz_options_attributes][#{i}][option_en]"
+        assert_select "input[type=text][name=?]", "quiz[quiz_options_attributes][#{i}][answer_da]"
+        assert_select "input[type=text][name=?]", "quiz[quiz_options_attributes][#{i}][answer_en]"
+      end
     end
   end
 end

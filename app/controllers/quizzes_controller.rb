@@ -15,6 +15,7 @@ class QuizzesController < ApplicationController
   # GET /quizzes/new
   def new
     @quiz = Quiz.new
+    @quiz.quiz_options = Quiz::OPTION_COUNT.times.map { @quiz.quiz_options.new }
   end
 
   # GET /quizzes/1/edit
@@ -70,6 +71,21 @@ class QuizzesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def quiz_params
-    params.require(:quiz).permit(:name, :title_da, :title_en, :subtitle_da, :subtitle_en, :result_title_da, :result_title_en)
+    params.require(:quiz).permit(
+      :name,
+      :title_da,
+      :title_en,
+      :subtitle_da,
+      :subtitle_en,
+      :result_title_da,
+      :result_title_en,
+      quiz_options_attributes: [
+        :id,
+        :option_da,
+        :option_en,
+        :answer_da,
+        :answer_en
+      ]
+    )
   end
 end

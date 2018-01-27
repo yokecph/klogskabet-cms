@@ -124,12 +124,18 @@ RSpec.describe QuizzesController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    let!(:quiz) { create :quiz }
+    let!(:quiz) { create :quiz, :with_options }
 
     it "destroys the requested quiz" do
       expect {
         delete :destroy, params: {id: quiz.to_param}, session: valid_session
       }.to change(Quiz, :count).by(-1)
+    end
+
+    it "destroys the requested quiz's options" do
+      expect {
+        delete :destroy, params: {id: quiz.to_param}, session: valid_session
+      }.to change(QuizOption, :count).by(-Quiz::OPTION_COUNT)
     end
 
     it "redirects to the quizzes list" do
