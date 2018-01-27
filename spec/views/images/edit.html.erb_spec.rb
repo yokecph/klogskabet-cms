@@ -15,6 +15,7 @@ RSpec.describe "images/edit", type: :view do
       assert_select "textarea[name=?]", "image[description_en]"
       assert_select "input[name=?]", "image[source_da]"
       assert_select "input[name=?]", "image[source_en]"
+      assert_select "input[name=?][accept=?]", "image[file]", "image/jpeg,image/pjpeg,image/png"
     end
   end
 end

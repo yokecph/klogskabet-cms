@@ -31,11 +31,13 @@ RSpec.describe ImagesController, type: :controller do
   let(:gallery) { create :gallery }
 
   let(:valid_attributes) {
-    attributes_for(:image)
+    attributes_for(:image_upload).merge({
+      file: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'fixtures', "test.jpg"), "image/jpeg")
+    })
   }
 
   let(:invalid_attributes) {
-    attributes_for(:image, title_da: "")
+    attributes_for(:image_upload, title_da: "")
   }
 
   # This should return the minimal set of values that should be in the session

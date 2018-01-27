@@ -31,7 +31,7 @@ RSpec.describe TracksController, type: :controller do
   let(:playlist) { create :playlist }
 
   let(:valid_attributes) {
-    attributes_for(:track).slice(:title, :description).merge({
+    attributes_for(:track_upload).slice(:title, :description).merge({
       mp3: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'fixtures', "silence.mp3"), "audio/mp3")
     })
   }
