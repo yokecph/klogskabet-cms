@@ -45,7 +45,7 @@ RSpec.describe ImagesController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
-      get :index, params: { gallery_id: gallery.id }, session: valid_session
+      get :index, params: { gallery_id: gallery.to_param }, session: valid_session
       expect(response).to be_success
     end
   end
@@ -60,7 +60,7 @@ RSpec.describe ImagesController, type: :controller do
 
   describe "GET #new" do
     it "returns a success response" do
-      get :new, params: { gallery_id: gallery.id }, session: valid_session
+      get :new, params: { gallery_id: gallery.to_param }, session: valid_session
       expect(response).to be_success
     end
   end
@@ -77,19 +77,19 @@ RSpec.describe ImagesController, type: :controller do
     context "with valid params" do
       it "creates a new Image" do
         expect {
-          post :create, params: { gallery_id: gallery.id, image: valid_attributes }, session: valid_session
+          post :create, params: { gallery_id: gallery.to_param, image: valid_attributes }, session: valid_session
         }.to change(Image, :count).by(1)
       end
 
       it "redirects to the created image" do
-        post :create, params: { gallery_id: gallery.id, image: valid_attributes }, session: valid_session
+        post :create, params: { gallery_id: gallery.to_param, image: valid_attributes }, session: valid_session
         expect(response).to redirect_to(Image.last)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: { gallery_id: gallery.id, image: invalid_attributes }, session: valid_session
+        post :create, params: { gallery_id: gallery.to_param, image: invalid_attributes }, session: valid_session
         expect(response).to be_success
       end
     end
