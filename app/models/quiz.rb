@@ -3,6 +3,8 @@ class Quiz < ApplicationRecord
 
   belongs_to :theme
   has_many :quiz_options, dependent: :destroy
+  has_many :devices, as: :content
+
   accepts_nested_attributes_for :quiz_options, allow_destroy: false
 
   validates :name, presence: true, uniqueness: true

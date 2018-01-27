@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180127255756) do
+ActiveRecord::Schema.define(version: 20180127255757) do
 
   create_table "devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -21,6 +21,9 @@ ActiveRecord::Schema.define(version: 20180127255756) do
     t.string "wlan_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "content_type"
+    t.bigint "content_id"
+    t.index ["content_type", "content_id"], name: "index_devices_on_content_type_and_content_id"
   end
 
   create_table "galleries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
