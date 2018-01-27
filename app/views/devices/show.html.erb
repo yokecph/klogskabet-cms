@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @device.name %>
+</p>
+
+<p>
+  <strong>Kind:</strong>
+  <%= @device.kind %>
+</p>
+
+<p>
+  <strong>Last contact:</strong>
+  <%= @device.last_contact %>
+</p>
+
+<p>
+  <strong>Passcode:</strong>
+  <%= @device.passcode %>
+</p>
+
+<p>
+  <strong>Eth ip:</strong>
+  <%= @device.eth_ip %>
+</p>
+
+<p>
+  <strong>Wlan ip:</strong>
+  <%= @device.wlan_ip %>
+</p>
+
+<%= link_to 'Edit', edit_device_path(@device) %> |
+<%= link_to 'Back', devices_path %>
