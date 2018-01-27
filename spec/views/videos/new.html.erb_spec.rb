@@ -16,6 +16,7 @@ RSpec.describe "videos/new", type: :view do
       assert_select "textarea[name=?]", "video[description_en]"
       assert_select "input[name=?]", "video[source_da]"
       assert_select "input[name=?]", "video[source_en]"
+      assert_select "input[name=?]", "video[youtube_id]"
     end
   end
 end
