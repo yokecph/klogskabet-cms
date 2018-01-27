@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title da:</strong>
+  <%= @interval.title_da %>
+</p>
+
+<p>
+  <strong>Title en:</strong>
+  <%= @interval.title_en %>
+</p>
+
+<p>
+  <strong>Subtitle da:</strong>
+  <%= @interval.subtitle_da %>
+</p>
+
+<p>
+  <strong>Subtitle en:</strong>
+  <%= @interval.subtitle_en %>
+</p>
+
+<p>
+  <strong>Description da:</strong>
+  <%= @interval.description_da %>
+</p>
+
+<p>
+  <strong>Description en:</strong>
+  <%= @interval.description_en %>
+</p>
+
+<%= link_to 'Edit', edit_interval_path(@interval) %> |
+<%= link_to 'Back', @interval.timeline %>

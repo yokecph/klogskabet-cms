@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180127014238) do
+ActiveRecord::Schema.define(version: 20180127020907) do
 
   create_table "galleries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -33,6 +33,19 @@ ActiveRecord::Schema.define(version: 20180127014238) do
     t.integer "file_file_size"
     t.datetime "file_updated_at"
     t.index ["gallery_id"], name: "index_images_on_gallery_id"
+  end
+
+  create_table "intervals", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "timeline_id"
+    t.string "title_da"
+    t.string "title_en"
+    t.string "subtitle_da"
+    t.string "subtitle_en"
+    t.text "description_da"
+    t.text "description_en"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["timeline_id"], name: "index_intervals_on_timeline_id"
   end
 
   create_table "playlists", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -84,6 +97,7 @@ ActiveRecord::Schema.define(version: 20180127014238) do
   end
 
   add_foreign_key "images", "galleries"
+  add_foreign_key "intervals", "timelines"
   add_foreign_key "tracks", "playlists"
   add_foreign_key "videos", "video_galleries"
 end
