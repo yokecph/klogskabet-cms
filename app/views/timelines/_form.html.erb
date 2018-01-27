@@ -1,0 +1,32 @@
+<%= form_with(model: timeline, local: true) do |form| %>
+  <% if timeline.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(timeline.errors.count, "error") %> prohibited this timeline from being saved:</h2>
+
+      <ul>
+      <% timeline.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :timeline_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :title_da %>
+    <%= form.text_field :title_da, id: :timeline_title_da %>
+  </div>
+
+  <div class="field">
+    <%= form.label :title_en %>
+    <%= form.text_field :title_en, id: :timeline_title_en %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
