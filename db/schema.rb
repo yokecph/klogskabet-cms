@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180127060810) do
+ActiveRecord::Schema.define(version: 20180127130901) do
 
   create_table "devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -81,6 +81,17 @@ ActiveRecord::Schema.define(version: 20180127060810) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "quiz_options", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "quiz_id"
+    t.string "option_da"
+    t.string "option_en"
+    t.string "answer_da"
+    t.string "answer_en"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quiz_id"], name: "index_quiz_options_on_quiz_id"
+  end
+
   create_table "quizzes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "title_da"
@@ -144,6 +155,7 @@ ActiveRecord::Schema.define(version: 20180127060810) do
   add_foreign_key "images", "galleries"
   add_foreign_key "interval_images", "intervals"
   add_foreign_key "intervals", "timelines"
+  add_foreign_key "quiz_options", "quizzes"
   add_foreign_key "tracks", "playlists"
   add_foreign_key "videos", "video_galleries"
 end

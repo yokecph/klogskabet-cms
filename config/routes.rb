@@ -1,8 +1,11 @@
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
-  resources :quizzes
   resources :themes
   resources :devices
+
+  resources :quizzes, shallow: true do
+    resources :quiz_options
+  end
 
   resources :timelines, shallow: true do
     resources :intervals, shallow: true do
