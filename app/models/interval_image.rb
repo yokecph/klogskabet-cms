@@ -3,7 +3,7 @@ class IntervalImage < ApplicationRecord
 
   belongs_to :interval
 
-  has_attached_file :file
+  has_attached_file :file, styles: { regular: ["1000x1000>", :jpg] }
 
   validates :description_da, presence: true
   validates :source_da, presence: true

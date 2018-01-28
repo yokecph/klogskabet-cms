@@ -7,6 +7,7 @@ FactoryBot.define do
     mp3_content_type "audio/mpeg"
     mp3_file_size 1000
     mp3_updated_at Time.zone.now
+    mp3_fingerprint "md5checksum"
   end
 
   factory :track_upload, class: Track do

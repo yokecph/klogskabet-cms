@@ -11,6 +11,7 @@ FactoryBot.define do
     file_content_type "image/jpeg"
     file_file_size 1000
     file_updated_at Time.zone.now
+    file_fingerprint "md5checksum"
   end
 
   factory :image_upload, class: Image do

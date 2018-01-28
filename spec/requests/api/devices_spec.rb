@@ -65,7 +65,9 @@ RSpec.describe "API/Devices", type: :request do
               description_da: String,
               description_en: String,
               source_da: String,
-              source_en: String
+              source_en: String,
+              url: String,
+              checksum: String
             }.ignore_extra_keys!
           ].ignore_extra_values!
         }.ignore_extra_keys!)
@@ -92,7 +94,9 @@ RSpec.describe "API/Devices", type: :request do
           tracks: [
             {
               id: Integer,
-              title: String
+              title: String,
+              url: String,
+              checksum: String
             }.ignore_extra_keys!
           ].ignore_extra_values!
         }.ignore_extra_keys!)
@@ -162,7 +166,9 @@ RSpec.describe "API/Devices", type: :request do
                   description_da: String,
                   description_en: String,
                   source_da: String,
-                  source_en: String
+                  source_en: String,
+                  url: String,
+                  checksum: String
                 }.ignore_extra_keys!
               ].ignore_extra_values!
             }.ignore_extra_keys!

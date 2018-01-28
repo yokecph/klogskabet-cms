@@ -3,7 +3,7 @@ class Image < ApplicationRecord
 
   belongs_to :gallery
 
-  has_attached_file :file
+  has_attached_file :file, styles: { regular: ["1000x1000>", :jpg] }
 
   validates :title_da, presence: true
   validates :source_da, presence: true
