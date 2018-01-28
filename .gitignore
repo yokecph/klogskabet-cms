@@ -24,3 +24,6 @@ config/application.yml
 
 # Ignore uploads
 /public/system/
+
+# Ignore simplecov coverage report
+/coverage
