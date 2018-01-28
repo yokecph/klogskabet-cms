@@ -1,4 +1,6 @@
 class Image < ApplicationRecord
+  include Bilingual
+
   belongs_to :gallery
 
   has_attached_file :file

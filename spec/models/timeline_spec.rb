@@ -7,4 +7,37 @@ RSpec.describe Timeline, type: :model do
   it { should validate_presence_of(:name) }
   it { should validate_uniqueness_of(:name) }
   it { should validate_presence_of(:title_da) }
+  it { should be_a(Bilingual) }
+
+  describe "bilingual" do
+    it "returns true if all the receiver, its intervals, and their images are bilingual" do
+      timeline = build :timeline
+      interval = build :interval
+      timeline.intervals << interval
+      image = build :interval_image
+      interval.interval_images << image
+      expect(timeline).to be_bilingual
+    end
+
+    it "returns false if the receiver isn't bilingual" do
+      timeline = build :timeline, title_en: ""
+      expect(timeline).to_not be_bilingual
+    end
+
+    it "returns false if not all the receiver's intervals are bilingual" do
+      timeline = build :timeline
+      interval = build :interval, title_en: ""
+      timeline.intervals << interval
+      expect(timeline).to_not be_bilingual
+    end
+
+    it "returns false if not all 2nd order images are bilingual" do
+      timeline = build :timeline
+      interval = build :interval
+      timeline.intervals << interval
+      image = build :interval_image, description_en: ""
+      interval.interval_images << image
+      expect(timeline).to_not be_bilingual
+    end
+  end
 end

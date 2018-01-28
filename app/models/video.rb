@@ -1,4 +1,6 @@
 class Video < ApplicationRecord
+  include Bilingual
+
   belongs_to :video_gallery
 
   validates :title_da, presence: true

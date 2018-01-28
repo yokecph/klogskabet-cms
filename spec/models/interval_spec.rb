@@ -7,4 +7,5 @@ RSpec.describe Interval, type: :model do
   it { should validate_presence_of(:title_en) }
   it { should validate_presence_of(:subtitle_da) }
   it { should validate_presence_of(:subtitle_en) }
+  it { should be_a(Bilingual) }
 end

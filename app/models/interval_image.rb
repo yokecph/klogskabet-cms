@@ -1,4 +1,6 @@
 class IntervalImage < ApplicationRecord
+  include Bilingual
+
   belongs_to :interval
 
   has_attached_file :file
