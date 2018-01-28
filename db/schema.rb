@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180127255757) do
+ActiveRecord::Schema.define(version: 20180128221946) do
 
   create_table "devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20180127255757) do
     t.string "file_content_type"
     t.integer "file_file_size"
     t.datetime "file_updated_at"
+    t.string "file_fingerprint"
     t.index ["gallery_id"], name: "index_images_on_gallery_id"
   end
 
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(version: 20180127255757) do
     t.string "file_content_type"
     t.integer "file_file_size"
     t.datetime "file_updated_at"
+    t.string "file_fingerprint"
     t.index ["interval_id"], name: "index_interval_images_on_interval_id"
   end
 
@@ -140,6 +142,7 @@ ActiveRecord::Schema.define(version: 20180127255757) do
     t.string "mp3_content_type"
     t.integer "mp3_file_size"
     t.datetime "mp3_updated_at"
+    t.string "mp3_fingerprint"
     t.index ["playlist_id"], name: "index_tracks_on_playlist_id"
   end
 
