@@ -79,7 +79,7 @@ group :test do
   gem 'simplecov', '~> 0.11', require: false
 
   # Use json_expressions for matching JSON responses
-  gem 'json_expressions', '~> 0.8.3'
+  gem 'json_expressions', '~> 0.9.0'
 
   # Use shoulda for validation testing
   gem 'shoulda-matchers'
