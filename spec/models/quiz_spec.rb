@@ -10,9 +10,29 @@ RSpec.describe Quiz, type: :model do
   it { should validate_presence_of(:title_da) }
   it { should validate_presence_of(:subtitle_da) }
   it { should validate_presence_of(:result_title_da) }
+  it { should be_a(Assignable) }
   it { should be_a(Bilingual) }
 
-  describe "bilingual" do
+  describe "assignability" do
+    it "is assignable to a screen device" do
+      device = build :device, kind: "screen"
+      quiz = build :quiz
+      expect(quiz.assignable_to?(device)).to be true
+    end
+
+    it "is assignable when it all its options are filled" do
+      quiz = create :quiz, :with_options
+      expect(quiz).to be_assignable
+    end
+
+    it "is not assignable when some of its options are unfilled" do
+      quiz = create :quiz, :with_options
+      quiz.quiz_options.last.update_attribute(:option_da, "")
+      expect(quiz).to_not be_assignable
+    end
+  end
+
+  describe "bilingualism" do
     it "returns true if all the receiver and its options are bilingual" do
       quiz = build :quiz, :with_options
       expect(quiz).to be_bilingual
