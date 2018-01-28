@@ -1,6 +1,7 @@
 class Timeline < ApplicationRecord
-  MIN_ASSIGNABLE_INTERVAL_COUNT = 2
+  MIN_PRESENTABLE_INTERVAL_COUNT = 2
 
+  include Presentable
   include Assignable
   include Bilingual
 
@@ -13,8 +14,8 @@ class Timeline < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :title_da, presence: true
 
-  # overrides Assignable method
-  def assignable?
-    self.intervals.count >= MIN_ASSIGNABLE_INTERVAL_COUNT
+  # overrides Presentable method
+  def presentable?
+    self.intervals.count >= MIN_PRESENTABLE_INTERVAL_COUNT
   end
 end

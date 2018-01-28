@@ -1,6 +1,7 @@
 class Quiz < ApplicationRecord
   OPTION_COUNT = 5
 
+  include Presentable
   include Assignable
   include Bilingual
 
@@ -17,8 +18,8 @@ class Quiz < ApplicationRecord
   validates :subtitle_da, presence: true
   validates :result_title_da, presence: true
 
-  # overrides Assignable method
-  def assignable?
+  # overrides Presentable method
+  def presentable?
     self.quiz_options.all?(&:filled?)
   end
 end

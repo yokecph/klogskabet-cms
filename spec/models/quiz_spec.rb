@@ -11,6 +11,7 @@ RSpec.describe Quiz, type: :model do
   it { should validate_presence_of(:subtitle_da) }
   it { should validate_presence_of(:result_title_da) }
   it { should be_a(Assignable) }
+  it { should be_a(Presentable) }
   it { should be_a(Bilingual) }
 
   describe "assignability" do
@@ -19,16 +20,18 @@ RSpec.describe Quiz, type: :model do
       quiz = build :quiz
       expect(quiz.assignable_to?(device)).to be true
     end
+  end
 
-    it "is assignable when it all its options are filled" do
+  describe "presentability" do
+    it "is presentable when it all its options are filled" do
       quiz = create :quiz, :with_options
-      expect(quiz).to be_assignable
+      expect(quiz).to be_presentable
     end
 
-    it "is not assignable when some of its options are unfilled" do
+    it "is not presentable when some of its options are unfilled" do
       quiz = create :quiz, :with_options
       quiz.quiz_options.last.update_attribute(:option_da, "")
-      expect(quiz).to_not be_assignable
+      expect(quiz).to_not be_presentable
     end
   end
 

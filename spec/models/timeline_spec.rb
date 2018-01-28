@@ -8,6 +8,7 @@ RSpec.describe Timeline, type: :model do
   it { should validate_uniqueness_of(:name) }
   it { should validate_presence_of(:title_da) }
   it { should be_a(Assignable) }
+  it { should be_a(Presentable) }
   it { should be_a(Bilingual) }
 
   describe "assignability" do
@@ -16,16 +17,18 @@ RSpec.describe Timeline, type: :model do
       timeline = build :timeline
       expect(timeline.assignable_to?(device)).to be true
     end
+  end
 
-    it "is assignable when it has enough intervals" do
+  describe "presentability" do
+    it "is presentable when it has enough intervals" do
       timeline = create :timeline
-      create_list(:interval, Timeline::MIN_ASSIGNABLE_INTERVAL_COUNT, timeline: timeline)
-      expect(timeline).to be_assignable
+      create_list(:interval, Timeline::MIN_PRESENTABLE_INTERVAL_COUNT, timeline: timeline)
+      expect(timeline).to be_presentable
     end
 
-    it "is not assignable when it has too few intervals" do
+    it "is not presentable when it has too few intervals" do
       timeline = create :timeline
-      expect(timeline).to_not be_assignable
+      expect(timeline).to_not be_presentable
     end
   end
 

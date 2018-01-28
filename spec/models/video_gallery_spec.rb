@@ -7,6 +7,7 @@ RSpec.describe VideoGallery, type: :model do
   it { should validate_presence_of(:name) }
   it { should validate_uniqueness_of(:name) }
   it { should be_a(Assignable) }
+  it { should be_a(Presentable) }
   it { should be_a(Bilingual) }
 
   describe "assignability" do
@@ -15,16 +16,18 @@ RSpec.describe VideoGallery, type: :model do
       video_gallery = build :video_gallery
       expect(video_gallery.assignable_to?(device)).to be true
     end
+  end
 
-    it "is assignable when it has enough videos" do
+  describe "presentability" do
+    it "is presentable when it has enough videos" do
       video_gallery = create :video_gallery
-      create_list(:video, VideoGallery::MIN_ASSIGNABLE_VIDEO_COUNT, video_gallery: video_gallery)
-      expect(video_gallery).to be_assignable
+      create_list(:video, VideoGallery::MIN_PRESENTABLE_VIDEO_COUNT, video_gallery: video_gallery)
+      expect(video_gallery).to be_presentable
     end
 
-    it "is not assignable when it has too few videos" do
+    it "is not presentable when it has too few videos" do
       video_gallery = build :video_gallery
-      expect(video_gallery).to_not be_assignable
+      expect(video_gallery).to_not be_presentable
     end
   end
 

@@ -1,7 +1,8 @@
 class Gallery < ApplicationRecord
-  MIN_ASSIGNABLE_IMAGE_COUNT = 10
+  MIN_PRESENTABLE_IMAGE_COUNT = 10
 
   include Assignable
+  include Presentable
   include Bilingual
 
   belongs_to :theme, optional: true
@@ -12,8 +13,8 @@ class Gallery < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
-  # overrides Assignable method
-  def assignable?
-    self.images.count >= MIN_ASSIGNABLE_IMAGE_COUNT
+  # overrides Presentable method
+  def presentable?
+    self.images.count >= MIN_PRESENTABLE_IMAGE_COUNT
   end
 end

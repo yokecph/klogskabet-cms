@@ -1,6 +1,7 @@
 class VideoGallery < ApplicationRecord
-  MIN_ASSIGNABLE_VIDEO_COUNT = 1
-  
+  MIN_PRESENTABLE_VIDEO_COUNT = 1
+
+  include Presentable
   include Assignable
   include Bilingual
 
@@ -12,8 +13,8 @@ class VideoGallery < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
-  # overrides Assignable method
-  def assignable?
-    self.videos.count >= MIN_ASSIGNABLE_VIDEO_COUNT
+  # overrides Presentable method
+  def presentable?
+    self.videos.count >= MIN_PRESENTABLE_VIDEO_COUNT
   end
 end

@@ -18,12 +18,6 @@ module Assignable
     self.devices.any?
   end
 
-  # whether the content is ready to be assigned
-  # (override in model classes)
-  def assignable?
-    raise NoMethodError.new("#assignable? must be overriden in models")
-  end
-
   # whether the given device is compatible with the receiver
   def assignable_to?(device)
     device.is_a?(Device) && device.kind.to_sym == self.class.required_device_kind

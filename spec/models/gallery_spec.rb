@@ -7,6 +7,7 @@ RSpec.describe Gallery, type: :model do
   it { should validate_presence_of(:name) }
   it { should validate_uniqueness_of(:name) }
   it { should be_a(Assignable) }
+  it { should be_a(Presentable) }
   it { should be_a(Bilingual) }
 
   describe "assignability" do
@@ -15,16 +16,18 @@ RSpec.describe Gallery, type: :model do
       gallery = build :gallery
       expect(gallery.assignable_to?(device)).to be true
     end
+  end
 
-    it "is assignable when it has enough images" do
+  describe "presentability" do
+    it "is presentable when it has enough images" do
       gallery = create :gallery
-      create_list(:image, Gallery::MIN_ASSIGNABLE_IMAGE_COUNT, gallery: gallery)
-      expect(gallery).to be_assignable
+      create_list(:image, Gallery::MIN_PRESENTABLE_IMAGE_COUNT, gallery: gallery)
+      expect(gallery).to be_presentable
     end
 
-    it "is not assignable when it has too few images" do
+    it "is not presentable when it has too few images" do
       gallery = build :gallery
-      expect(gallery).to_not be_assignable
+      expect(gallery).to_not be_presentable
     end
   end
 
