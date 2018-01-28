@@ -1,2 +1,4 @@
+json.theme_color gallery.theme.try(:color)
+json.kind 'gallery'
 json.extract! gallery, :id, :name, :created_at, :updated_at
-json.url gallery_url(gallery, format: :json)
+json.images gallery.images, partial: 'images/image', as: :image
