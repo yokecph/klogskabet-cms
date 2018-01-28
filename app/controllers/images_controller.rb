@@ -3,13 +3,11 @@ class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
 
   # GET /images
-  # GET /images.json
   def index
     @images = @gallery.images.all
   end
 
   # GET /images/1
-  # GET /images/1.json
   def show
   end
 
@@ -23,43 +21,30 @@ class ImagesController < ApplicationController
   end
 
   # POST /images
-  # POST /images.json
   def create
     @image = @gallery.images.new(image_params)
 
-    respond_to do |format|
-      if @image.save
-        format.html { redirect_to @image, notice: 'Image was successfully created.' }
-        format.json { render :show, status: :created, location: @image }
-      else
-        format.html { render :new }
-        format.json { render json: @image.errors, status: :unprocessable_entity }
-      end
+    if @image.save
+      redirect_to @image, notice: 'Image was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /images/1
-  # PATCH/PUT /images/1.json
   def update
-    respond_to do |format|
-      if @image.update(image_params)
-        format.html { redirect_to @image, notice: 'Image was successfully updated.' }
-        format.json { render :show, status: :ok, location: @image }
-      else
-        format.html { render :edit }
-        format.json { render json: @image.errors, status: :unprocessable_entity }
-      end
+    if @image.update(image_params)
+      redirect_to @image, notice: 'Image was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /images/1
-  # DELETE /images/1.json
   def destroy
     @image.destroy
-    respond_to do |format|
-      format.html { redirect_to @image.gallery, notice: 'Image was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+
+    redirect_to @image.gallery, notice: 'Image was successfully destroyed.'
   end
 
   private
@@ -77,4 +62,5 @@ class ImagesController < ApplicationController
   def image_params
     params.require(:image).permit(:file, :title_da, :title_en, :description_da, :description_en, :source_da, :source_en)
   end
+
 end

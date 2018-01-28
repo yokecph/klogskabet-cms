@@ -3,13 +3,11 @@ class TracksController < ApplicationController
   before_action :set_track, only: [:show, :edit, :update, :destroy]
 
   # GET /tracks
-  # GET /tracks.json
   def index
     @tracks = @playlist.tracks.all
   end
 
   # GET /tracks/1
-  # GET /tracks/1.json
   def show
   end
 
@@ -23,43 +21,30 @@ class TracksController < ApplicationController
   end
 
   # POST /tracks
-  # POST /tracks.json
   def create
     @track = @playlist.tracks.new(track_params)
 
-    respond_to do |format|
-      if @track.save
-        format.html { redirect_to @track, notice: 'Track was successfully created.' }
-        format.json { render :show, status: :created, location: @track }
-      else
-        format.html { render :new }
-        format.json { render json: @track.errors, status: :unprocessable_entity }
-      end
+    if @track.save
+      redirect_to @track, notice: 'Track was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /tracks/1
-  # PATCH/PUT /tracks/1.json
   def update
-    respond_to do |format|
-      if @track.update(track_params)
-        format.html { redirect_to @track, notice: 'Track was successfully updated.' }
-        format.json { render :show, status: :ok, location: @track }
-      else
-        format.html { render :edit }
-        format.json { render json: @track.errors, status: :unprocessable_entity }
-      end
+    if @track.update(track_params)
+      redirect_to @track, notice: 'Track was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /tracks/1
-  # DELETE /tracks/1.json
   def destroy
     @track.destroy
-    respond_to do |format|
-      format.html { redirect_to playlist_tracks_url(@track.playlist), notice: 'Track was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+
+    redirect_to playlist_tracks_url(@track.playlist), notice: 'Track was successfully destroyed.'
   end
 
   private
@@ -77,4 +62,5 @@ class TracksController < ApplicationController
   def track_params
     params.require(:track).permit(:title, :description, :mp3)
   end
+
 end
