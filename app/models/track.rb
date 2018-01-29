@@ -1,5 +1,7 @@
 class Track < ApplicationRecord
   belongs_to :playlist
+  has_many :devices, through: :playlist
+  has_one :theme, through: :playlist, required: false
 
   has_attached_file :mp3
 

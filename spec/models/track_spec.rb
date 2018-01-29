@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Track, type: :model do
   it { should belong_to(:playlist) }
+  it { should have_many(:devices).through(:playlist) }
+  it { should have_one(:theme).through(:playlist) }
   it { should validate_presence_of(:title) }
 
   describe "#display_title" do

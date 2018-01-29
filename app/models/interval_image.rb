@@ -2,6 +2,8 @@ class IntervalImage < ApplicationRecord
   include Bilingual
 
   belongs_to :interval
+  has_many :devices, through: :interval
+  has_one :theme, through: :interval, required: false
 
   has_attached_file :file, styles: { regular: ["1000x1000>", :jpg] }
 
