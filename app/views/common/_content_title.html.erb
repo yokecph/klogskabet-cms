@@ -1,0 +1,15 @@
+<div style="border-left: 20px solid <%= model.theme.try(:color) || '#fff' %>; padding-left: 0.5em">
+  <h1>
+    <%= model.class.to_s.underscore.humanize %>: <%= model.name %>
+    <% if model.theme.present? %>
+      <small>
+        Theme: <%= link_to model.theme.name, model.theme %>
+      </small>
+    <% end %>
+  </h1>
+
+  <p>
+    <%# yield for edit and delete links %>
+    <%= yield %>
+  </p>
+</div>
