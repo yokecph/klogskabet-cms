@@ -7,4 +7,8 @@ class Track < ApplicationRecord
   validates_attachment :mp3, presence: true, content_type: {
     content_type: /\Aaudio\/(mp3|mpeg).*\z/
   }
+
+  def display_title
+    I18n.transliterate(self.title)[0...20]
+  end
 end

@@ -1,24 +1,64 @@
-<p id="notice"><%= notice %></p>
+<div style="border-left: 20px solid <%= @playlist.theme.try(:color) || '#fff' %>; padding-left: 0.5em">
+  <h1>
+    Playlist: <%= @playlist.name %>
+    <% if @playlist.theme.present? %>
+      <small>
+        Theme: <%= link_to @playlist.theme.name, @playlist.theme %>
+      </small>
+    <% end %>
+  </h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @playlist.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @playlist.description %>
-</p>
-
-<%= link_to 'Edit', edit_playlist_path(@playlist) %> |
-<%= link_to 'Back', theme_playlists_path(@playlist.theme) %>
+  <p>
+    <%= link_to 'Edit playlist...', edit_playlist_path(@playlist) %> |
+    <%= link_to 'Delete playlist and tracks...', @playlist, method: :delete, data: { confirm: 'Are you sure you want to delete this playlist and all its tracks?' }, class: "text-danger" %>
+  </p>
+</div>
 
 <h2>Tracks</h2>
 
 <% if @playlist.tracks.any? %>
-  <%= render @playlist.tracks %>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th style="width: 10%"></th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+    <% @playlist.tracks.each do |track| %>
+
+      <tr>
+        <td>
+          <%= track.title %>
+          <br>
+          <samp>(<%= track.display_title %>)</samp>
+        </td>
+        <td>
+          <%= track.description %>
+        </td>
+        <td>
+          <audio src="<%= track.mp3.url %>" controls />
+        </td>
+        <td>
+          <%= link_to "Edit", edit_track_path(track) %>
+        </td>
+        <td>
+          <%= link_to 'Delete...', track, method: :delete, data: { confirm: 'Are you sure you want to delete this track?' }, class: "text-danger" %>
+        </td>
+      </tr>
+
+    <% end %>
+    </tbody>
+  </table>
+
 <% else %>
-  <em class="muted">No tracks</em>
+  <p><em class="text-muted">No tracks</em></p>
 <% end %>
 
-<%= link_to 'New Track', new_playlist_track_path(@playlist) %>
+<p>
+  <%= link_to 'Add Track...', new_playlist_track_path(@playlist) %>
+</p>
