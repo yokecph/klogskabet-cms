@@ -1,39 +1,84 @@
-<p id="notice"><%= notice %></p>
+<div style="border-left: 20px solid <%= @quiz.theme.try(:color) || '#fff' %>; padding-left: 0.5em">
+  <h1>
+    Quiz: <%= @quiz.name %>
+    <% if @quiz.theme.present? %>
+      <small>
+        Theme: <%= link_to @quiz.theme.name, @quiz.theme %>
+      </small>
+    <% end %>
+  </h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @quiz.name %>
-</p>
+  <p>
+    <%= link_to 'Edit quiz...', edit_quiz_path(@quiz) %> |
+    <%= link_to 'Delete quiz...', @quiz, method: :delete, data: { confirm: 'Are you sure you want to delete this quiz?' }, class: "text-danger" %>
+  </p>
+</div>
 
-<p>
-  <strong>Title da:</strong>
-  <%= @quiz.title_da %>
-</p>
+<div class="container">
+  <div class="col-md-6">
+    <h2>Danish</h2>
 
-<p>
-  <strong>Title en:</strong>
-  <%= @quiz.title_en %>
-</p>
+    <p>
+      <strong>Title:</strong> <%= @quiz.title_da %>
+    </p>
 
-<p>
-  <strong>Subtitle da:</strong>
-  <%= @quiz.subtitle_da %>
-</p>
+    <p>
+      <strong>Subtitle:</strong> <%= @quiz.subtitle_da %>
+    </p>
 
-<p>
-  <strong>Subtitle en:</strong>
-  <%= @quiz.subtitle_en %>
-</p>
+    <p>
+      <strong>Results heading:</strong> <%= @quiz.result_title_da %>
+    </p>
 
-<p>
-  <strong>Result title da:</strong>
-  <%= @quiz.result_title_da %>
-</p>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th style="width: 50%">Option</th>
+          <th>Comparison</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @quiz.quiz_options.each do |option| %>
+        <tr>
+          <td><%= option.option_da %></td>
+          <td><%= option.answer_da %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<p>
-  <strong>Result title en:</strong>
-  <%= @quiz.result_title_en %>
-</p>
+  <div class="col-md-6">
+    <h2>English</h2>
 
-<%= link_to 'Edit', edit_quiz_path(@quiz) %> |
-<%= link_to 'Back', theme_quizzes_path(@quiz.theme) %>
+    <p>
+      <strong>Title:</strong> <%= @quiz.title_en %>
+    </p>
+
+    <p>
+      <strong>Subtitle:</strong> <%= @quiz.subtitle_en %>
+    </p>
+
+    <p>
+      <strong>Results heading:</strong> <%= @quiz.result_title_en %>
+    </p>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th style="width: 50%">Option</th>
+          <th>Comparison</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @quiz.quiz_options.each do |option| %>
+        <tr>
+          <td><%= option.option_en %></td>
+          <td><%= option.answer_en %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+</div>
