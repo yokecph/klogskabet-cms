@@ -57,6 +57,7 @@ RSpec.describe "API/Devices", type: :request do
           name: gallery.name,
           theme_color: theme.color,
           kind: "gallery",
+          bilingual: wildcard_matcher,
           images: [
             {
               id: Integer,
@@ -119,6 +120,7 @@ RSpec.describe "API/Devices", type: :request do
           name: quiz.name,
           theme_color: theme.color,
           kind: "quiz",
+          bilingual: wildcard_matcher,
           title_da: String,
           title_en: String,
           subtitle_da: String,
@@ -152,6 +154,7 @@ RSpec.describe "API/Devices", type: :request do
           name: timeline.name,
           theme_color: theme.color,
           kind: "timeline",
+          bilingual: wildcard_matcher,
           title_da: String,
           title_en: String,
           intervals: [
@@ -193,6 +196,7 @@ RSpec.describe "API/Devices", type: :request do
           name: video_gallery.name,
           theme_color: theme.color,
           kind: "video_gallery",
+          bilingual: wildcard_matcher,
           videos: [
             {
               id: Integer,
