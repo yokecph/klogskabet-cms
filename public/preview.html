@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Content Preview</title>
+  <style>
+    body {
+      background: #333;
+      color: #fff;
+      width: 960px;
+    }
+
+    iframe {
+      border: none;
+      -ms-zoom: 0.5;
+      -moz-transform: scale(0.5);
+      -moz-transform-origin: 0 0;
+      -o-transform: scale(0.5);
+      -o-transform-origin: 0 0;
+      -webkit-transform: scale(0.5);
+      -webkit-transform-origin: 0 0;
+    }
+  </style>
+</head>
+
+<body>
+
+<script>
+  // parse query string
+  var params = (location.search || '')
+    .replace(/^\?/, '')
+    .split('&')
+    .map(param => param.split('='))
+    .filter(param => param.length === 2)
+    .reduce((obj, param) => {
+      obj[param[0]] = param[1];
+      return obj
+    }, {});
+
+  if (params['url'] && params['type']) {
+    var url = `/system/screenmodule/${params['type']}.html?content=${params['url']}`
+    var iframe = document.createElement('iframe');
+    iframe.src = url;
+    iframe.width = 1920;
+    iframe.height = 1080;
+    document.body.appendChild(iframe);
+  } else {
+    document.write('Error');
+  }
+</script>
+
+</body>
+</html>
