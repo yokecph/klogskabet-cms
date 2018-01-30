@@ -1,5 +1,5 @@
 <h1>New Track</h1>
 
-<%= render 'form', track: @track %>
-
-<%= link_to 'Back', @track.playlist %>
+<%= render 'form', track: @track do %>
+  &nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Cancel', @track.playlist %>
+<% end %>

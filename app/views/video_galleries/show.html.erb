@@ -1,9 +1,60 @@
-<p id="notice"><%= notice %></p>
+<%= render 'common/assigned_devices', model: @video_gallery %>
 
+<%= render 'common/content_title', model: @video_gallery do %>
+  <%= link_to 'Edit video gallery...', edit_video_gallery_path(@video_gallery) %> |
+  <%= link_to 'Delete video gallery...', @video_gallery, method: :delete, data: { confirm: 'Are you sure you want to delete this video gallery and all its videos?' }, class: "text-danger" %>
+<% end %>
+
+<h2>Videos</h2>
+
+<% if @video_gallery.videos.any? %>
+
+<div class="alert alert-info">
+  A video gallery can contain up to 4 videos. However, if there are less than 4, <em>only the first video will be shown</em>.
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Languages</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @video_gallery.videos.each do |video| %>
+    <tr>
+      <td>
+        <%= link_to video.title_da, video %>
+        <% if video.title_en.present? %>
+        <br>
+        <span class="text-muted"><%= video.title_en %></span>
+        <% end %>
+      </td>
+      <td>
+        <%= video.bilingual? ? "Danish/English" : "Danish" %>
+      </td>
+      <td>
+        <%= link_to "Edit", edit_video_path(video) %>
+      </td>
+      <td>
+        <%= link_to 'Delete...', video, method: :delete, data: { confirm: 'Are you sure you want to delete this video?' }, class: "text-danger" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<% else %>
+
+<div class="alert alert-warning">
+  This video gallery cannot be shown on any devices yet, as it must contain at least 1 video.
+</div>
+
+<% end %>
+
+<% if @video_gallery.videos.count < VideoGallery::MAX_VIDEO_COUNT %>
 <p>
-  <strong>Name:</strong>
-  <%= @video_gallery.name %>
+  <%= link_to 'Add video...', new_video_gallery_video_path(@video_gallery) %>
 </p>
-
-<%= link_to 'Edit', edit_video_gallery_path(@video_gallery) %> |
-<%= link_to 'Back', theme_video_galleries_path(@video_gallery.theme) %>
+<% end %>

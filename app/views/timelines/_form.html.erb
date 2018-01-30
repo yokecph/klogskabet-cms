@@ -1,32 +1,36 @@
 <%= form_with(model: timeline, url: (timeline.new_record? ? [timeline.theme, timeline] : timeline), local: true) do |form| %>
-  <% if timeline.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(timeline.errors.count, "error") %> prohibited this timeline from being saved:</h2>
+  <%= render 'common/validation_errors', model: timeline %>
 
-      <ul>
-      <% timeline.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, id: :timeline_name %>
+    <%= form.text_field :name, required: true, class: 'form-control', id: :timeline_name %>
+    <span class="help-block">
+      Required. The timeline name isn't shown publically, it's only for naming the timeline in the CMS.
+    </span>
   </div>
 
-  <div class="field">
-    <%= form.label :title_da %>
-    <%= form.text_field :title_da, id: :timeline_title_da %>
-  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Danish (required)</h3>
 
-  <div class="field">
-    <%= form.label :title_en %>
-    <%= form.text_field :title_en, id: :timeline_title_en %>
+      <div class="form-group">
+        <%= form.label :title_da %>
+        <%= form.text_field :title_da, required: true, class: 'form-control', id: :timeline_title_da %>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <h3>English</h3>
+
+      <div class="form-group">
+        <%= form.label :title_en %>
+        <%= form.text_field :title_en, class: 'form-control', id: :timeline_title_en %>
+      </div>
+    </div>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
+    <%= yield %>
   </div>
 <% end %>

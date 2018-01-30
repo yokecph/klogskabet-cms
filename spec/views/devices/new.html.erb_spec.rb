@@ -9,8 +9,8 @@ RSpec.describe "devices/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", devices_path, "post" do
-      assert_select "input[name=?]", "device[name]"
-      assert_select "select[name=?]", "device[kind]"
+      assert_select "input.form-control[name=?][required]", "device[name]"
+      assert_select "select.form-control[name=?]", "device[kind]"
       Device::KINDS.each do |kind|
         assert_select "option[value=?]", kind
       end

@@ -1,27 +1,18 @@
 <%= form_with(model: theme, local: true) do |form| %>
-  <% if theme.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(theme.errors.count, "error") %> prohibited this theme from being saved:</h2>
+  <%= render 'common/validation_errors', model: theme %>
 
-      <ul>
-      <% theme.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, id: :theme_name %>
+    <%= form.text_field :name, class: 'form-control', required: true, id: :theme_name %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :color %>
     <%= select_tag 'theme[color]', options_for_select(Theme::COLORS, theme.color || Theme::COLORS.values.first), { id: :theme_color } %>
   </div>
 
   <div class="actions">
     <%= form.submit %>
+    <%= yield %>
   </div>
 <% end %>

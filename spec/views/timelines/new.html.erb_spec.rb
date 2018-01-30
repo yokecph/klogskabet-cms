@@ -10,8 +10,8 @@ RSpec.describe "timelines/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", theme_timelines_path(@theme), "post" do
-      assert_select "input[name=?]", "timeline[title_da]"
-      assert_select "input[name=?]", "timeline[title_en]"
+      assert_select "input.form-control[name=?][required]", "timeline[title_da]"
+      assert_select "input.form-control[name=?]", "timeline[title_en]"
     end
   end
 end

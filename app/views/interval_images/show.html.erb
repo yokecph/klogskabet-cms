@@ -1,29 +1,61 @@
-<p id="notice"><%= notice %></p>
+<%= render 'common/assigned_devices', model: @interval_image %>
 
-<p>
-  <strong>Interval:</strong>
-  <%= @interval_image.interval %>
+<div style="border-left: 20px solid <%= @interval_image.theme.try(:color) || '#fff' %>; padding-left: 0.5em">
+  <h1>
+    Image
+    <small>
+      Interval: <%= link_to @interval_image.interval.title_da, @interval_image.interval %>
+    </small>
+  </h1>
+
+  <p>
+    <%= link_to 'Edit image...', edit_interval_image_path(@interval_image) %>
+    |
+    <%= link_to 'Delete image...', @interval_image, method: :delete, data: { confirm: 'Are you sure you want to delete this image?' }, class: "text-danger" %>
+  </p>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <h3>Danish</h3>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @interval_image.description_da %>
+    </p>
+
+    <p>
+      <strong>Source:</strong>
+      <%= @interval_image.source_da %>
+    </p>
+  </div>
+
+  <div class="col-md-6">
+    <h3>English</h3>
+
+    <p>
+      <strong>Description:</strong>
+      <br>
+      <% if @interval_image.description_en.present? %>
+        <%= @interval_image.description_en %>
+      <% else %>
+        <em class="text-muted">Missing</em>
+      <% end %>
+    </p>
+
+    <p>
+      <strong>Source:</strong>
+      <% if @interval_image.source_en.present? %>
+        <%= @interval_image.source_en %>
+      <% else %>
+        <em class="text-muted">Missing</em>
+      <% end %>
+    </p>
+  </div>
+</div>
+
+<p class="text-center">
+  <%= image_tag @interval_image.file.url(:regular) %>
+  <br>
+  <%= link_to "View original file", @interval_image.file.url(:original), target: '_blank' %>
 </p>
-
-<p>
-  <strong>Description da:</strong>
-  <%= @interval_image.description_da %>
-</p>
-
-<p>
-  <strong>Description en:</strong>
-  <%= @interval_image.description_en %>
-</p>
-
-<p>
-  <strong>Source da:</strong>
-  <%= @interval_image.source_da %>
-</p>
-
-<p>
-  <strong>Source en:</strong>
-  <%= @interval_image.source_en %>
-</p>
-
-<%= link_to 'Edit', edit_interval_image_path(@interval_image) %> |
-<%= link_to 'Back', @interval_image.interval %>

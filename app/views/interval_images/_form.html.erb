@@ -1,42 +1,49 @@
 <%= form_with(model: interval_image, url: (interval_image.new_record? ? [interval_image.interval, interval_image] : interval_image), local: true) do |form| %>
-  <% if interval_image.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(interval_image.errors.count, "error") %> prohibited this interval_image from being saved:</h2>
+  <%= render 'common/validation_errors', model: interval_image %>
 
-      <ul>
-      <% interval_image.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
+  <div class="form-group">
     <%= form.label :file %>
-    <%= form.text_field :file, id: :interval_image_file, accept: "image/jpeg,image/pjpeg,image/png" %>
+    <%= form.file_field :file, id: :interval_image_file, accept: "image/jpeg,image/pjpeg,image/png" %>
+    <span class="help-block">
+      File must be a JPEG or PNG.
+      <% if interval_image.new_record? %>
+        Required.
+      <% else %>
+        Select a file to replace the current image or leave blank.
+      <% end %>
+    </span>
   </div>
 
-  <div class="field">
-    <%= form.label :description_da %>
-    <%= form.text_area :description_da, id: :interval_image_description_da %>
-  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Danish (required)</h3>
 
-  <div class="field">
-    <%= form.label :description_en %>
-    <%= form.text_area :description_en, id: :interval_image_description_en %>
-  </div>
+      <div class="form-group">
+        <%= form.label :description_da %>
+        <%= form.text_field :description_da, required: true, class: 'form-control', id: :interval_image_description_da %>
+      </div>
 
-  <div class="field">
-    <%= form.label :source_da %>
-    <%= form.text_field :source_da, id: :interval_image_source_da %>
-  </div>
+      <div class="form-group">
+        <%= form.label :source_da %>
+        <%= form.text_field :source_da, required: true, class: 'form-control', id: :interval_image_source_da %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :source_en %>
-    <%= form.text_field :source_en, id: :interval_image_source_en %>
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label :description_en %>
+        <%= form.text_field :description_en, class: 'form-control', id: :interval_image_description_en %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :source_en %>
+        <%= form.text_field :source_en, class: 'form-control', id: :interval_image_source_en %>
+      </div>
+    </div>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
+    <%= yield %>
   </div>
 <% end %>

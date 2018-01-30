@@ -1,6 +1,5 @@
 <h1>Editing Interval</h1>
 
-<%= render 'form', interval: @interval %>
-
-<%= link_to 'Show', @interval %> |
-<%= link_to 'Back', @interval.timeline %>
+<%= render 'form', interval: @interval do %>
+  &nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Cancel', @interval %>
+<% end %>

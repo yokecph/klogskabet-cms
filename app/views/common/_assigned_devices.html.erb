@@ -1,0 +1,16 @@
+<% if model.devices.any? %>
+  <div class="alert alert-warning">
+    <p>
+      <strong>Beware:</strong>
+      This content is currently <strong>live</strong> on the following <%= "device".pluralize(model.devices.count) %>:
+    </p>
+    <ul>
+    <% model.devices.each do |device| %>
+      <li><samp><%= device.name %></samp></li>
+    <% end %>
+    </ul>
+    <p>
+      Any changes made to the content will be reflected on the <%= "device".pluralize(model.devices.count) %>.
+    </p>
+  </div>
+<% end %>

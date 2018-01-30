@@ -1,5 +1,6 @@
 class VideoGallery < ApplicationRecord
   MIN_PRESENTABLE_VIDEO_COUNT = 1
+  MAX_VIDEO_COUNT = 4
 
   include Presentable
   include Assignable

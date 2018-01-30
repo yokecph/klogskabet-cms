@@ -27,5 +27,8 @@ module Klogskabet
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Use Danish timezone
+    config.time_zone = 'Europe/Copenhagen'
   end
 end

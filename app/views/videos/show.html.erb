@@ -1,39 +1,77 @@
-<p id="notice"><%= notice %></p>
+<%= render 'common/assigned_devices', model: @video %>
+
+<div style="border-left: 20px solid <%= @video.theme.try(:color) || '#fff' %>; padding-left: 0.5em">
+  <h1>
+    Video
+    <small>
+      Gallery: <%= link_to @video.video_gallery.name, @video.video_gallery %>
+    </small>
+  </h1>
+
+  <p>
+    <%= link_to 'Edit video...', edit_video_path(@video) %>
+    |
+    <%= link_to 'Delete video...', @video, method: :delete, data: { confirm: 'Are you sure you want to delete this video?' }, class: "text-danger" %>
+  </p>
+</div>
 
 <p>
-  <strong>Video gallery:</strong>
-  <%= @video.video_gallery %>
+  <strong>YouTube ID:</strong>
+  <a href="https://www.youtube.com/watch?v=<%= @video.youtube_id %>">
+    <samp><%= @video.youtube_id %></samp>
+  </a>
 </p>
 
-<p>
-  <strong>Title da:</strong>
-  <%= @video.title_da %>
-</p>
+<div class="row">
+  <div class="col-md-6">
+    <h3>Danish</h3>
 
-<p>
-  <strong>Title en:</strong>
-  <%= @video.title_en %>
-</p>
+    <p>
+      <strong>Title:</strong> <%= @video.title_da %>
+    </p>
 
-<p>
-  <strong>Description da:</strong>
-  <%= @video.description_da %>
-</p>
+    <p>
+      <strong>Source:</strong> <%= @video.source_da %>
+    </p>
 
-<p>
-  <strong>Description en:</strong>
-  <%= @video.description_en %>
-</p>
+    <p><strong>Description:</strong></p>
+    <%= simple_format @video.description_da %>
+    </p>
+  </div>
 
-<p>
-  <strong>Source da:</strong>
-  <%= @video.source_da %>
-</p>
+  <div class="col-md-6">
+    <h3>English</h3>
 
-<p>
-  <strong>Source en:</strong>
-  <%= @video.source_en %>
-</p>
+    <p>
+      <strong>Title:</strong>
+      <% if @video.title_en.present? %>
+        <%= @video.title_en %>
+      <% else %>
+        <em class="text-muted">Missing</em>
+      <% end %>
+    </p>
 
-<%= link_to 'Edit', edit_video_path(@video) %> |
-<%= link_to 'Back', @video.video_gallery %>
+    <p>
+      <strong>Source:</strong>
+      <% if @video.source_en.present? %>
+        <%= @video.source_en %>
+      <% else %>
+        <em class="text-muted">Missing</em>
+      <% end %>
+    </p>
+
+    <p><strong>Description:</strong></p>
+    <% if @video.description_en.present? %>
+      <%= simple_format @video.description_en %>
+    <% else %>
+      <p><em class="text-muted">Missing</em></p>
+    <% end %>
+    </p>
+  </div>
+</div>
+
+<hr>
+
+<p class="text-center">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @video.youtube_id %>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</p>

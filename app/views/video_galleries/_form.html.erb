@@ -1,22 +1,16 @@
 <%= form_with(model: video_gallery, url: (video_gallery.new_record? ? [video_gallery.theme, video_gallery] : video_gallery), local: true) do |form| %>
-  <% if video_gallery.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(video_gallery.errors.count, "error") %> prohibited this video_gallery from being saved:</h2>
+  <%= render 'common/validation_errors', model: video_gallery %>
 
-      <ul>
-      <% video_gallery.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, id: :video_gallery_name %>
+    <%= form.text_field :name, class: 'form-control', required: true, id: :video_gallery_name %>
+    <span class="help-block">
+      Required. The name isn't shown publically, it's only for naming the video gallery in the CMS.
+    </span>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
+    <%= yield %>
   </div>
 <% end %>

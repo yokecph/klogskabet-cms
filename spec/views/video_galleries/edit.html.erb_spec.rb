@@ -9,7 +9,7 @@ RSpec.describe "video_galleries/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", video_gallery_path(@video_gallery), "post" do
-      assert_select "input[name=?]", "video_gallery[name]"
+      assert_select "input.form-control[name=?][required]", "video_gallery[name]"
     end
   end
 end
