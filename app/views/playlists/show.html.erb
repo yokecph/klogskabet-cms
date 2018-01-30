@@ -5,9 +5,11 @@
   <%= link_to 'Delete playlist...', @playlist, method: :delete, data: { confirm: 'Are you sure you want to delete this playlist and all its tracks?' }, class: "text-danger" %>
 <% end %>
 
-<p>
-  <%= @playlist.description %>
-</p>
+<% if @playlist.description.present? %>
+  <%= simple_format @playlist.description %>
+<% else %>
+  <p><em class="text-muted">No description.</em></p>
+<% end %>
 
 <h2>Tracks</h2>
 

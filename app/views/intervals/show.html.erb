@@ -31,9 +31,8 @@
 
     <p>
       <strong>Description:</strong>
-      <br>
-      <%= @interval.description_da %>
     </p>
+    <%= simple_format @interval.description_da %>
   </div>
 
   <div class="col-md-6">
@@ -57,15 +56,12 @@
       <% end %>
     </p>
 
-    <p>
-      <strong>Description:</strong>
-      <br>
-      <% if @interval.description_en.present? %>
-        <%= @interval.description_en %>
-      <% else %>
-        <em class="text-muted">Missing</em>
-      <% end %>
-    </p>
+    <p><strong>Description:</strong></p>
+    <% if @interval.description_en.present? %>
+      <%= simple_format @interval.description_en %>
+    <% else %>
+      <p><em class="text-muted">Missing</em></p>
+    <% end %>
   </div>
 </div>
 

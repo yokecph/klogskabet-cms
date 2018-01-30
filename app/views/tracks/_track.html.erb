@@ -1,6 +1,12 @@
 <article class="track">
   <h3><%= track.title %></h3>
-  <p><%= track.description.present? ? track.description : "<em>No description</em>".html_safe %></p>
+
+  <% if track.description.present? %>
+    <%= simple_format track.description %>
+  <% else %>
+  <p><em class="text-muted">No description</em></p>
+  <% end %>
+
   <p>
     <audio src="<%= track.mp3.url %>" controls></audio>
   </p>

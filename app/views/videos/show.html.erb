@@ -34,10 +34,8 @@
       <strong>Source:</strong> <%= @video.source_da %>
     </p>
 
-    <p>
-      <strong>Description:</strong>
-      <br>
-      <%= @video.description_da %>
+    <p><strong>Description:</strong></p>
+    <%= simple_format @video.description_da %>
     </p>
   </div>
 
@@ -62,14 +60,12 @@
       <% end %>
     </p>
 
-    <p>
-      <strong>Description:</strong>
-      <br>
-      <% if @video.description_en.present? %>
-        <%= @video.description_en %>
-      <% else %>
-        <em class="text-muted">Missing</em>
-      <% end %>
+    <p><strong>Description:</strong></p>
+    <% if @video.description_en.present? %>
+      <%= simple_format @video.description_en %>
+    <% else %>
+      <p><em class="text-muted">Missing</em></p>
+    <% end %>
     </p>
   </div>
 </div>

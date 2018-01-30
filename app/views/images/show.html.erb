@@ -27,11 +27,8 @@
       <strong>Source:</strong> <%= @image.source_da %>
     </p>
 
-    <p>
-      <strong>Description:</strong>
-      <br>
-      <%= @image.description_da %>
-    </p>
+    <p><strong>Description:</strong></p>
+    <p><%= simple_format @image.description_da %></p>
   </div>
 
   <div class="col-md-6">
@@ -55,15 +52,13 @@
       <% end %>
     </p>
 
-    <p>
-      <strong>Description:</strong>
-      <br>
-      <% if @image.description_en.present? %>
-        <%= @image.description_en %>
-      <% else %>
-        <em class="text-muted">Missing</em>
-      <% end %>
-    </p>
+    <p><strong>Description:</strong></p>
+    <% if @image.description_en.present? %>
+      <%= simple_format @image.description_en %>
+    <% else %>
+      <p><em class="text-muted">Missing</em></p>
+    <% end %>
+
   </div>
 </div>
 
