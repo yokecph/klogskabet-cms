@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180128221946) do
+ActiveRecord::Schema.define(version: 20180130135335) do
 
   create_table "devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "kind"
     t.datetime "last_contact"
-    t.string "passcode"
     t.string "eth_ip"
     t.string "wlan_ip"
     t.datetime "created_at", null: false
