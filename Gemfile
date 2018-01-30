@@ -47,6 +47,9 @@ gem 'semver'
 # Use figaro for general config
 gem 'figaro'
 
+# Use addressable to generate external URLs
+gem 'addressable'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a
   # debugger console
