@@ -1,6 +1,5 @@
 <h1>Editing Quiz</h1>
 
-<%= render 'form', quiz: @quiz %>
-
-<%= link_to 'Show', @quiz %> |
-<%= link_to 'Back', theme_quizzes_path(@quiz.theme) %>
+<%= render 'form', quiz: @quiz do %>
+  &nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Cancel', @quiz %>
+<% end %>

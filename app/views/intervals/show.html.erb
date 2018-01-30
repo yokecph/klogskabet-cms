@@ -1,34 +1,120 @@
 <%= render 'common/assigned_devices', model: @interval %>
 
-<p>
-  <strong>Title da:</strong>
-  <%= @interval.title_da %>
-</p>
+<div style="border-left: 20px solid <%= @interval.theme.try(:color) || '#fff' %>; padding-left: 0.5em">
+  <h1>
+    Interval
+    <small>
+      Timeline: <%= link_to @interval.timeline.name, @interval.timeline %>
+    </small>
+  </h1>
 
-<p>
-  <strong>Title en:</strong>
-  <%= @interval.title_en %>
-</p>
+  <p>
+    <%= link_to 'Edit interval...', edit_interval_path(@interval) %>
+    |
+    <%= link_to 'Delete interval...', @interval, method: :delete, data: { confirm: 'Are you sure you want to delete this interval?' }, class: "text-danger" %>
+  </p>
+</div>
 
-<p>
-  <strong>Subtitle da:</strong>
-  <%= @interval.subtitle_da %>
-</p>
+<div class="row">
+  <div class="col-md-6">
+    <h3>Danish</h3>
 
-<p>
-  <strong>Subtitle en:</strong>
-  <%= @interval.subtitle_en %>
-</p>
+    <p>
+      <strong>Title:</strong>
+      <%= @interval.title_da %>
+    </p>
 
-<p>
-  <strong>Description da:</strong>
-  <%= @interval.description_da %>
-</p>
+    <p>
+      <strong>Subtitle:</strong>
+      <%= @interval.subtitle_da %>
+    </p>
 
-<p>
-  <strong>Description en:</strong>
-  <%= @interval.description_en %>
-</p>
+    <p>
+      <strong>Description:</strong>
+      <br>
+      <%= @interval.description_da %>
+    </p>
+  </div>
 
-<%= link_to 'Edit', edit_interval_path(@interval) %> |
-<%= link_to 'Back', @interval.timeline %>
+  <div class="col-md-6">
+    <h3>English</h3>
+
+    <p>
+      <strong>Title:</strong>
+      <% if @interval.title_en.present? %>
+        <%= @interval.title_en %>
+      <% else %>
+        <em class="text-muted">Missing</em>
+      <% end %>
+    </p>
+
+    <p>
+      <strong>Subtitle:</strong>
+      <% if @interval.subtitle_en.present? %>
+        <%= @interval.subtitle_en %>
+      <% else %>
+        <em class="text-muted">Missing</em>
+      <% end %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <br>
+      <% if @interval.description_en.present? %>
+        <%= @interval.description_en %>
+      <% else %>
+        <em class="text-muted">Missing</em>
+      <% end %>
+    </p>
+  </div>
+</div>
+
+<h2>Images</h2>
+
+<% if @interval.interval_images.any? %>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th style="width:2%"></th>
+        <th>Description</th>
+        <th>Languages</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @interval.interval_images.each do |image| %>
+      <tr>
+        <td>
+          <%= link_to image do %>
+          <%= image_tag image.file.url(:thumbnail) %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to image.description_da, image %>
+        </td>
+        <td>
+          <%= image.bilingual? ? "Danish/English" : "Danish" %>
+        </td>
+        <td>
+          <%= link_to "Edit", edit_interval_image_path(image) %>
+        </td>
+        <td>
+          <%= link_to 'Delete...', image, method: :delete, data: { confirm: 'Are you sure you want to delete this image?' }, class: "text-danger" %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+<% else %>
+
+  <p><em class="text-muted">No images</em></p>
+
+<% end %>
+
+<% if @interval.interval_images.count < Interval::MAX_INTERVAL_IMAGE_COUNT %>
+<p>
+  <%= link_to 'Add image...', new_interval_interval_image_path(@interval) %>
+</p>
+<% end %>

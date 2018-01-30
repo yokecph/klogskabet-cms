@@ -1,6 +1,5 @@
 <h1>Editing Image</h1>
 
-<%= render 'form', image: @image %>
-
-<%= link_to 'Show', @image %> |
-<%= link_to 'Back', @image.gallery %>
+<%= render 'form', image: @image do %>
+  &nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Cancel', @image %>
+<% end %>

@@ -1,6 +1,5 @@
 <h1>Editing Interval Image</h1>
 
-<%= render 'form', interval_image: @interval_image %>
-
-<%= link_to 'Show', @interval_image %> |
-<%= link_to 'Back', @interval_image.interval %>
+<%= render 'form', interval_image: @interval_image do %>
+  &nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Cancel', @interval_image %>
+<% end %>

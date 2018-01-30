@@ -7,7 +7,7 @@
 
 <div class="container">
   <div class="col-md-6">
-    <h2>Danish</h2>
+    <h3>Danish</h3>
 
     <p>
       <strong>Title:</strong> <%= @quiz.title_da %>
@@ -40,18 +40,33 @@
   </div>
 
   <div class="col-md-6">
-    <h2>English</h2>
+    <h3>English</h3>
 
     <p>
-      <strong>Title:</strong> <%= @quiz.title_en %>
+      <strong>Title:</strong>
+      <% if @quiz.title_en.present? %>
+        <%= @quiz.title_en %>
+      <% else %>
+        <em class="text-muted">Missing</em>
+      <% end %>
     </p>
 
     <p>
-      <strong>Subtitle:</strong> <%= @quiz.subtitle_en %>
+      <strong>Subtitle:</strong>
+      <% if @quiz.subtitle_en.present? %>
+        <%= @quiz.subtitle_en %>
+      <% else %>
+        <em class="text-muted">Missing</em>
+      <% end %>
     </p>
 
     <p>
-      <strong>Results heading:</strong> <%= @quiz.result_title_en %>
+      <strong>Results heading:</strong>
+      <% if @quiz.result_title_en.present? %>
+        <%= @quiz.result_title_en %>
+      <% else %>
+        <em class="text-muted">Missing</em>
+      <% end %>
     </p>
 
     <table class="table table-striped">
