@@ -1,4 +1,6 @@
 class Interval < ApplicationRecord
+  MAX_INTERVAL_IMAGE_COUNT = 3
+
   include Bilingual
 
   belongs_to :timeline

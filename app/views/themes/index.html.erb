@@ -1,29 +1,25 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Themes</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
+      <th style="width:2em; max-width:3em"></th>
       <th>Name</th>
-      <th>Color</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @themes.each do |theme| %>
       <tr>
-        <td><%= theme.name %></td>
-        <td><%= theme.color_name %></td>
-        <td><%= link_to 'Show', theme %></td>
-        <td><%= link_to 'Edit', edit_theme_path(theme) %></td>
-        <td><%= link_to 'Destroy', theme, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <div class="well well-sm" style="background: <%= theme.color %>; width: 3em; margin-bottom: 0"></div>
+        </td>
+        <td><%= link_to theme.name, theme %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Theme', new_theme_path %>
+<p>
+  <%= link_to 'Add theme...', new_theme_path %>
+</p>

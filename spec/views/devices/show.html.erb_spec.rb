@@ -8,9 +8,10 @@ RSpec.describe "devices/show", type: :view do
   it "renders attributes in <p>" do
     render
     expect(rendered).to match(@device.name)
-    expect(rendered).to match(@device.kind)
-    expect(rendered).to match(@device.passcode)
-    expect(rendered).to match(@device.eth_ip)
-    expect(rendered).to match(@device.wlan_ip)
+    expect(rendered).to match(@device.kind.capitalize)
+    if @device.audio?
+      expect(rendered).to match(@device.eth_ip)
+      expect(rendered).to match(@device.wlan_ip)
+    end
   end
 end

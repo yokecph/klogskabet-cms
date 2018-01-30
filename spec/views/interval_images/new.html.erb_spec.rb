@@ -10,10 +10,10 @@ RSpec.describe "interval_images/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", interval_interval_images_path(@interval), "post" do
-      assert_select "textarea[name=?]", "interval_image[description_da]"
-      assert_select "textarea[name=?]", "interval_image[description_en]"
-      assert_select "input[name=?]", "interval_image[source_da]"
-      assert_select "input[name=?]", "interval_image[source_en]"
+      assert_select "textarea.form-control[name=?][required]", "interval_image[description_da]"
+      assert_select "textarea.form-control[name=?]", "interval_image[description_en]"
+      assert_select "input.form-control[name=?][required]", "interval_image[source_da]"
+      assert_select "input.form-control[name=?]", "interval_image[source_en]"
       assert_select "input[name=?][accept=?]", "interval_image[file]", "image/jpeg,image/pjpeg,image/png"
     end
   end

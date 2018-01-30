@@ -9,12 +9,12 @@ RSpec.describe "images/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", image_path(@image), "post" do
-      assert_select "input[name=?]", "image[title_da]"
-      assert_select "input[name=?]", "image[title_en]"
-      assert_select "textarea[name=?]", "image[description_da]"
-      assert_select "textarea[name=?]", "image[description_en]"
-      assert_select "input[name=?]", "image[source_da]"
-      assert_select "input[name=?]", "image[source_en]"
+      assert_select "input.form-control[name=?][required]", "image[title_da]"
+      assert_select "input.form-control[name=?]", "image[title_en]"
+      assert_select "textarea.form-control[name=?][required]", "image[description_da]"
+      assert_select "textarea.form-control[name=?]", "image[description_en]"
+      assert_select "input.form-control[name=?][required]", "image[source_da]"
+      assert_select "input.form-control[name=?]", "image[source_en]"
       assert_select "input[name=?][accept=?]", "image[file]", "image/jpeg,image/pjpeg,image/png"
     end
   end

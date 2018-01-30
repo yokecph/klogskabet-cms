@@ -1,27 +1,20 @@
 <%= form_with(model: device, local: true) do |form| %>
-  <% if device.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(device.errors.count, "error") %> prohibited this device from being saved:</h2>
+  <%= render 'common/validation_errors', model: device %>
 
-      <ul>
-      <% device.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, id: :device_name %>
+    <%= form.text_field :name, id: :device_name, required: true, class: 'form-control' %>
+    <span class="help-block">
+      The device name can only contain <samp>a-z0-9-_</samp> and must be unique.
+    </span>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :kind %>
-    <%= select_tag 'device[kind]', options_for_select(Device::KINDS, device.kind || Device::KINDS.first), { id: :device_kind } %>
+    <%= select_tag 'device[kind]', options_for_select(Device::KINDS.map { |kind| [kind.capitalize, kind] }, device.kind || Device::KINDS.first), { id: 'device_kind', class: 'form-control' } %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

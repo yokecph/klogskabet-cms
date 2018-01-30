@@ -10,13 +10,13 @@ RSpec.describe "videos/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", video_gallery_videos_path(@video_gallery), "post" do
-      assert_select "input[name=?]", "video[title_da]"
-      assert_select "input[name=?]", "video[title_en]"
-      assert_select "textarea[name=?]", "video[description_da]"
-      assert_select "textarea[name=?]", "video[description_en]"
-      assert_select "input[name=?]", "video[source_da]"
-      assert_select "input[name=?]", "video[source_en]"
-      assert_select "input[name=?]", "video[youtube_id]"
+      assert_select "input.form-control[name=?][required]", "video[title_da]"
+      assert_select "input.form-control[name=?]", "video[title_en]"
+      assert_select "textarea.form-control[name=?][required]", "video[description_da]"
+      assert_select "textarea.form-control[name=?]", "video[description_en]"
+      assert_select "input.form-control[name=?][required]", "video[source_da]"
+      assert_select "input.form-control[name=?]", "video[source_en]"
+      assert_select "input.form-control[name=?]", "video[youtube_id]"
     end
   end
 end

@@ -20,24 +20,24 @@
     <% end %>
   </dd>
 
-  <% if !@device.audio? %>
-  <dt>Ethernet IP</dt>
-  <dd>
-    <% if @device.eth_ip.present? %>
-      <code><%= @device.eth_ip %></code>
-    <% else %>
-      <em class="text-muted">Unknown</em>
-    <% end %>
-  </dd>
+  <% if @device.audio? %>
+    <dt>Ethernet IP</dt>
+    <dd>
+      <% if @device.eth_ip.present? %>
+        <code><%= @device.eth_ip %></code>
+      <% else %>
+        <em class="text-muted">Unknown</em>
+      <% end %>
+    </dd>
 
-  <dt>WLAN IP</dt>
-  <dd>
-    <% if @device.wlan_ip.present? %>
-      <code><%= @device.wlan_ip %></code>
-    <% else %>
-      <em class="text-muted">Unknown</em>
-    <% end %>
-  </dd>
+    <dt>WLAN IP</dt>
+    <dd>
+      <% if @device.wlan_ip.present? %>
+        <code><%= @device.wlan_ip %></code>
+      <% else %>
+        <em class="text-muted">Unknown</em>
+      <% end %>
+    </dd>
   <% end %>
 </dl>
 

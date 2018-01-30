@@ -1,22 +1,15 @@
 <%= form_with(model: gallery, url: (gallery.new_record? ? [gallery.theme, gallery] : gallery), local: true) do |form| %>
-  <% if gallery.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(gallery.errors.count, "error") %> prohibited this gallery from being saved:</h2>
+  <%= render 'common/validation_errors', model: gallery %>
 
-      <ul>
-      <% gallery.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, id: :gallery_name %>
+    <%= form.text_field :name, id: :gallery_name, required: true, class: 'form-control' %>
+    <span class="help-block">
+      The gallery name isn't shown publically, it's only for naming the gallery in the CMS.
+    </span>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

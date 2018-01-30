@@ -1,78 +1,105 @@
 <%= form_with(model: quiz, url: (quiz.new_record? ? [quiz.theme, quiz] : quiz), local: true) do |form| %>
-  <% if quiz.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>
+  <%= render 'common/validation_errors', model: quiz %>
 
-      <ul>
-      <% quiz.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, id: :quiz_name %>
+    <%= form.text_field :name, required: true, class: 'form-control', id: :quiz_name %>
+    <span class="help-block">
+      Required. The quiz name isn't shown publically, it's only for naming the quiz in the CMS.
+    </span>
   </div>
 
-  <div class="field">
-    <%= form.label :title_da %>
-    <%= form.text_field :title_da, id: :quiz_title_da %>
-  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Danish (required)</h3>
 
-  <div class="field">
-    <%= form.label :title_en %>
-    <%= form.text_field :title_en, id: :quiz_title_en %>
-  </div>
-
-  <div class="field">
-    <%= form.label :subtitle_da %>
-    <%= form.text_field :subtitle_da, id: :quiz_subtitle_da %>
-  </div>
-
-  <div class="field">
-    <%= form.label :subtitle_en %>
-    <%= form.text_field :subtitle_en, id: :quiz_subtitle_en %>
-  </div>
-
-  <div class="field">
-    <%= form.label :result_title_da %>
-    <%= form.text_field :result_title_da, id: :quiz_result_title_da %>
-  </div>
-
-  <div class="field">
-    <%= form.label :result_title_en %>
-    <%= form.text_field :result_title_en, id: :quiz_result_title_en %>
-  </div>
-
-  <%= form.fields_for :quiz_options do |builder| %>
-    <fieldset label="Options">
-      <%= builder.hidden_field :id %>
-
-      <div class="field">
-        <%= builder.label :option_da %>
-        <%= builder.text_field :option_da %>
+      <div class="form-group">
+        <%= form.label :title_da %>
+        <%= form.text_field :title_da, required: true, class: 'form-control', id: :quiz_title_da %>
       </div>
 
-      <div class="field">
-        <%= builder.label :option_en %>
-        <%= builder.text_field :option_en %>
+      <div class="form-group">
+        <%= form.label :subtitle_da %>
+        <%= form.text_field :subtitle_da, required: true, class: 'form-control', id: :quiz_subtitle_da %>
       </div>
 
-      <div class="field">
-        <%= builder.label :answer_da %>
-        <%= builder.text_field :answer_da %>
+      <div class="form-group">
+        <%= form.label :result_title_da %>
+        <%= form.text_field :result_title_da, required: true, class: 'form-control', id: :quiz_result_title_da %>
       </div>
 
-      <div class="field">
-        <%= builder.label :answer_en %>
-        <%= builder.text_field :answer_en %>
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Options</h4>
+
+          <%= form.fields_for :quiz_options do |builder| %>
+            <%= builder.hidden_field :id %>
+            <div class="form-group">
+              <%= builder.text_field :option_da, class: 'form-control' %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="col-md-6">
+          <h4>Comparisons</h4>
+
+          <%= form.fields_for :quiz_options do |builder| %>
+            <%= builder.hidden_field :id %>
+            <div class="form-group">
+              <%= builder.text_field :answer_da, class: 'form-control' %>
+            </div>
+          <% end %>
+        </div>
       </div>
-    </fieldset>
-  <% end %>
+
+    </div>
+
+    <div class="col-md-6">
+      <h3>English</h3>
+
+      <div class="form-group">
+        <%= form.label :title_en %>
+        <%= form.text_field :title_en, class: 'form-control', id: :quiz_title_en %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :subtitle_en %>
+        <%= form.text_field :subtitle_en, class: 'form-control', id: :quiz_subtitle_en %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :result_title_en %>
+        <%= form.text_field :result_title_en, class: 'form-control', id: :quiz_result_title_en %>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Options</h4>
+
+          <%= form.fields_for :quiz_options do |builder| %>
+            <%= builder.hidden_field :id %>
+            <div class="form-group">
+              <%= builder.text_field :option_en, class: 'form-control' %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="col-md-6">
+          <h4>Comparisons</h4>
+
+          <%= form.fields_for :quiz_options do |builder| %>
+            <%= builder.hidden_field :id %>
+            <div class="form-group">
+              <%= builder.text_field :answer_en, class: 'form-control' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>
