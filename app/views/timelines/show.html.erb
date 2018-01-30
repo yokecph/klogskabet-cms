@@ -1,16 +1,12 @@
 <%= render 'common/assigned_devices', model: @timeline %>
 
-<% if @timeline.intervals.count < Timeline::MIN_PRESENTABLE_INTERVAL_COUNT %>
-
-  <div class="alert alert-warning">
-    This timeline cannot be shown on any devices yet, as it must contain at least <%= pluralize(Timeline::MIN_PRESENTABLE_INTERVAL_COUNT, 'interval') %>.
-  </div>
-
-<% end %>
-
 <%= render 'common/content_title', model: @timeline do %>
   <%= link_to 'Edit timeline...', edit_timeline_path(@timeline) %> |
   <%= link_to 'Delete timeline...', @timeline, method: :delete, data: { confirm: 'Are you sure you want to delete this timeline and all its content?' }, class: "text-danger" %>
+<% end %>
+
+<%= render 'common/content_controls', model: @timeline do %>
+  It must contain <%= pluralize(Timeline::MIN_PRESENTABLE_INTERVAL_COUNT, 'interval') %> or more.
 <% end %>
 
 <div class="container">
