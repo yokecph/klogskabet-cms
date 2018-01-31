@@ -1,5 +1,5 @@
 class Interval < ApplicationRecord
-  MAX_INTERVAL_IMAGE_COUNT = 3
+  MAX_INTERVAL_IMAGE_COUNT = 4
 
   include Bilingual
 
