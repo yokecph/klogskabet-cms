@@ -5,6 +5,20 @@
   <%= link_to 'Delete playlist...', @playlist, method: :delete, data: { confirm: 'Are you sure you want to delete this playlist and all its tracks?' }, class: "text-danger" %>
 <% end %>
 
+<p>
+  <% if @playlist.presentable? %>
+    <%= link_to "Assign to device...", select_device_path(content_class: @playlist.class.to_s.underscore, content_id: @playlist.to_param), class: "btn btn-default" %>
+  <% else %>
+    <%= link_to "Assign to device...", '#', class: "btn btn-default disabled" %>
+
+    <span class="text-danger">
+      This playlist is incomplete and cannot be previewed or assigned to devices yet.
+      It must contain <%= pluralize(Playlist::MIN_PRESENTABLE_TRACK_COUNT, 'track') %> or more.
+    </span>
+  <% end %>
+</p>
+
+
 <% if @playlist.description.present? %>
   <%= simple_format @playlist.description %>
 <% else %>

@@ -7,6 +7,9 @@ Rails.application.routes.draw do
 
   resources :devices
 
+  get 'assignments/:content_class/:content_id/select', controller: :assignments, action: :select, as: :select_device
+  post 'assignments/assign', controller: :assignments, action: :assign, as: :assign_device
+
   resources :themes, shallow: true do
     resources :quizzes
 
