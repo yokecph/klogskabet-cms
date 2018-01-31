@@ -1,1 +1,5 @@
-# Application configuration values go here (but there aren't any yet)
+# Application configuration values go here
+
+# Generate keys for Devise using bin/rake secret
+DEVISE_SECRET_KEY: ~
+DEVISE_PEPPER: ~
