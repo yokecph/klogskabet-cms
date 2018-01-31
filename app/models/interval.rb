@@ -12,4 +12,8 @@ class Interval < ApplicationRecord
 
   validates :title_da, presence: true
   validates :subtitle_da, presence: true
+
+  def presentable?
+    self.interval_images.any?
+  end
 end

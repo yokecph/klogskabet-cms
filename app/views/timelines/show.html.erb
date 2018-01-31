@@ -6,7 +6,7 @@
 <% end %>
 
 <%= render 'common/content_controls', model: @timeline do %>
-  It must contain <%= pluralize(Timeline::MIN_PRESENTABLE_INTERVAL_COUNT, 'interval') %> or more.
+  It must contain <%= pluralize(Timeline::MIN_PRESENTABLE_INTERVAL_COUNT, 'interval') %> or more, each with at least 1 image.
 <% end %>
 
 <div class="container">

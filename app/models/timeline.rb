@@ -16,6 +16,7 @@ class Timeline < ApplicationRecord
 
   # overrides Presentable method
   def presentable?
-    self.intervals.count >= MIN_PRESENTABLE_INTERVAL_COUNT
+    return false if self.intervals.count < MIN_PRESENTABLE_INTERVAL_COUNT
+    self.intervals.all?(&:presentable?)
   end
 end

@@ -20,14 +20,20 @@ RSpec.describe Timeline, type: :model do
   end
 
   describe "presentability" do
-    it "is presentable when it has enough intervals" do
+    it "is presentable when it has enough presentable intervals" do
       timeline = create :timeline
-      create_list(:interval, Timeline::MIN_PRESENTABLE_INTERVAL_COUNT, timeline: timeline)
+      create_list(:interval, Timeline::MIN_PRESENTABLE_INTERVAL_COUNT, :with_interval_images, timeline: timeline)
       expect(timeline).to be_presentable
     end
 
     it "is not presentable when it has too few intervals" do
       timeline = create :timeline
+      expect(timeline).to_not be_presentable
+    end
+
+    it "is not presentable when intervals aren't presentable" do
+      timeline = create :timeline
+      create_list(:interval, Timeline::MIN_PRESENTABLE_INTERVAL_COUNT, timeline: timeline)
       expect(timeline).to_not be_presentable
     end
   end
