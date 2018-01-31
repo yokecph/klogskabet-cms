@@ -28,14 +28,19 @@
         <%= form.text_field :result_title_da, required: true, class: 'form-control', id: :quiz_result_title_da %>
       </div>
 
+      <% quiz.quiz_options.each_with_index do |option, i| %>
+        <% unless option.new_record? %>
+          <%= hidden_field_tag "quiz[quiz_options_attributes][#{i}][id]", option.id %>
+        <% end %>
+      <% end %>
+
       <div class="row">
         <div class="col-md-6">
           <h4>Options</h4>
 
-          <%= form.fields_for :quiz_options do |builder| %>
-            <%= builder.hidden_field :id %>
+          <% quiz.quiz_options.each_with_index do |option, i| %>
             <div class="form-group">
-              <%= builder.text_field :option_da, class: 'form-control' %>
+              <%= text_field_tag "quiz[quiz_options_attributes][#{i}][option_da]", option.option_da, class: "form-control" %>
             </div>
           <% end %>
         </div>
@@ -43,10 +48,9 @@
         <div class="col-md-6">
           <h4>Comparisons</h4>
 
-          <%= form.fields_for :quiz_options do |builder| %>
-            <%= builder.hidden_field :id %>
+          <% quiz.quiz_options.each_with_index do |option, i| %>
             <div class="form-group">
-              <%= builder.text_field :answer_da, class: 'form-control' %>
+              <%= text_field_tag "quiz[quiz_options_attributes][#{i}][answer_da]", option.answer_da, class: "form-control" %>
             </div>
           <% end %>
         </div>
@@ -76,10 +80,10 @@
         <div class="col-md-6">
           <h4>Options</h4>
 
-          <%= form.fields_for :quiz_options do |builder| %>
-            <%= builder.hidden_field :id %>
+          <%# can't use fields_for because it messes up indexing for new records %>
+          <% quiz.quiz_options.each_with_index do |option, i| %>
             <div class="form-group">
-              <%= builder.text_field :option_en, class: 'form-control' %>
+              <%= text_field_tag "quiz[quiz_options_attributes][#{i}][option_en]", option.option_en, class: "form-control" %>
             </div>
           <% end %>
         </div>
@@ -87,10 +91,10 @@
         <div class="col-md-6">
           <h4>Comparisons</h4>
 
-          <%= form.fields_for :quiz_options do |builder| %>
-            <%= builder.hidden_field :id %>
+          <%# can't use fields_for because it messes up indexing for new records %>
+          <% quiz.quiz_options.each_with_index do |option, i| %>
             <div class="form-group">
-              <%= builder.text_field :answer_en, class: 'form-control' %>
+              <%= text_field_tag "quiz[quiz_options_attributes][#{i}][answer_en]", option.answer_en, class: "form-control" %>
             </div>
           <% end %>
         </div>
