@@ -25,7 +25,7 @@ class TracksController < ApplicationController
     @track = @playlist.tracks.new(track_params)
 
     if @track.save
-      redirect_to @track, notice: 'Track was successfully created.'
+      redirect_to @track.playlist, notice: 'Track was successfully created.'
     else
       render :new
     end
@@ -34,7 +34,7 @@ class TracksController < ApplicationController
   # PATCH/PUT /tracks/1
   def update
     if @track.update(track_params)
-      redirect_to @track, notice: 'Track was successfully updated.'
+      redirect_to @track.playlist, notice: 'Track was successfully updated.'
     else
       render :edit
     end
@@ -44,7 +44,7 @@ class TracksController < ApplicationController
   def destroy
     @track.destroy
 
-    redirect_to playlist_tracks_url(@track.playlist), notice: 'Track was successfully deleted.'
+    redirect_to @track.playlist, notice: 'Track was successfully deleted.'
   end
 
   private

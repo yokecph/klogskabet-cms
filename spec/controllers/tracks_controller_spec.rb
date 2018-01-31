@@ -87,7 +87,7 @@ RSpec.describe TracksController, type: :controller do
 
       it "redirects to the created track" do
         post :create, params: { track: valid_attributes, playlist_id: playlist.to_param }, session: valid_session
-        expect(response).to redirect_to(Track.last)
+        expect(response).to redirect_to(playlist)
       end
     end
 
@@ -116,7 +116,7 @@ RSpec.describe TracksController, type: :controller do
 
       it "redirects to the track" do
         put :update, params: {id: track.to_param, track: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(track)
+        expect(response).to redirect_to(playlist)
       end
     end
 
@@ -139,7 +139,7 @@ RSpec.describe TracksController, type: :controller do
 
     it "redirects to the tracks list" do
       delete :destroy, params: {id: track.to_param}, session: valid_session
-      expect(response).to redirect_to(playlist_tracks_url(playlist))
+      expect(response).to redirect_to(playlist)
     end
   end
 
