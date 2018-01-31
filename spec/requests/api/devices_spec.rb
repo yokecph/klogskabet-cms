@@ -65,6 +65,8 @@ RSpec.describe "API/Devices", type: :request do
               title_en: String,
               description_da: String,
               description_en: String,
+              description_html_da: String,
+              description_html_en: String,
               source_da: String,
               source_en: String,
               url: String,
@@ -164,6 +166,8 @@ RSpec.describe "API/Devices", type: :request do
               subtitle_en: String,
               description_da: String,
               description_en: String,
+              description_html_da: String,
+              description_html_en: String,
               images: [
                 {
                   description_da: String,
@@ -204,6 +208,8 @@ RSpec.describe "API/Devices", type: :request do
               title_en: String,
               description_da: String,
               description_en: String,
+              description_html_da: String,
+              description_html_en: String,
               subtitle_da: String,
               subtitle_en: String,
               youtube_id: String
