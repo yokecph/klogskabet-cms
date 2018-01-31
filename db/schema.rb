@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180130135335) do
+ActiveRecord::Schema.define(version: 20180131024127) do
 
   create_table "devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -159,8 +159,8 @@ ActiveRecord::Schema.define(version: 20180130135335) do
     t.string "title_en"
     t.text "description_da"
     t.text "description_en"
-    t.string "source_da"
-    t.string "source_en"
+    t.string "subtitle_da"
+    t.string "subtitle_en"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "youtube_id"

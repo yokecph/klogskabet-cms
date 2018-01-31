@@ -41,6 +41,8 @@ en:
         description_en: Description (en)
         source_da: Source (da)
         source_en: Source (en)
+        subtitle_da: Subtitle (da)
+        subtitle_en: Subtitle (en)
 
       device:
         name: Device ID

@@ -31,7 +31,7 @@
     </p>
 
     <p>
-      <strong>Source:</strong> <%= @video.source_da %>
+      <strong>Subtitle:</strong> <%= @video.subtitle_da %>
     </p>
 
     <p><strong>Description:</strong></p>
@@ -52,9 +52,9 @@
     </p>
 
     <p>
-      <strong>Source:</strong>
-      <% if @video.source_en.present? %>
-        <%= @video.source_en %>
+      <strong>Subtitle:</strong>
+      <% if @video.subtitle_en.present? %>
+        <%= @video.subtitle_en %>
       <% else %>
         <em class="text-muted">Missing</em>
       <% end %>

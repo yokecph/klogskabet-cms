@@ -10,6 +10,6 @@ RSpec.describe "videos/show", type: :view do
     expect(rendered).to match(/Dansk titel/)
     expect(rendered).to match(/English Title/)
     expect(rendered).to match(/Lorem ipsum/i)
-    expect(rendered).to match(/FactoryBot/)
+    expect(rendered).to match(/Foobar/)
   end
 end
