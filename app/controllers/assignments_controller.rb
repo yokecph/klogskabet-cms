@@ -7,7 +7,7 @@ class AssignmentsController < ApplicationController
   end
 
   def assign
-    if @device.update_attribute(:content, @content)
+    if @content.assignable_to?(@device) && @device.update_attribute(:content, @content)
       redirect_to @content, notice: 'Content succesfully assigned to device'
     else
       redirect_to @content, alert: 'Could not assign content to device'
