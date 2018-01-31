@@ -2,7 +2,7 @@ module Assignable
   extend ActiveSupport::Concern
 
   included do
-    has_many :devices, as: :content
+    has_many :devices, as: :content, dependent: :nullify
   end
 
   module ClassMethods
