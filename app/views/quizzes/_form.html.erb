@@ -1,9 +1,11 @@
 <%= form_with(model: quiz, url: (quiz.new_record? ? [quiz.theme, quiz] : quiz), local: true) do |form| %>
   <%= render 'common/validation_errors', model: quiz %>
 
+  <% tabindex = 0 %>
+
   <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, required: true, class: 'form-control', id: :quiz_name %>
+    <%= form.text_field :name, required: true, class: 'form-control', id: :quiz_name, tabindex: 1 %>
     <span class="help-block">
       Required. The quiz name isn't shown publically, it's only for naming the quiz in the CMS.
     </span>
@@ -15,17 +17,17 @@
 
       <div class="form-group">
         <%= form.label :title_da %>
-        <%= form.text_field :title_da, required: true, class: 'form-control', id: :quiz_title_da %>
+        <%= form.text_field :title_da, required: true, class: 'form-control', id: :quiz_title_da, tabindex: 2 %>
       </div>
 
       <div class="form-group">
         <%= form.label :subtitle_da %>
-        <%= form.text_field :subtitle_da, required: true, class: 'form-control', id: :quiz_subtitle_da %>
+        <%= form.text_field :subtitle_da, required: true, class: 'form-control', id: :quiz_subtitle_da, tabindex: 4 %>
       </div>
 
       <div class="form-group">
         <%= form.label :result_title_da %>
-        <%= form.text_field :result_title_da, required: true, class: 'form-control', id: :quiz_result_title_da %>
+        <%= form.text_field :result_title_da, required: true, class: 'form-control', id: :quiz_result_title_da, tabindex: 6 %>
       </div>
 
       <% quiz.quiz_options.each_with_index do |option, i| %>
@@ -38,9 +40,10 @@
         <div class="col-md-6">
           <h4>Options</h4>
 
+          <%# can't use fields_for because it messes up indexing for new records %>
           <% quiz.quiz_options.each_with_index do |option, i| %>
             <div class="form-group">
-              <%= text_field_tag "quiz[quiz_options_attributes][#{i}][option_da]", option.option_da, class: "form-control" %>
+              <%= text_field_tag "quiz[quiz_options_attributes][#{i}][option_da]", option.option_da, class: "form-control", tabindex: ((i + 1) * 4) + 7 %>
             </div>
           <% end %>
         </div>
@@ -48,9 +51,10 @@
         <div class="col-md-6">
           <h4>Comparisons</h4>
 
+          <%# can't use fields_for because it messes up indexing for new records %>
           <% quiz.quiz_options.each_with_index do |option, i| %>
             <div class="form-group">
-              <%= text_field_tag "quiz[quiz_options_attributes][#{i}][answer_da]", option.answer_da, class: "form-control" %>
+              <%= text_field_tag "quiz[quiz_options_attributes][#{i}][answer_da]", option.answer_da, class: "form-control", tabindex: ((i + 1) * 4 + 1 + 7) %>
             </div>
           <% end %>
         </div>
@@ -63,17 +67,17 @@
 
       <div class="form-group">
         <%= form.label :title_en %>
-        <%= form.text_field :title_en, class: 'form-control', id: :quiz_title_en %>
+        <%= form.text_field :title_en, class: 'form-control', id: :quiz_title_en, tabindex: 3 %>
       </div>
 
       <div class="form-group">
         <%= form.label :subtitle_en %>
-        <%= form.text_field :subtitle_en, class: 'form-control', id: :quiz_subtitle_en %>
+        <%= form.text_field :subtitle_en, class: 'form-control', id: :quiz_subtitle_en, tabindex: 5 %>
       </div>
 
       <div class="form-group">
         <%= form.label :result_title_en %>
-        <%= form.text_field :result_title_en, class: 'form-control', id: :quiz_result_title_en %>
+        <%= form.text_field :result_title_en, class: 'form-control', id: :quiz_result_title_en, tabindex: 7 %>
       </div>
 
       <div class="row">
@@ -83,7 +87,7 @@
           <%# can't use fields_for because it messes up indexing for new records %>
           <% quiz.quiz_options.each_with_index do |option, i| %>
             <div class="form-group">
-              <%= text_field_tag "quiz[quiz_options_attributes][#{i}][option_en]", option.option_en, class: "form-control" %>
+              <%= text_field_tag "quiz[quiz_options_attributes][#{i}][option_en]", option.option_en, class: "form-control", tabindex: ((i + 1) * 4 + 2 + 7) %>
             </div>
           <% end %>
         </div>
@@ -94,7 +98,7 @@
           <%# can't use fields_for because it messes up indexing for new records %>
           <% quiz.quiz_options.each_with_index do |option, i| %>
             <div class="form-group">
-              <%= text_field_tag "quiz[quiz_options_attributes][#{i}][answer_en]", option.answer_en, class: "form-control" %>
+              <%= text_field_tag "quiz[quiz_options_attributes][#{i}][answer_en]", option.answer_en, class: "form-control", tabindex: ((i + 1) * 4 + 3 + 7) %>
             </div>
           <% end %>
         </div>
