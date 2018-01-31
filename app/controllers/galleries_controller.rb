@@ -46,7 +46,7 @@ class GalleriesController < ApplicationController
   def destroy
     @gallery.destroy
 
-    redirect_to @gallery.theme, notice: 'Gallery was successfully destroyed.'
+    redirect_to @gallery.theme, notice: 'Gallery was successfully deleted.'
   end
 
   private

@@ -44,7 +44,7 @@ class TracksController < ApplicationController
   def destroy
     @track.destroy
 
-    redirect_to playlist_tracks_url(@track.playlist), notice: 'Track was successfully destroyed.'
+    redirect_to playlist_tracks_url(@track.playlist), notice: 'Track was successfully deleted.'
   end
 
   private

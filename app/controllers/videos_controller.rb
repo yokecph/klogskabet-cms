@@ -44,7 +44,7 @@ class VideosController < ApplicationController
   def destroy
     @video.destroy
 
-    redirect_to @video.video_gallery, notice: 'Video was successfully destroyed.'
+    redirect_to @video.video_gallery, notice: 'Video was successfully deleted.'
   end
 
   private

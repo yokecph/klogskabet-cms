@@ -44,7 +44,7 @@ class IntervalImagesController < ApplicationController
   def destroy
     @interval_image.destroy
 
-    redirect_to @interval_image.interval, notice: 'Interval image was successfully destroyed.'
+    redirect_to @interval_image.interval, notice: 'Interval image was successfully deleted.'
   end
 
   private

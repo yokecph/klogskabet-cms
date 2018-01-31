@@ -47,7 +47,7 @@ class QuizzesController < ApplicationController
   def destroy
     @quiz.destroy
 
-    redirect_to @quiz.theme, notice: 'Quiz was successfully destroyed.'
+    redirect_to @quiz.theme, notice: 'Quiz was successfully deleted.'
   end
 
   private

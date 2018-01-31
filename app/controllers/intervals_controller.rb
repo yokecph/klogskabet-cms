@@ -45,7 +45,7 @@ class IntervalsController < ApplicationController
   def destroy
     @interval.destroy
 
-    redirect_to @interval.timeline, notice: 'Interval was successfully destroyed.'
+    redirect_to @interval.timeline, notice: 'Interval was successfully deleted.'
   end
 
   private

@@ -44,7 +44,7 @@ class ImagesController < ApplicationController
   def destroy
     @image.destroy
 
-    redirect_to @image.gallery, notice: 'Image was successfully destroyed.'
+    redirect_to @image.gallery, notice: 'Image was successfully deleted.'
   end
 
   private

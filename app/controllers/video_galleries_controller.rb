@@ -46,7 +46,7 @@ class VideoGalleriesController < ApplicationController
   def destroy
     @video_gallery.destroy
 
-    redirect_to @video_gallery.theme, notice: 'Video gallery was successfully destroyed.'
+    redirect_to @video_gallery.theme, notice: 'Video gallery was successfully deleted.'
   end
 
   private

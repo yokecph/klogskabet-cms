@@ -43,7 +43,7 @@ class DevicesController < ApplicationController
   def destroy
     @device.destroy
 
-    redirect_to devices_url, notice: 'Device was successfully destroyed.'
+    redirect_to devices_url, notice: 'Device was successfully deleted.'
   end
 
   private

@@ -46,7 +46,7 @@ class TimelinesController < ApplicationController
   def destroy
     @timeline.destroy
 
-    redirect_to @timeline.theme, notice: 'Timeline was successfully destroyed.'
+    redirect_to @timeline.theme, notice: 'Timeline was successfully deleted.'
   end
 
   private

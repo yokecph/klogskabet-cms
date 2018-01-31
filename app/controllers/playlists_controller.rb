@@ -46,7 +46,7 @@ class PlaylistsController < ApplicationController
   def destroy
     @playlist.destroy
 
-    redirect_to @playlist.theme, notice: 'Playlist was successfully destroyed.'
+    redirect_to @playlist.theme, notice: 'Playlist was successfully deleted.'
   end
 
   private

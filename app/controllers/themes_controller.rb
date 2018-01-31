@@ -43,7 +43,7 @@ class ThemesController < ApplicationController
   def destroy
     @theme.destroy
 
-    redirect_to themes_url, notice: 'Theme was successfully destroyed.'
+    redirect_to themes_url, notice: 'Theme was successfully deleted.'
   end
 
   private
