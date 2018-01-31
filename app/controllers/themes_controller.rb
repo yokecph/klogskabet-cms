@@ -3,7 +3,7 @@ class ThemesController < ApplicationController
 
   # GET /themes
   def index
-    @themes = Theme.all
+    @themes = Theme.all.order(:name)
   end
 
   # GET /themes/1

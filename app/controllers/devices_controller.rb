@@ -3,7 +3,7 @@ class DevicesController < ApplicationController
 
   # GET /devices
   def index
-    @devices = Device.all
+    @devices = Device.all.order(:name)
   end
 
   # GET /devices/1

@@ -9,11 +9,11 @@ class Theme < ApplicationRecord
     "Purple" => '#dac2ff'
   }.freeze
 
-  has_many :galleries, dependent: :destroy
-  has_many :playlists, dependent: :destroy
-  has_many :quizzes, dependent: :destroy
-  has_many :timelines, dependent: :destroy
-  has_many :video_galleries, dependent: :destroy
+  has_many :galleries, -> { order(:name) }, dependent: :destroy
+  has_many :playlists, -> { order(:name) }, dependent: :destroy
+  has_many :quizzes, -> { order(:name) }, dependent: :destroy
+  has_many :timelines, -> { order(:name) }, dependent: :destroy
+  has_many :video_galleries, -> { order(:name) }, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates :color, presence: true, format: { with: /\A#[a-f0-9]{6}\z/i }

@@ -3,7 +3,7 @@ class AssignmentsController < ApplicationController
   before_action :load_device, only: :assign
 
   def select
-    @devices = Device.where(kind: content_class.required_device_kind)
+    @devices = Device.where(kind: content_class.required_device_kind).order(:name)
   end
 
   def assign
