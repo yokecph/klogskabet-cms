@@ -31,4 +31,6 @@ Rails.application.routes.draw do
       resources :tracks
     end
   end
+
+  root to: 'themes#index'
 end
