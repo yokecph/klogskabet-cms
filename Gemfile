@@ -78,6 +78,9 @@ group :development do
 
   # Use Capistrano for deployment
   gem 'capistrano-rails'
+
+  # Use letter_opener for email previews
+  gem 'letter_opener'
 end
 
 group :test do
