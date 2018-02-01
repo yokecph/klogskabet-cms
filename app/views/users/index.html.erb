@@ -1,0 +1,42 @@
+<h1>Users</h1>
+
+<% if @users.any? %>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td>
+            <%= user.email %>
+            <% if user.admin? %>
+              <span class="label label-primary">Administrator</span>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "Delete...", user, method: :delete, data: { confirm: "Are you sure you want to delete this user?" }, class: "text-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% else %>
+
+  <p>
+    <em class="text-muted">
+      No users (other than you). Were you looking for <%= link_to "your own account?", account_path %>
+    </em>
+  </p>
+
+<% end %>
+
+<p>
+  <%= link_to 'Invite new user...', new_user_path %>
+</p>

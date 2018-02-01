@@ -2,6 +2,7 @@
 Rails.application.routes.draw do
   resource :account, except: [:new, :create]
 
+  resources :users, except: [:edit, :update], constraints: { id: /\d+/ }
   devise_for :users
 
   resources :devices

@@ -95,7 +95,6 @@ RSpec.describe TracksController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: { track: invalid_attributes, playlist_id: playlist.to_param }, session: valid_session
-        expect(response.status).to eq 200
         expect(response).to be_success
       end
     end

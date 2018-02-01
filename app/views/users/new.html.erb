@@ -1,0 +1,42 @@
+<h1>Invite user</h1>
+
+<%= form_with(model: @user, local: true) do |form| %>
+  <%= render 'common/validation_errors', model: @user %>
+
+  <div class="form-group">
+    <%= form.label :email %>
+    <%= form.email_field :email, required: true, class: 'form-control' %>
+    <span class="help-block">
+      An email with login instructions will be sent to the given address
+    </span>
+  </div>
+
+  <div class="form-group checkbox">
+    <%= form.label :admin do %>
+      <%= form.check_box :admin, id: "user_admin", class: "checkbox-inline" %> Make this user an adminstrator
+    <% end %>
+    <span class="help-block">
+      Administrators can invite and delete other users (like you can)
+    </span>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag "Message (optional)" %>
+    <%= text_area_tag "message", "", class: "form-control" %>
+    <span class="help-block">
+      Message to add to the email to the new user (e.g. who you are so they know who to contact)
+    </span>
+  </div>
+
+  <div class="form-group checkbox">
+    <%= label_tag "reply-to" do %>
+      <%= check_box_tag "reply-to", "1", false, class: "checkbox-inline" %> Use my email address as the reply-to address
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Invite user", class: "btn btn-primary" %>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <%= link_to "Cancel", users_path %>
+  </div>
+<% end %>
