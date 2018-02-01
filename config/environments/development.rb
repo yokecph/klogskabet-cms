@@ -32,9 +32,6 @@ Rails.application.configure do
   # Send emails to letter_opener
   config.action_mailer.delivery_method = :letter_opener
 
-  # This is required for email templates to render proper links etc..
-  config.action_mailer.default_url_options = { host: '0.0.0.0', port: 3000 }
-
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
