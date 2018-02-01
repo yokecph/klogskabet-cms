@@ -79,4 +79,11 @@ RSpec.configure do |config|
   config.after(:suite) do
     FileUtils.rm_rf( Dir["#{Rails.root}/tmp/test_uploads/"] )
   end
+
+  # Include devise helpers
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
+
+  # Include custom macros
+  config.include AuthenticationMacros, type: :controller
 end

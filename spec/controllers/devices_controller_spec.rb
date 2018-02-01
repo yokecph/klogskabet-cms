@@ -24,6 +24,7 @@ require 'rails_helper'
 # `rails-controller-testing` gem.
 
 RSpec.describe DevicesController, type: :controller do
+  let!(:user) { sign_in_as_user }
 
   # This should return the minimal set of attributes required to create a valid
   # Device. As you add validations to Device, be sure to
