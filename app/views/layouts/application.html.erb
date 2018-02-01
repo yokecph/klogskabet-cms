@@ -16,10 +16,21 @@
             Klogskabet
           </a>
         </div>
-        <ul class="nav navbar-nav">
-          <li><%= link_to "Themes", themes_path %></li>
-          <li><%= link_to "Devices", devices_path %></li>
-        </ul>
+        <% if user_signed_in? %>
+          <ul class="nav navbar-nav">
+            <li><%= link_to "Themes", themes_path %></li>
+            <li><%= link_to "Devices", devices_path %></li>
+            <% if user_is_admin? %>
+            <li><%= link_to "Users", users_path %></li>
+            <% end %>
+          </ul>
+          <p class="navbar-text navbar-right">
+            <span class="glyphicon glyphicon-user"></span>
+            <%= link_to current_user.email, account_path, class: "navbar-link" %>
+            &nbsp;&nbsp;&nbsp;
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "navbar-link" %>
+          </p>
+        <% end %>
       </div>
     </nav>
 

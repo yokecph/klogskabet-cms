@@ -24,6 +24,7 @@ require 'rails_helper'
 # `rails-controller-testing` gem.
 
 RSpec.describe IntervalsController, type: :controller do
+  let!(:user) { sign_in_as_user }
 
   # This should return the minimal set of attributes required to create a valid
   # Interval. As you add validations to Interval, be sure to

@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe AssignmentsController, type: :controller do
+  let!(:user) { sign_in_as_user }
+
   let(:quiz) { create :quiz, :with_options }
   let(:device) { create :device }
 

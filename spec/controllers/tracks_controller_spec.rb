@@ -24,6 +24,7 @@ require 'rails_helper'
 # `rails-controller-testing` gem.
 
 RSpec.describe TracksController, type: :controller do
+  let!(:user) { sign_in_as_user }
 
   # This should return the minimal set of attributes required to create a valid
   # Track. As you add validations to Track, be sure to
@@ -94,7 +95,6 @@ RSpec.describe TracksController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: { track: invalid_attributes, playlist_id: playlist.to_param }, session: valid_session
-        expect(response.status).to eq 200
         expect(response).to be_success
       end
     end

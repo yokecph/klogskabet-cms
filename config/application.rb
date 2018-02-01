@@ -30,5 +30,11 @@ module Klogskabet
 
     # Use Danish timezone
     config.time_zone = 'Europe/Copenhagen'
+
+    # Set a default host for links in emails
+    config.action_mailer.default_url_options = { host: ENV['action_mailer_default_host'] }
+
+    # Set default email sender
+    config.action_mailer.default_options = { from: ENV["action_mailer_default_from"] }
   end
 end
