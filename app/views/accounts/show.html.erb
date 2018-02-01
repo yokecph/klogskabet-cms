@@ -1,0 +1,10 @@
+<h1>
+  My account
+  <small><%= current_user.email %></small>
+</h1>
+
+<p>
+  <%= link_to "Click here to change your password", edit_account_path, class: "btn btn-primary" %>
+  &nbsp;&nbsp;&nbsp;
+  <%= link_to "Delete account", account_path, method: :delete, data: { confirm: "Are you sure you want to delete your account? This cannot be undone" }, class: "btn btn-danger" %>
+</p>

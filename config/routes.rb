@@ -1,10 +1,8 @@
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
-  devise_for :users
+  resource :account, except: [:new, :create]
 
-  namespace :api do
-    resources :devices, only: [:show, :update], constraints: { id: /[a-z0-9_-]+/i }
-  end
+  devise_for :users
 
   resources :devices
 
@@ -31,6 +29,10 @@ Rails.application.routes.draw do
     resources :playlists, shallow: true do
       resources :tracks
     end
+  end
+
+  namespace :api do
+    resources :devices, only: [:show, :update], constraints: { id: /[a-z0-9_-]+/i }
   end
 
   root to: 'themes#index'
