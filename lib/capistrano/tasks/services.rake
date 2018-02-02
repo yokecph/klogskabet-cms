@@ -1,23 +1,14 @@
 namespace :deploy do
   namespace :unicorn do
-    commands = %w(start stop reload)
-    desc "Unicorn commands (#{commands.join(", ")})"
-    commands.each do |command|
-      task command.to_sym do
-        on roles(:app), in: :sequence, wait: 5 do
-          execute "systemctl #{command} <%= fetch(:application) %>-unicorn.service"
-        end
-      end
-    end
-  end
-
-  namespace :resque do
-    commands = %w(start stop)
-    desc "Resque commands (#{commands.join(", ")})"
-    commands.each do |command|
-      task command.to_sym do
-        on roles(:app), in: :sequence, wait: 5 do
-          execute "systemctl #{command} <%= fetch(:application) %>-resque.service"
+    task :reload do
+      on roles(:app), in: :sequence, wait: 5 do
+        # we sidestep systemd here, which isn't nice, but other solutions would
+        # require not using systemd, breaking the server with a newer version of
+        # polkit, or make deployer a passwordless sudoer... all gross
+        if execute("test -f '#{shared_path}/tmp/pids/unicorn.pid'")
+          execute "/bin/kill -s USR2 $(head -n 1 '#{shared_path}/tmp/pids/unicorn.pid')"
+        else
+          warn "Unicorn does not appear to be running"
         end
       end
     end
