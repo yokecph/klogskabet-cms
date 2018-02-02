@@ -1,0 +1,17 @@
+# For Ubuntu 16.04 this file should
+# 1. be moved/copied into /etc/logrotate.d/<%= fetch(:application) %>.logrotate
+# 2. have its permissions set to 0644
+# 3. have its owner/group should be set to root:root
+
+<%= fetch(:deploy_to) %>/shared/log/*.log {
+  su root deployer
+  weekly
+  missingok
+  rotate 52
+  size 5M
+  compress
+  delaycompress
+  notifempty
+  create 640 root deployer
+  copytruncate
+}
