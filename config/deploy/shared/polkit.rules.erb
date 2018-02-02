@@ -1,0 +1,21 @@
+// place this file in /etc/polkit-1/rules.d/57-manage-klogskabet-services.rules
+
+// Allow <%= host.user %> to manage <%= fetch(:application) %>-unicorn.service;
+// fall back to implicit authorization otherwise.
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.freedesktop.systemd1.manage-units" &&
+        action.lookup("unit") == "<%= fetch(:application) %>-unicorn.service" &&
+        subject.user == "<%= host.user %>") {
+        return polkit.Result.YES;
+    }
+});
+
+// Allow <%= host.user %> to manage <%= fetch(:application) %>-resque.service;
+// fall back to implicit authorization otherwise.
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.freedesktop.systemd1.manage-units" &&
+        action.lookup("unit") == "<%= fetch(:application) %>-resque.service" &&
+        subject.user == "<%= host.user %>") {
+        return polkit.Result.YES;
+    }
+});

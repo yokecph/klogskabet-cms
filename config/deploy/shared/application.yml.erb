@@ -1,0 +1,14 @@
+# These secrets were generated when `cap [stage] setup:config` was run
+DEVISE_SECRET_KEY: <%= SecureRandom.hex(64) %>
+DEVISE_PEPPER: <%= SecureRandom.hex(64) %>
+
+# Action Mailer setup
+action_mailer_default_host: <%= host.hostname %>
+action_mailer_default_from: no-reply@<%= host.hostname %>
+
+# SMTP setup
+action_mailer_smtp_host: smtp.mailgun.org
+action_mailer_smtp_port: 587
+action_mailer_smtp_domain: yoke.dk
+action_mailer_smtp_username: ~
+action_mailer_smtp_password: ~

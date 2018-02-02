@@ -1,0 +1,30 @@
+# For Ubuntu 16.04
+# 1. move/copy this file into /lib/systemd/system/<%= fetch(:application) %>-unicorn.service
+# 2. reload daemons: sudo systemctl daemon-reload
+# 3. enable the service: sudo systemctl enable <%= fetch(:application) %>-unicorn.service
+
+[Unit]
+Description=Klogskabet Unicorn Server
+Requires=redis-server.service
+Wants=mysql.service
+After=redis-server.service mysql.service
+
+[Service]
+User=deployer
+WorkingDirectory=<%= current_path %>
+Environment=RAILS_ENV=production
+PIDFile=<%= current_path %>/tmp/pids/unicorn.pid
+
+ExecStart=<%= current_path %>/bin/bundle exec "unicorn -D -c <%= "#{shared_path}/config/unicorn.rb" %> -E <%= fetch(:rails_env) %>"
+ExecReload=/bin/kill -s USR2 $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+
+# Restart service after 10 seconds if unicorn service crashes
+Restart=always
+RestartSec=10
+
+# To view logs: sudo journalctl -u <%= fetch(:application) %>-unicorn
+SyslogIdentifier=<%= fetch(:application) %>-unicorn
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,28 @@
+# For Ubuntu 16.04
+# 1. move/copy this file into /lib/systemd/system/<%= fetch(:application) %>-resque.service
+# 2. reload daemons: sudo systemctl daemon-reload
+# 3. enable the service: sudo systemctl enable <%= fetch(:application) %>-resque.service
+
+[Unit]
+Description=Klogskabet Resque Service
+Requires=redis-server.service
+After=redis-server.service
+
+[Service]
+User=deployer
+WorkingDirectory=<%= current_path %>
+Environment=RAILS_ENV=<%= fetch(:rails_env) %> QUEUE=* VERBOSE=1 PIDFILE=<%= current_path %>/tmp/pids/resque.pid BACKGROUND=yes
+PIDFile=<%= current_path %>/tmp/pids/resque.pid
+
+ExecStart=<%= current_path %>/bin/rake resque:work
+ExecStop=/bin/kill -s QUIT $MAINPID
+
+# Restart service after 10 seconds if resque service crashes
+Restart=always
+RestartSec=10
+
+# To view logs: sudo journalctl -u <%= fetch(:application) %>-resque
+SyslogIdentifier=<%= fetch(:application) %>-resque
+
+[Install]
+WantedBy=multi-user.target

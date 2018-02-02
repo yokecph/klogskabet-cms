@@ -1,0 +1,52 @@
+root = "<%= current_path %>"
+
+working_directory root
+pid "#{root}/tmp/pids/unicorn.pid"
+stderr_path "#{root}/log/unicorn.stdout.log"
+stdout_path "#{root}/log/unicorn.stderr.log"
+
+listen "/tmp/unicorn.<%= fetch(:application) %>.sock"
+worker_processes <%= fetch(:unicorn_worker_count, 2) %>
+timeout 30
+preload_app true
+GC.respond_to?(:copy_on_write_friendly=) and
+  GC.copy_on_write_friendly = true
+
+# Force unicorn to look at the Gemfile in the current_path
+# otherwise once we've first started a master process, it
+# will always point to the first one it started.
+before_exec do |server|
+  ENV['BUNDLE_GEMFILE'] = "<%= current_path %>/Gemfile"
+end
+
+before_fork do |server, worker|
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.connection.disconnect!
+
+  # The following is only recommended for memory/DB-constrained
+  # installations.  It is not needed if your system can house
+  # twice as many worker_processes as you have configured.
+  #
+  # # This allows a new master process to incrementally
+  # # phase out the old master process with SIGTTOU to avoid a
+  # # thundering herd (especially in the "preload_app false" case)
+  # # when doing a transparent upgrade.  The last worker spawned
+  # # will then kill off the old master process with a SIGQUIT.
+  old_pid = "#{server.config[:pid]}.oldbin"
+  if old_pid != server.pid
+    begin
+      sig = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
+      Process.kill(sig, File.read(old_pid).to_i)
+    rescue Errno::ENOENT, Errno::ESRCH
+    end
+  end
+end
+
+after_fork do |server, worker|
+  port = 5000 + worker.nr
+  child_pid = server.config[:pid].sub('.pid', ".#{port}.pid")
+  system("echo #{Process.pid} > #{child_pid}")
+
+  defined?(ActiveRecord::Base) and
+    ActiveRecord::Base.establish_connection
+end
