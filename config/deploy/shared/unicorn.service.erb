@@ -1,7 +1,7 @@
 # For Ubuntu 16.04
-# 1. move/copy this file into /lib/systemd/system/<%= fetch(:application) %>-unicorn.service
+# 1. move/copy this file into /etc/systemd/system/klogskabet-unicorn.service
 # 2. reload daemons: sudo systemctl daemon-reload
-# 3. enable the service: sudo systemctl enable <%= fetch(:application) %>-unicorn.service
+# 3. enable the service: sudo systemctl enable klogskabet-unicorn.service
 
 [Unit]
 Description=Klogskabet Unicorn Server
@@ -11,11 +11,10 @@ After=redis-server.service mysql.service
 
 [Service]
 User=deployer
-WorkingDirectory=<%= current_path %>
-Environment=RAILS_ENV=production
-PIDFile=<%= current_path %>/tmp/pids/unicorn.pid
+WorkingDirectory=/home/deployer/apps/klogskabet/current
+PIDFile=/home/deployer/apps/klogskabet/current/tmp/pids/unicorn.pid
 
-ExecStart=<%= current_path %>/bin/bundle exec "unicorn -D -c <%= "#{shared_path}/config/unicorn.rb" %> -E <%= fetch(:rails_env) %>"
+ExecStart=/bin/bash -lc 'RAILS_ENV=production /home/deployer/apps/klogskabet/current/bin/bundle exec "unicorn -D -c /home/deployer/apps/klogskabet/shared/config/unicorn.rb -E production"'
 ExecReload=/bin/kill -s USR2 $MAINPID
 ExecStop=/bin/kill -s QUIT $MAINPID
 
@@ -23,8 +22,8 @@ ExecStop=/bin/kill -s QUIT $MAINPID
 Restart=always
 RestartSec=10
 
-# To view logs: sudo journalctl -u <%= fetch(:application) %>-unicorn
-SyslogIdentifier=<%= fetch(:application) %>-unicorn
+# To view logs: sudo journalctl -u klogskabet-unicorn
+SyslogIdentifier=klogskabet-unicorn
 
 [Install]
 WantedBy=multi-user.target
