@@ -22,4 +22,8 @@ module ApplicationHelper
       })
       .to_s
   end
+
+  def attachment_url(path)
+    (ENV['paperclip_host'] || "") + path
+  end
 end

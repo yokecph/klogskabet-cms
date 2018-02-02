@@ -14,3 +14,13 @@ action_mailer_smtp_port: 587
 action_mailer_smtp_domain: yoke.dk
 action_mailer_smtp_username: ~
 action_mailer_smtp_password: ~
+
+# Host to use for paperclip URLs
+# Must be set for production!
+paperclip_host: "http://0.0.0.0:3000"
+
+test:
+  paperclip_host: "http://example.com"
+
+production:
+  paperclip_host: "https://klogskabet.yoke.dk"
