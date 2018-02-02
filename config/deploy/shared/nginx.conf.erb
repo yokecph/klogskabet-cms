@@ -54,5 +54,5 @@ server {
   }
 
   # Serve actual files directly, or hand the request off to Unicorn
-  try_files $uri $uri/index.html $uri/ @unicorn;
+  try_files $uri $uri/index.html @unicorn;
 }
