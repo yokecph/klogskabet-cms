@@ -3,7 +3,7 @@ production:
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  socket: /tmp/mysql.sock
+  socket: /var/run/mysqld/mysqld.sock
   database: <%= fetch(:application) %>
   username: <%= fetch(:application) %>
   password: ~
