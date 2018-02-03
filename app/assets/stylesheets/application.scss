@@ -16,3 +16,9 @@
 
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
+
+// keep texareas from being dragged narrower/wider
+textarea.form-control {
+  min-width: 100%;
+  max-width: 100%;
+}

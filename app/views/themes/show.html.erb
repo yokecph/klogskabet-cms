@@ -31,7 +31,7 @@
           <%= link_to model.name, model %>
 
           <% if model.assigned? %>
-            <span class="label label-primary">Live</span>
+            <span class="label label-warning">LIVE</span>
           <% end %>
 
           <% unless model.presentable? %>
