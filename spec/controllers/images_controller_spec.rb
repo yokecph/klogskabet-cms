@@ -46,13 +46,6 @@ RSpec.describe ImagesController, type: :controller do
   # ImagesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "returns a success response" do
-      get :index, params: { gallery_id: gallery.to_param }, session: valid_session
-      expect(response).to be_success
-    end
-  end
-
   describe "GET #show" do
     it "returns a success response" do
       image = create :image

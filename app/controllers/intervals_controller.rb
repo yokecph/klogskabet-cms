@@ -2,11 +2,6 @@ class IntervalsController < ApplicationController
   before_action :set_timeline, only: [:index, :new, :create]
   before_action :set_interval, only: [:show, :edit, :update, :destroy]
 
-  # GET /intervals
-  def index
-    @intervals = @timeline.intervals.all
-  end
-
   # GET /intervals/1
   def show
   end

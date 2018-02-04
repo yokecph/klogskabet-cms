@@ -44,13 +44,6 @@ RSpec.describe VideosController, type: :controller do
   # VideosController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "returns a success response" do
-      get :index, params: { video_gallery_id: video_gallery.to_param }, session: valid_session
-      expect(response).to be_success
-    end
-  end
-
   describe "GET #show" do
     let(:video) { create :video }
 

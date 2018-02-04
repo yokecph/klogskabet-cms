@@ -2,15 +2,6 @@ class TracksController < ApplicationController
   before_action :set_playlist, only: [:index, :new, :create]
   before_action :set_track, only: [:show, :edit, :update, :destroy]
 
-  # GET /tracks
-  def index
-    @tracks = @playlist.tracks.all
-  end
-
-  # GET /tracks/1
-  def show
-  end
-
   # GET /tracks/new
   def new
     @track = @playlist.tracks.new

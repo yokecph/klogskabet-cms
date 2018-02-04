@@ -3,10 +3,6 @@ require "rails_helper"
 RSpec.describe IntervalsController, type: :routing do
   describe "routing" do
 
-    it "routes to #index" do
-      expect(get: "/timelines/2/intervals").to route_to("intervals#index", timeline_id: "2")
-    end
-
     it "routes to #new" do
       expect(get: "/timelines/2/intervals/new").to route_to("intervals#new", timeline_id: "2")
     end

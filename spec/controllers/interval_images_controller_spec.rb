@@ -46,13 +46,6 @@ RSpec.describe IntervalImagesController, type: :controller do
   # IntervalImagesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "returns a success response" do
-      get :index, params: { interval_id: interval.to_param }, session: valid_session
-      expect(response).to be_success
-    end
-  end
-
   describe "GET #show" do
     let(:interval_image) { create :interval_image }
 

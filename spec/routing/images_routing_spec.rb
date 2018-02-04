@@ -3,10 +3,6 @@ require "rails_helper"
 RSpec.describe ImagesController, type: :routing do
   describe "routing" do
 
-    it "routes to #index" do
-      expect(get: "/galleries/2/images").to route_to("images#index", gallery_id: "2")
-    end
-
     it "routes to #new" do
       expect(get: "/galleries/2/images/new").to route_to("images#new", gallery_id: "2")
     end
