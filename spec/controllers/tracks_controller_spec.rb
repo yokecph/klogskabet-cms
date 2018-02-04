@@ -46,22 +46,6 @@ RSpec.describe TracksController, type: :controller do
   # TracksController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "returns a success response" do
-      get :index, params: { playlist_id: playlist.to_param }, session: valid_session
-      expect(response).to be_success
-    end
-  end
-
-  describe "GET #show" do
-    let!(:track) { create :track, playlist: playlist }
-
-    it "returns a success response" do
-      get :show, params: { id: track.to_param }, session: valid_session
-      expect(response).to be_success
-    end
-  end
-
   describe "GET #new" do
     it "returns a success response" do
       get :new, params: { playlist_id: playlist.to_param }, session: valid_session

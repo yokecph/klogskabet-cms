@@ -14,21 +14,21 @@ Rails.application.routes.draw do
     resources :quizzes
 
     resources :timelines, shallow: true do
-      resources :intervals, shallow: true do
-        resources :interval_images
+      resources :intervals, except: :index, shallow: true do
+        resources :interval_images, except: :index
       end
     end
 
     resources :video_galleries, shallow: true do
-      resources :videos
+      resources :videos, except: :index
     end
 
     resources :galleries, shallow: true do
-      resources :images
+      resources :images, except: :index
     end
 
     resources :playlists, shallow: true do
-      resources :tracks
+      resources :tracks, except: [:index, :show]
     end
   end
 

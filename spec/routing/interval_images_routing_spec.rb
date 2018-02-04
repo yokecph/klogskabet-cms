@@ -3,10 +3,6 @@ require "rails_helper"
 RSpec.describe IntervalImagesController, type: :routing do
   describe "routing" do
 
-    it "routes to #index" do
-      expect(get: "/intervals/2/interval_images").to route_to("interval_images#index", interval_id: "2")
-    end
-
     it "routes to #new" do
       expect(get: "/intervals/2/interval_images/new").to route_to("interval_images#new", interval_id: "2")
     end

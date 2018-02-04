@@ -2,11 +2,6 @@ class ImagesController < ApplicationController
   before_action :set_gallery, only: [:index, :new, :create]
   before_action :set_image, only: [:show, :edit, :update, :destroy]
 
-  # GET /images
-  def index
-    @images = @gallery.images.all
-  end
-
   # GET /images/1
   def show
   end

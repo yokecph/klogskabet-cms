@@ -2,11 +2,6 @@ class VideosController < ApplicationController
   before_action :set_video_gallery, only: [:index, :new, :create]
   before_action :set_video, only: [:show, :edit, :update, :destroy]
 
-  # GET /videos
-  def index
-    @videos = @video_gallery.videos.all
-  end
-
   # GET /videos/1
   def show
   end

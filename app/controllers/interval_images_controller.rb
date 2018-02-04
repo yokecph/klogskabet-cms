@@ -2,11 +2,6 @@ class IntervalImagesController < ApplicationController
   before_action :set_interval, only: [:index, :new, :create]
   before_action :set_interval_image, only: [:show, :edit, :update, :destroy]
 
-  # GET /interval_images
-  def index
-    @interval_images = @interval.interval_images.all
-  end
-
   # GET /interval_images/1
   def show
   end

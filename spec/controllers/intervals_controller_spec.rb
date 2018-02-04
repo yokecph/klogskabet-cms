@@ -44,13 +44,6 @@ RSpec.describe IntervalsController, type: :controller do
   # IntervalsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "returns a success response" do
-      get :index, params: { timeline_id: timeline.id }, session: valid_session
-      expect(response).to be_success
-    end
-  end
-
   describe "GET #show" do
     let(:interval) { create :interval }
 
