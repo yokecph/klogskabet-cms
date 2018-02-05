@@ -1,5 +1,6 @@
 class Api::DevicesController < ApplicationController
   skip_before_action :authenticate_user!
+  skip_before_action :verify_authenticity_token
   before_action :load_device
 
   def show
