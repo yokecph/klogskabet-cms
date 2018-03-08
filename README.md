@@ -1,5 +1,5 @@
 # Klogskabet CMS
-Copyright ©2018 YOKE ApS. All rights reserved.
+Copyright 2018 YOKE ApS. AGPLv3 licensed.
 
 ## Description
 CMS for Klogskabet installations at Danish public libraries.
@@ -229,3 +229,6 @@ To deploy, invoke:
 To deploy to a blank server, first call `bin/cap production deploy:config` which will render several configuration templates and upload them to the server. Here, they must be edited to match the desired settings, after which the code can be deployed.
 
 Note that this repository does _not_ contain any encryption keys or other sensitive data used in the production environment. Should these be required (e.g. if the hosting changes) please contact YOKE.
+
+## License
+AGPLv3. See `COPYING`.
