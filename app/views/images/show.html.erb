@@ -1,0 +1,71 @@
+<%= render 'common/assigned_devices', model: @image %>
+
+<div style="border-left: 20px solid <%= @image.theme.try(:color) || '#fff' %>; padding-left: 0.5em">
+  <h1>
+    Image
+    <small>
+      Gallery: <%= link_to @image.gallery.name, @image.gallery %>
+    </small>
+  </h1>
+
+  <p>
+    <%= link_to 'Edit image...', edit_image_path(@image) %>
+    |
+    <%= link_to 'Delete image...', @image, method: :delete, data: { confirm: 'Are you sure you want to delete this image?' }, class: "text-danger" %>
+  </p>
+</div>
+
+<div class="container">
+  <div class="col-md-6">
+    <h3>Danish</h3>
+
+    <p>
+      <strong>Title:</strong> <%= @image.title_da %>
+    </p>
+
+    <p>
+      <strong>Source:</strong> <%= @image.source_da %>
+    </p>
+
+    <p><strong>Description:</strong></p>
+    <p><%= simple_format @image.description_da %></p>
+  </div>
+
+  <div class="col-md-6">
+    <h3>English</h3>
+
+    <p>
+      <strong>Title:</strong>
+      <% if @image.title_en.present? %>
+        <%= @image.title_en %>
+      <% else %>
+        <em class="text-muted">Missing</em>
+      <% end %>
+    </p>
+
+    <p>
+      <strong>Source:</strong>
+      <% if @image.source_en.present? %>
+        <%= @image.source_en %>
+      <% else %>
+        <em class="text-muted">Missing</em>
+      <% end %>
+    </p>
+
+    <p><strong>Description:</strong></p>
+    <% if @image.description_en.present? %>
+      <%= simple_format @image.description_en %>
+    <% else %>
+      <p><em class="text-muted">Missing</em></p>
+    <% end %>
+
+  </div>
+</div>
+
+<hr>
+
+<p class="text-center">
+  <%= image_tag @image.file.url(:regular) %>
+  <br>
+  <%= link_to "View original file", @image.file.url(:original), target: '_blank' %>
+</p>

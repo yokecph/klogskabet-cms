@@ -1,0 +1,22 @@
+<p>
+  Hi <%= @user.email %>,
+</p>
+
+<p>
+  You've been invited to the Klogskabet CMS.
+</p>
+
+<% if @message.present? %>
+<blockquote>
+  <%= simple_format @message %>
+</blockquote>
+<% end %>
+
+<p>
+  <%= link_to "Click here", edit_user_password_url(@user, reset_password_token: @token) %> to set your password and start using the Klogskabet CMS.
+</p>
+
+<p>
+  Note that the link above only works for a limited period of time. Should it expire, you can use the
+  <%= link_to "'forgot password' function", new_user_password_url %> to send a new link.
+</p>

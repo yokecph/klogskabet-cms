@@ -1,0 +1,25 @@
+<h1>Themes</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th style="width:2em; max-width:3em"></th>
+      <th>Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @themes.each do |theme| %>
+      <tr>
+        <td>
+          <div class="well well-sm" style="background: <%= theme.color %>; width: 3em; margin-bottom: 0"></div>
+        </td>
+        <td><%= link_to theme.name, theme %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= link_to 'Add theme...', new_theme_path %>
+</p>

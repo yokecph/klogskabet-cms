@@ -1,0 +1,89 @@
+<%= render 'common/assigned_devices', model: @timeline %>
+
+<%= render 'common/content_title', model: @timeline do %>
+  <%= link_to 'Edit timeline...', edit_timeline_path(@timeline) %> |
+  <%= link_to 'Delete timeline...', @timeline, method: :delete, data: { confirm: 'Are you sure you want to delete this timeline and all its content?' }, class: "text-danger" %>
+<% end %>
+
+<%= render 'common/content_controls', model: @timeline do %>
+  It must contain <%= pluralize(Timeline::MIN_PRESENTABLE_INTERVAL_COUNT, 'interval') %> or more, each with at least 1 image.
+<% end %>
+
+<div class="container">
+  <div class="col-md-6">
+    <h3>Danish</h3>
+
+    <p>
+      <strong>Title:</strong> <%= @timeline.title_da %>
+    </p>
+  </div>
+
+  <div class="col-md-6">
+    <h3>Danish</h3>
+
+    <p>
+      <strong>Title:</strong>
+      <% if @timeline.title_en.present? %>
+        <%= @timeline.title_en %>
+      <% else %>
+        <em class="text-muted">Missing</em>
+      <% end %>
+    </p>
+  </div>
+</div>
+
+<h2>Intervals</h2>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Subtitle</th>
+      <th>Images</th>
+      <th>Languages</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @timeline.intervals.each do |interval| %>
+      <tr>
+        <td>
+          <%= link_to interval.title_da, interval %>
+          <% if interval.title_en.present? %>
+          <br>
+          <span class="text-muted"><%= interval.title_en %></span>
+          <% end %>
+        </td>
+
+        <td>
+          <%= interval.subtitle_da %>
+          <% if interval.subtitle_en.present? %>
+          <br>
+          <span class="text-muted"><%= interval.subtitle_en %></span>
+          <% end %>
+        </td>
+
+        <td>
+          <%= interval.interval_images.count %>
+        </td>
+
+        <td>
+          <%= interval.bilingual? ? "Danish/English" : "Danish" %>
+        </td>
+
+        <td>
+          <%= link_to "Edit", edit_interval_path(interval) %>
+        </td>
+
+        <td>
+          <%= link_to 'Delete...', interval, method: :delete, data: { confirm: 'Are you sure you want to delete this interval?' }, class: "text-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= link_to "Add interval...", new_timeline_interval_path(@timeline) %>
+</p>

@@ -1,0 +1,16 @@
+<%= form_with(model: gallery, url: (gallery.new_record? ? [gallery.theme, gallery] : gallery), local: true) do |form| %>
+  <%= render 'common/validation_errors', model: gallery %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :gallery_name, required: true, class: 'form-control' %>
+    <span class="help-block">
+      The gallery name isn't shown publically, it's only for naming the gallery in the CMS.
+    </span>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= yield %>
+  </div>
+<% end %>

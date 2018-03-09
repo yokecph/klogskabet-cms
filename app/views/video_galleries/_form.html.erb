@@ -1,0 +1,16 @@
+<%= form_with(model: video_gallery, url: (video_gallery.new_record? ? [video_gallery.theme, video_gallery] : video_gallery), local: true) do |form| %>
+  <%= render 'common/validation_errors', model: video_gallery %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: 'form-control', required: true, id: :video_gallery_name %>
+    <span class="help-block">
+      Required. The name isn't shown publically, it's only for naming the video gallery in the CMS.
+    </span>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= yield %>
+  </div>
+<% end %>

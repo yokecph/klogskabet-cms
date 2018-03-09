@@ -9,6 +9,59 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">
+            Klogskabet
+          </a>
+        </div>
+        <% if user_signed_in? %>
+          <ul class="nav navbar-nav">
+            <li><%= link_to "Themes", themes_path %></li>
+            <li><%= link_to "Devices", devices_path %></li>
+            <% if user_is_admin? %>
+            <li><%= link_to "Users", users_path %></li>
+            <% end %>
+          </ul>
+          <p class="navbar-text navbar-right">
+            <span class="glyphicon glyphicon-user"></span>
+            <%= link_to current_user.email, account_path, class: "navbar-link" %>
+            &nbsp;&nbsp;&nbsp;
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "navbar-link" %>
+          </p>
+        <% end %>
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <% if notice %>
+        <div class="alert alert-info">
+          <strong>Notice</strong>
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class="alert alert-danger">
+          <strong>Alert</strong>
+          <%= alert %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+
+      <hr>
+
+      <p class="text-center text-muted">
+        <small>
+          ©2018 YOKE ApS.<br>
+          AGPLv3 &mdash; <a href="https://github.com/yokecph/klogskabet-cms" target="_blank">Source</a>
+          Contents copyright of their respective copyright owners.
+        </small>
+      </p>
+
+    </div>
   </body>
 </html>

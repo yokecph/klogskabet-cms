@@ -1,0 +1,92 @@
+<%= render 'common/assigned_devices', model: @quiz %>
+
+<%= render 'common/content_title', model: @quiz do %>
+  <%= link_to 'Edit quiz...', edit_quiz_path(@quiz) %> |
+  <%= link_to 'Delete quiz...', @quiz, method: :delete, data: { confirm: 'Are you sure you want to delete this quiz?' }, class: "text-danger" %>
+<% end %>
+
+<%= render 'common/content_controls', model: @quiz %>
+
+<div class="container">
+  <div class="col-md-6">
+    <h3>Danish</h3>
+
+    <p>
+      <strong>Title:</strong> <%= @quiz.title_da %>
+    </p>
+
+    <p>
+      <strong>Subtitle:</strong> <%= @quiz.subtitle_da %>
+    </p>
+
+    <p>
+      <strong>Results heading:</strong> <%= @quiz.result_title_da %>
+    </p>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th style="width: 50%">Option</th>
+          <th>Comparison</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @quiz.quiz_options.each do |option| %>
+        <tr>
+          <td><%= option.option_da %></td>
+          <td><%= option.answer_da %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-6">
+    <h3>English</h3>
+
+    <p>
+      <strong>Title:</strong>
+      <% if @quiz.title_en.present? %>
+        <%= @quiz.title_en %>
+      <% else %>
+        <em class="text-muted">Missing</em>
+      <% end %>
+    </p>
+
+    <p>
+      <strong>Subtitle:</strong>
+      <% if @quiz.subtitle_en.present? %>
+        <%= @quiz.subtitle_en %>
+      <% else %>
+        <em class="text-muted">Missing</em>
+      <% end %>
+    </p>
+
+    <p>
+      <strong>Results heading:</strong>
+      <% if @quiz.result_title_en.present? %>
+        <%= @quiz.result_title_en %>
+      <% else %>
+        <em class="text-muted">Missing</em>
+      <% end %>
+    </p>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th style="width: 50%">Option</th>
+          <th>Comparison</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @quiz.quiz_options.each do |option| %>
+        <tr>
+          <td><%= option.option_en %></td>
+          <td><%= option.answer_en %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+</div>

@@ -1,0 +1,48 @@
+<h1>
+  Assign content to device
+  <small>
+    <%= link_to @content do %>
+      <%= @content.class.model_name.human %>: <%= @content.name %>
+    <% end %>
+  </small>
+</h1>
+
+<%= form_tag assign_device_path, method: :post, local: true do %>
+  <input type="hidden" name="content_class" value="<%= @content.class.table_name %>">
+  <input type="hidden" name="content_id" value="<%= @content.to_param %>">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th style="width:5%"></th>
+        <th style="width:45%">Device</th>
+        <th>Current content</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @devices.each do |device| %>
+        <tr>
+          <td>
+            <%= radio_button_tag "device_id", device.to_param %>
+          </td>
+          <td>
+            <samp><%= device.name %></samp>
+          </td>
+          <td>
+            <% if device.content %>
+              <%= device.content.class.model_name.human %>: <%= device.content.name %>
+            <% else %>
+              <em class="text-muted">None</em>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <p>
+    <input type="submit" value="Assign" class="btn btn-primary">
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <%= link_to "Cancel", @content %>
+  </p>
+<% end %>

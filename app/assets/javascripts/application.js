@@ -11,4 +11,14 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require jquery
 //= require_tree .
+
+// Rails wraps inputs with failed validations in a div.field_with_errors element
+// but Bootstrap's validation error class has to be added higher up in the
+// heirarchy so do that on load
+$(function () {
+ $('.field_with_errors').each(function () {
+   $(this).closest('.form-group').addClass('has-error');
+ });
+});

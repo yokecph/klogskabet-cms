@@ -11,8 +11,14 @@ gem 'rails', '~> 5.1.4'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 
+# Use resque for ActiveJob
+gem 'resque'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
+
+# Use devise for user authentication
+gem 'devise'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -47,6 +53,9 @@ gem 'semver'
 # Use figaro for general config
 gem 'figaro'
 
+# Use addressable to generate external URLs
+gem 'addressable'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a
   # debugger console
@@ -72,6 +81,9 @@ group :development do
 
   # Use Capistrano for deployment
   gem 'capistrano-rails'
+
+  # Use letter_opener for email previews
+  gem 'letter_opener'
 end
 
 group :test do
@@ -79,10 +91,15 @@ group :test do
   gem 'simplecov', '~> 0.11', require: false
 
   # Use json_expressions for matching JSON responses
-  gem 'json_expressions', '~> 0.8.3'
+  gem 'json_expressions', '~> 0.9.0'
 
   # Use shoulda for validation testing
   gem 'shoulda-matchers'
+end
+
+group :production do
+  # Use Unicorn as the app server
+  gem 'unicorn'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

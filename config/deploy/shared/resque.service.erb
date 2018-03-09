@@ -1,0 +1,25 @@
+# For Ubuntu 16.04
+# 1. move/copy this file into /etc/systemd/system/klogskabet-resque.service
+# 2. reload daemons: sudo systemctl daemon-reload
+# 3. enable the service: sudo systemctl enable klogskabet-resque.service
+
+[Unit]
+Description=Klogskabet Resque Service
+Requires=redis-server.service
+After=redis-server.service
+
+[Service]
+Type=forking
+User=deployer
+WorkingDirectory=/home/deployer/apps/klogskabet/current
+PIDFile=/home/deployer/apps/klogskabet/current/tmp/pids/resque.pid
+
+ExecStart=/bin/bash -lc 'RAILS_ENV=production QUEUE=* VERBOSE=1 PIDFILE=/home/deployer/apps/klogskabet/current/tmp/pids/resque.pid BACKGROUND=yes /home/deployer/apps/klogskabet/current/bin/rake resque:work'
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+
+# To view logs: sudo journalctl -u klogskabet-resque
+SyslogIdentifier=klogskabet-resque
+
+[Install]
+WantedBy=multi-user.target

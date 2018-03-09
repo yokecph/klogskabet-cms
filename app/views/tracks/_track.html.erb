@@ -1,0 +1,16 @@
+<article class="track">
+  <h3><%= track.title %></h3>
+
+  <% if track.description.present? %>
+    <%= simple_format track.description %>
+  <% else %>
+  <p><em class="text-muted">No description</em></p>
+  <% end %>
+
+  <p>
+    <audio src="<%= track.mp3.url %>" controls></audio>
+  </p>
+  <p>
+    <%= link_to 'Edit track', edit_track_path(track) %> | <%= link_to 'Delete track', track, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </p>
+</article>

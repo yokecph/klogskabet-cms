@@ -1,1 +1,26 @@
-# Application configuration values go here (but there aren't any yet)
+# Application configuration values go here
+
+# Generate keys for Devise using bin/rake secret
+DEVISE_SECRET_KEY: ~
+DEVISE_PEPPER: ~
+
+# These should be set in all environments
+action_mailer_default_host: klogskabet.yoke.dk
+action_mailer_default_from: no-reply@klogskabet.yoke.dk
+
+# SMTP setup (only required for production)
+action_mailer_smtp_host: smtp.mailgun.org
+action_mailer_smtp_port: 587
+action_mailer_smtp_domain: yoke.dk
+action_mailer_smtp_username: ~
+action_mailer_smtp_password: ~
+
+# Host to use for paperclip URLs
+# Must be set for production!
+paperclip_host: "http://0.0.0.0:3000"
+
+test:
+  paperclip_host: "http://example.com"
+
+production:
+  paperclip_host: "https://klogskabet.yoke.dk"

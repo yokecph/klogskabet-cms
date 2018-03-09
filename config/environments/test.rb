@@ -34,9 +34,15 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
+  # Tell Active Job to use the test queue
+  config.active_job.queue_adapter = :test
+
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Put test uploads into tmp
+  Paperclip::Attachment.default_options[:path] = "#{Rails.root}/tmp/test_uploads/:class/:id_partition/:style.:extension"
 end

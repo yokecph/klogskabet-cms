@@ -1,0 +1,49 @@
+<h1>Devices</h1>
+
+<% if @devices.any? %>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Content</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @devices.each do |device| %>
+        <tr>
+          <td>
+            <%= link_to device do %>
+              <samp><%= device.name %></samp>
+            <% end %>
+          </td>
+          <td><%= device.kind.capitalize %></td>
+          <td>
+            <% if device.content.present? %>
+              <%= link_to device.content do %>
+                <% if device.content.theme.present? %>
+                  <%= device.content.class.to_s.humanize.capitalize %>:&nbsp;<%= device.content.theme.name %>/<%= device.content.name %>
+                <% else %>
+                  <%= device.content.class.to_s.humanize.capitalize %>:&nbsp;(No theme)/<%= device.content.name %>
+                <% end %>
+              <% end %>
+            <% else %>
+              <em class="text-muted">None</em>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% else %>
+
+  <p><em class="text-muted">No devices</em></p>
+
+<% end %>
+
+<p>
+  <%= link_to 'Add device...', new_device_path %>
+</p>

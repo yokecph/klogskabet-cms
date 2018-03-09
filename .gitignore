@@ -21,3 +21,9 @@
 # Ignore sensitive files
 config/database.yml
 config/application.yml
+
+# Ignore uploads
+/public/system/
+
+# Ignore simplecov coverage report
+/coverage

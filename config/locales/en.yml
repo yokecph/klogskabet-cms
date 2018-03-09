@@ -30,4 +30,56 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    interval_image: Timeline image
+
+    attributes:
+      common_attributes: &common
+        title_da: Title (da)
+        title_en: Title (en)
+        description_da: Description (da)
+        description_en: Description (en)
+        source_da: Source (da)
+        source_en: Source (en)
+        subtitle_da: Subtitle (da)
+        subtitle_en: Subtitle (en)
+
+      device:
+        name: Device ID
+        kind: Module type
+        eth_ip: Ethernet IP
+        wlan_ip: WLAN IP
+
+      image:
+        file: Image file
+        <<: *common
+
+      interval_image:
+        file: Image file
+        <<: *common
+
+      interval:
+        <<: *common
+
+      playlist:
+        description: Notes
+
+      quiz:
+        <<: *common
+
+      quiz_option:
+        option_da: Option (da)
+        option_en: Option (en)
+        answer_da: Comparison (da)
+        answer_en: Comparison (en)
+
+      timeline:
+        <<: *common
+
+      track:
+        description: Notes
+        mp3: MP3 file
+
+      video:
+        <<: *common
+        youtube_id: YouTube ID

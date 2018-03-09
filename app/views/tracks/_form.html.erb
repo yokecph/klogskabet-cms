@@ -1,0 +1,39 @@
+<%= form_with(model: track, url: (track.new_record? ? [track.playlist, track] : track), local: true) do |form| %>
+  <%= render 'common/validation_errors', model: track %>
+
+  <div class="form-group">
+    <%= form.label :mp3 %>
+    <%= form.file_field :mp3, id: :track_mp3, accept: "audio/mp3,audio/mpeg" %>
+    <span class="help-block">
+      File must be an MP3.
+      <% if track.new_record? %>
+        Required.
+      <% else %>
+        Select a file to replace the current MP3 or leave blank.
+      <% end %>
+    </span>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :title %>
+    <%= form.text_field :title, required: true, class: 'form-control', id: :track_title %>
+    <span class="help-block">
+      Required.
+      <br>
+      <strong>Note:</strong> Due to the audio module's LCD display, non-English characters will be transliterated, and the title will be truncated to the first 20 characters.
+    </span>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: 'form-control', id: :track_description %>
+    <span class="help-block">
+      Optional notes about this track (e.g. sources). Not shown publically.
+    </span>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= yield %>
+  </div>
+<% end %>

@@ -1,0 +1,14 @@
+<p>
+  <% if model.presentable? %>
+    <%= link_to "Preview...", preview_url_for(model), target: '_blank', class: "btn btn-default" %>
+    <%= link_to "Assign to device...", select_device_path(content_class: model.class.to_s.underscore, content_id: model.to_param), class: "btn btn-default" %>
+  <% else %>
+    <%= link_to "Preview...", '#', target: '_blank', class: "btn btn-default disabled" %>
+    <%= link_to "Assign to device...", '#', class: "btn btn-default disabled" %>
+
+    <span class="text-danger">
+      This <%= model.model_name.human.downcase %> is incomplete and cannot be previewed or assigned to devices yet.
+      <%= yield %>
+    </span>
+  <% end %>
+</p>

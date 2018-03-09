@@ -5,7 +5,17 @@ require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+
 # Add additional requires below this line. Rails is not loaded until this point!
+
+# Add json_expressions
+require 'json_expressions/rspec'
+
+# Set the COVERAGE env var to run simplecov
+if ENV['COVERAGE'].present?
+  require 'simplecov'
+  SimpleCov.start 'rails'
+end
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -64,4 +74,16 @@ RSpec.configure do |config|
 
   # Include FactoryBot methods
   config.include FactoryBot::Syntax::Methods
+
+  # Delete test uploads when done (see config/environment/test.rb)
+  config.after(:suite) do
+    FileUtils.rm_rf( Dir["#{Rails.root}/tmp/test_uploads/"] )
+  end
+
+  # Include devise helpers
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
+
+  # Include custom macros
+  config.include AuthenticationMacros, type: :controller
 end
