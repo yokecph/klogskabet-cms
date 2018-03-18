@@ -14,5 +14,10 @@ class Video < ApplicationRecord
     content_type: /\Avideo\/mp4\z/
   }
 
+  has_attached_file :mp4_poster, styles: { regular: ["1280x720>", :jpg] }
+  validates_attachment :mp4_poster, content_type: {
+    content_type: /\Aimage\/(p?jpeg|png).*\z/
+  }
+
   validates_with VideoValidator
 end

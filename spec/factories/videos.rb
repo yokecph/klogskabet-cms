@@ -12,5 +12,9 @@ FactoryBot.define do
     mp4_content_type "video/mp4"
     mp4_file_size 10000
     mp4_updated_at Time.zone.now
+    mp4_poster_file_name "test.png"
+    mp4_poster_content_type "image/png"
+    mp4_poster_file_size 1000
+    mp4_poster_updated_at Time.zone.now
   end
 end

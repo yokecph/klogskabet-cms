@@ -30,6 +30,18 @@
           <% end %>
         </span>
       </div>
+
+      <div class="form-group">
+        <%= form.label :mp4_poster %>
+        <%= form.file_field :mp4_poster, id: :mp4_poster_file, accept: "image/jpeg,image/pjpeg,image/png" %>
+        <span class="help-block">
+          JPEG or PNG. Poster image (still image) for the video. Only used for MP4 videos.
+          <br>
+          <% unless video.new_record? %>
+            Select a file to replace the current video poster image or leave blank.
+          <% end %>
+        </span>
+      </div>
     </div>
   </div>
 

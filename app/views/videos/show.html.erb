@@ -27,7 +27,7 @@
   </div>
 
   <% else %>
-  <video src="<%= @video.mp4.url %>" controls height="315"></video>
+  <video src="<%= @video.mp4.url %>" preload="metadata" controls height="315" poster="<%= @video.mp4_poster.present? ? @video.mp4_poster.url(:regular) : '' %>"></video>
   <% end %>
 </p>
 
