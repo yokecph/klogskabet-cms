@@ -131,6 +131,8 @@ If no content has been assigned to the device, or the content is incomplete, or 
     }
 
 #### Video gallery response
+Note that videos can have two sources: YouTube or an MP4 file. If an MP4 file url is present, it should take precedence over the YouTube ID if both are present. Also, if an MP4 file url is present, a poster image url may be present and used as a thumbnail.
+
     {
       "kind": "video_gallery",
       "id": <integer>,
@@ -148,7 +150,9 @@ If no content has been assigned to the device, or the content is incomplete, or 
           "description_en": <string - optional>,
           "description_html_da": <html formatted description string>,
           "description_html_en": <html formatted description string - optional>,
-          "youtube_id": <string>,
+          "youtube_id": <string - optional>,
+          "mp4_url": <string - optional>,
+          "mp4_poster_url": <string - optional>,
           "created_at": <rfc-formatted datetime string>,
           "updated_at": <rfc-formatted datetime string>
         },

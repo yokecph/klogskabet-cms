@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180201182927) do
+ActiveRecord::Schema.define(version: 20180318025737) do
 
   create_table "devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -177,6 +177,14 @@ ActiveRecord::Schema.define(version: 20180201182927) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "youtube_id"
+    t.string "mp4_file_name"
+    t.string "mp4_content_type"
+    t.integer "mp4_file_size"
+    t.datetime "mp4_updated_at"
+    t.string "mp4_poster_file_name"
+    t.string "mp4_poster_content_type"
+    t.integer "mp4_poster_file_size"
+    t.datetime "mp4_poster_updated_at"
     t.index ["video_gallery_id"], name: "index_videos_on_video_gallery_id"
   end
 
