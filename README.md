@@ -234,5 +234,8 @@ To deploy to a blank server, first call `bin/cap production deploy:config` which
 
 Note that this repository does _not_ contain any encryption keys or other sensitive data used in the production environment. Should these be required (e.g. if the hosting changes) please contact YOKE.
 
+### Screen module UI
+The UI for the screenmodules is maintained in [a separate repository](https://github.com/yokecph/klogskabet-screen-ui). Its files are expected to be placed in or symlinked to `<deploy path>/shared/public/system/screenmodule` on the server.
+
 ## License
 AGPLv3. See `COPYING`.
