@@ -83,3 +83,4 @@ en:
       video:
         <<: *common
         youtube_id: YouTube ID
+        mp4: MP4 file

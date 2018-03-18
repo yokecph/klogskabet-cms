@@ -1,14 +1,36 @@
 <%= form_with(model: video, url: (video.new_record? ? [video.video_gallery, video] : video), local: true) do |form| %>
   <%= render 'common/validation_errors', model: video %>
 
-  <div class="form-group">
-    <%= form.label :youtube_id %>
-    <%= form.text_field :youtube_id, required: true, class: 'form-control', id: :video_youtube_id %>
-    <span class="help-block">
-      The YouTube ID is the the string of characters in a video's URL after the "v=", e.g. <code>youtube.com/watch?v=<u>xyz123abc</u>&amp;...</code>
-      <br>
-      The video must be embeddable to work.
-    </span>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label :youtube_id %>
+        <%= form.text_field :youtube_id, class: 'form-control', id: :video_youtube_id %>
+        <span class="help-block">
+          Optional if an mp4 file is uploaded.
+          <br>
+          The YouTube ID is the the string of characters in a video's URL after the "v=", e.g. <code>youtube.com/watch?v=<u>xyz123abc</u>&amp;...</code>
+          <br>
+          The video must be embeddable to work.
+        </span>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label :mp4 %>
+        <%= form.file_field :mp4, id: :mp4_file, accept: "video/mp4" %>
+        <span class="help-block">
+          MP4 h.264 encoded video file (no larger than 1280x720 resolution)
+          <br>
+          <% if video.new_record? %>
+            Optional if a YouTube ID is specified.
+          <% else %>
+            Select a file to replace the current video (or override the YouTube ID) or leave blank.
+          <% end %>
+        </span>
+      </div>
+    </div>
   </div>
 
   <div class="row">

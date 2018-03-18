@@ -15,12 +15,23 @@
   </p>
 </div>
 
-<p>
-  <strong>YouTube ID:</strong>
-  <a href="https://www.youtube.com/watch?v=<%= @video.youtube_id %>">
-    <samp><%= @video.youtube_id %></samp>
-  </a>
+<p class="text-center">
+  <% if @video.youtube_id.present? %>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @video.youtube_id %>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+  <div>
+    <strong>YouTube ID:</strong>
+    <a href="https://www.youtube.com/watch?v=<%= @video.youtube_id %>">
+      <samp><%= @video.youtube_id %></samp>
+    </a>
+  </div>
+
+  <% else %>
+  <video src="<%= @video.mp4.url %>" controls height="315"></video>
+  <% end %>
 </p>
+
+<hr>
 
 <div class="row">
   <div class="col-md-6">
@@ -69,9 +80,3 @@
     </p>
   </div>
 </div>
-
-<hr>
-
-<p class="text-center">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @video.youtube_id %>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</p>
