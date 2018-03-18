@@ -131,6 +131,8 @@ If no content has been assigned to the device, or the content is incomplete, or 
     }
 
 #### Video gallery response
+Note that videos can have two sources: YouTube or an MP4 file. If an MP4 file url is present, it should take precedence over the YouTube ID if both are present. Also, if an MP4 file url is present, a poster image url may be present and used as a thumbnail.
+
     {
       "kind": "video_gallery",
       "id": <integer>,
@@ -148,7 +150,9 @@ If no content has been assigned to the device, or the content is incomplete, or 
           "description_en": <string - optional>,
           "description_html_da": <html formatted description string>,
           "description_html_en": <html formatted description string - optional>,
-          "youtube_id": <string>,
+          "youtube_id": <string - optional>,
+          "mp4_url": <string - optional>,
+          "mp4_poster_url": <string - optional>,
           "created_at": <rfc-formatted datetime string>,
           "updated_at": <rfc-formatted datetime string>
         },
@@ -229,6 +233,9 @@ To deploy, invoke:
 To deploy to a blank server, first call `bin/cap production deploy:config` which will render several configuration templates and upload them to the server. Here, they must be edited to match the desired settings, after which the code can be deployed.
 
 Note that this repository does _not_ contain any encryption keys or other sensitive data used in the production environment. Should these be required (e.g. if the hosting changes) please contact YOKE.
+
+### Screen module UI
+The UI for the screenmodules is maintained in [a separate repository](https://github.com/yokecph/klogskabet-screen-ui). Its files are expected to be placed in or symlinked to `<deploy path>/shared/public/system/screenmodule` on the server.
 
 ## License
 AGPLv3. See `COPYING`.

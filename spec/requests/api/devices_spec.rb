@@ -212,7 +212,9 @@ RSpec.describe "API/Devices", type: :request do
               description_html_en: String,
               subtitle_da: String,
               subtitle_en: String,
-              youtube_id: String
+              youtube_id: String,
+              mp4_url: String,
+              mp4_poster_url: String
             }.ignore_extra_keys!
           ].ignore_extra_values!
         }.ignore_extra_keys!)
