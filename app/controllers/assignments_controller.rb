@@ -18,7 +18,7 @@ class AssignmentsController < ApplicationController
 
   def content_class
     klass = params[:content_class].classify.constantize
-    [Gallery, Playlist, Quiz, Timeline, VideoGallery].include?(klass) ? klass : nil
+    [Gallery, Playlist, Quiz, Timeline, VideoGallery, TrailerGallery].include?(klass) ? klass : nil
   end
 
   def load_content

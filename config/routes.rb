@@ -23,6 +23,10 @@ Rails.application.routes.draw do
       resources :videos, except: :index
     end
 
+    resources :trailer_galleries, shallow: true do
+      resources :trailers, except: :index
+    end
+
     resources :galleries, shallow: true do
       resources :images, except: :index
     end
@@ -34,6 +38,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :devices, only: [:show, :update], constraints: { id: /[a-z0-9_-]+/i }
+
+    get 'patron', to: 'cicero#show'
   end
 
   root to: 'themes#index'

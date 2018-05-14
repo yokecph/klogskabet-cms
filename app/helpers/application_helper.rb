@@ -2,7 +2,7 @@ module ApplicationHelper
   # Get the preview URL for a content model
   def preview_url_for(content)
     type = case content
-           when Gallery, Quiz, Timeline, VideoGallery
+           when Gallery, Quiz, Timeline, VideoGallery, TrailerGallery
              content.class.to_s.underscore
            else
              raise "Can't generate preview URL for #{content.class}"

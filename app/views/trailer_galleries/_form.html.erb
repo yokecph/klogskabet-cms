@@ -1,0 +1,16 @@
+<%= form_with(model: trailer_gallery, url: (trailer_gallery.new_record? ? [trailer_gallery.theme, trailer_gallery] : trailer_gallery), local: true) do |form| %>
+  <%= render 'common/validation_errors', model: trailer_gallery %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: 'form-control', required: true, id: :trailer_gallery_name %>
+    <span class="help-block">
+      Required. The name isn't shown publically, it's only for naming the trailer gallery in the CMS.
+    </span>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= yield %>
+  </div>
+<% end %>

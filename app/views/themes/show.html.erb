@@ -162,6 +162,43 @@
 
 <hr>
 
+<h3>Trailer Galleries</h3>
+
+<% if @theme.trailer_galleries.any? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th style="width: 20%">Languages</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @theme.trailer_galleries.each do |model| %>
+      <tr>
+        <td>
+          <%= link_to model.name, model %>
+
+          <% if model.assigned? %>
+            <span class="label label-warning">LIVE</span>
+          <% end %>
+
+          <% unless model.presentable? %>
+            <span class="label label-danger">Incomplete</span>
+          <% end %>
+        </td>
+        <td><%= model.bilingual? ? "Danish/English" : "Danish" %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p><em class="text-muted">None</em></p>
+<% end %>
+
+<p><%= link_to 'Add trailer gallery...', new_theme_trailer_gallery_path(@theme) %></p>
+
+<hr>
+
 <h3>Playlists</h3>
 
 <% if @theme.playlists.any? %>

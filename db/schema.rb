@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180318025737) do
+ActiveRecord::Schema.define(version: 20180425140008) do
 
   create_table "devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -145,6 +145,33 @@ ActiveRecord::Schema.define(version: 20180318025737) do
     t.index ["playlist_id"], name: "index_tracks_on_playlist_id"
   end
 
+  create_table "trailer_galleries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "theme_id"
+    t.index ["theme_id"], name: "index_trailer_galleries_on_theme_id"
+  end
+
+  create_table "trailers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "trailer_gallery_id"
+    t.string "title_da"
+    t.string "title_en"
+    t.text "description_da"
+    t.text "description_en"
+    t.string "subtitle_da"
+    t.string "subtitle_en"
+    t.string "url"
+    t.string "youtube_id"
+    t.string "mp4_file_name"
+    t.string "mp4_content_type"
+    t.integer "mp4_file_size"
+    t.datetime "mp4_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trailer_gallery_id"], name: "index_trailers_on_trailer_gallery_id"
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -197,6 +224,8 @@ ActiveRecord::Schema.define(version: 20180318025737) do
   add_foreign_key "quizzes", "themes"
   add_foreign_key "timelines", "themes"
   add_foreign_key "tracks", "playlists"
+  add_foreign_key "trailer_galleries", "themes"
+  add_foreign_key "trailers", "trailer_galleries"
   add_foreign_key "video_galleries", "themes"
   add_foreign_key "videos", "video_galleries"
 end

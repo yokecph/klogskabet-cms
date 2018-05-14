@@ -14,6 +14,7 @@ class Theme < ApplicationRecord
   has_many :quizzes, -> { order(:name) }, dependent: :destroy
   has_many :timelines, -> { order(:name) }, dependent: :destroy
   has_many :video_galleries, -> { order(:name) }, dependent: :destroy
+  has_many :trailer_galleries, -> { order(:name) }, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates :color, presence: true, format: { with: /\A#[a-f0-9]{6}\z/i }

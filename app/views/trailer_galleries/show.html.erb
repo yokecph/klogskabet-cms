@@ -1,0 +1,60 @@
+<%= render 'common/assigned_devices', model: @trailer_gallery %>
+
+<%= render 'common/content_title', model: @trailer_gallery do %>
+  <%= link_to 'Edit trailer gallery...', edit_trailer_gallery_path(@trailer_gallery) %> |
+  <%= link_to 'Delete trailer gallery...', @trailer_gallery, method: :delete, data: { confirm: 'Are you sure you want to delete this trailer gallery and all its trailers?' }, class: "text-danger" %>
+<% end %>
+
+<%= render 'common/content_controls', model: @trailer_gallery do %>
+  It must contain <%= TrailerGallery::MIN_PRESENTABLE_TRAILER_COUNT %> to <%= TrailerGallery::MAX_TRAILER_COUNT %> trailers.
+<% end %>
+
+<h2>Trailers</h2>
+
+<% if @trailer_gallery.trailers.any? %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Languages</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @trailer_gallery.trailers.each do |trailer| %>
+    <tr>
+      <td>
+        <%= link_to trailer.title_da, trailer %>
+        <% if trailer.title_en.present? %>
+        <br>
+        <span class="text-muted"><%= trailer.title_en %></span>
+        <% end %>
+      </td>
+      <td>
+        <%= trailer.bilingual? ? "Danish/English" : "Danish" %>
+      </td>
+      <td>
+        <%= link_to "Edit", edit_trailer_path(trailer) %>
+      </td>
+      <td>
+        <%= link_to 'Delete...', trailer, method: :delete, data: { confirm: 'Are you sure you want to delete this trailer?' }, class: "text-danger" %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<% else %>
+
+<div class="alert alert-warning">
+  This trailer gallery cannot be shown on any devices yet, as it must contain at least 1 trailer.
+</div>
+
+<% end %>
+
+<% if @trailer_gallery.trailers.count < TrailerGallery::MAX_TRAILER_COUNT %>
+<p>
+  <%= link_to 'Add trailer...', new_trailer_gallery_trailer_path(@trailer_gallery) %>
+</p>
+<% end %>

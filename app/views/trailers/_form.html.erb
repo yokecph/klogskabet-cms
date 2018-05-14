@@ -1,0 +1,88 @@
+<%= form_with(model: trailer, url: (trailer.new_record? ? [trailer.trailer_gallery, trailer] : trailer), local: true) do |form| %>
+  <%= render 'common/validation_errors', model: trailer %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label :youtube_id %>
+        <%= form.text_field :youtube_id, class: 'form-control', id: :trailer_youtube_id %>
+        <span class="help-block">
+          Optional if an mp4 file is uploaded.
+          <br>
+          The YouTube ID is the the string of characters in a video's URL after the "v=", e.g. <code>youtube.com/watch?v=<u>xyz123abc</u>&amp;...</code>
+          <br>
+          The video must be embeddable to work.
+        </span>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= form.label :mp4 %>
+        <%= form.file_field :mp4, id: :mp4_file, accept: "video/mp4" %>
+        <span class="help-block">
+          MP4 h.264 encoded video file (no larger than 1280x720 resolution)
+          <br>
+          <% if trailer.new_record? %>
+            Optional if a YouTube ID is specified.
+          <% else %>
+            Select a file to replace the current video (or override the YouTube ID) or leave blank.
+          <% end %>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Danish (required)</h3>
+
+      <div class="form-group">
+        <%= form.label :title_da %>
+        <%= form.text_field :title_da, required: true, class: 'form-control', id: :trailer_title_da %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :subtitle_da %>
+        <%= form.text_field :subtitle_da, required: true, class: 'form-control', id: :trailer_subtitle_da %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :description_da %>
+        <%= form.text_area :description_da, required: true, class: 'form-control', id: :trailer_description_da %>
+      </div>
+
+    </div>
+
+    <div class="col-md-6">
+      <h3>English</h3>
+
+      <div class="form-group">
+        <%= form.label :title_en %>
+        <%= form.text_field :title_en, class: 'form-control', id: :trailer_title_en %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :subtitle_en %>
+        <%= form.text_field :subtitle_en, class: 'form-control', id: :trailer_subtitle_en %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :description_en %>
+        <%= form.text_area :description_en, class: 'form-control', id: :trailer_description_en %>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <%= form.label :url %>
+            <%= form.text_field :url, class: 'form-control', id: :url %>
+        </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= yield %>
+  </div>
+<% end %>

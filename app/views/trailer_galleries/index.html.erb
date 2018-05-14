@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Trailer Galleries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @trailer_galleries.each do |trailer_gallery| %>
+      <tr>
+        <td><%= trailer_gallery.name %></td>
+        <td><%= link_to 'Show', trailer_gallery %></td>
+        <td><%= link_to 'Edit', edit_trailer_gallery_path(trailer_gallery) %></td>
+        <td><%= link_to 'Destroy', trailer_gallery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Add trailer gallery...', new_theme_trailer_gallery_path(@theme) %>

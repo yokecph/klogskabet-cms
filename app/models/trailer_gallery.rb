@@ -1,22 +1,21 @@
-class VideoGallery < ApplicationRecord
-
-  MIN_PRESENTABLE_VIDEO_COUNT = 1
-  MAX_VIDEO_COUNT = 4
+class TrailerGallery < ApplicationRecord
+  MIN_PRESENTABLE_TRAILER_COUNT = 1
+  MAX_TRAILER_COUNT = 30
 
   include Presentable
   include Assignable
   include Bilingual
 
   belongs_to :theme, optional: true
-  has_many :videos, dependent: :destroy
+  has_many :trailers, dependent: :destroy
 
   device_kind :screen
-  bilingual_associations :videos
+  bilingual_associations :trailers
 
   validates :name, presence: true, uniqueness: true
 
   # overrides Presentable method
   def presentable?
-    self.videos.count >= MIN_PRESENTABLE_VIDEO_COUNT
+    self.trailers.count >= MIN_PRESENTABLE_TRAILER_COUNT
   end
 end
